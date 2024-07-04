@@ -2,8 +2,5 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
-
-# gem "jekyll", "~> 4.3"
-gem "github-pages"
+gem "github-pages", "~> 231"
 gem "webrick", "~> 1.8"
