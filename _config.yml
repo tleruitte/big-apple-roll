@@ -1,0 +1,5 @@
+exclude: ["scripts", "Gemfile", "Gemfile.lock", "README.md"]
+
+collections:
+  pages:
+    output: true

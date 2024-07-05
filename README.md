@@ -10,11 +10,11 @@ bundle install
 ## Dev
 
 ```sh
-bundle exec jekyll serve --source src --livereload
+./scripts/serve
 ```
 
 ## Update
 
 ```sh
-bundle update github-pages
+bundle update --all
 ```

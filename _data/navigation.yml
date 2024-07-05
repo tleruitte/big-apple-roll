@@ -1,4 +1,6 @@
 - name: Home
-  link: /
-- name: About
-  link: /about.html
+  url: /
+- name: Schedule
+  url: /schedule/
+- name: Hotel
+  url: /hotel/
