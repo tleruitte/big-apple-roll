@@ -1,5 +1,6 @@
 - name: Home
   url: /
+  matching_url: /index.html
 - name: Schedule
   url: /schedule/
 - name: Hotel
