@@ -6,30 +6,46 @@
   text-decoration: none;
   text-transform: uppercase;
 
-}
-.button--blueTheme {
-  background: $blue;
-}
+  &:hover {
+    background: $green;
+    color: white;
+  }
 
-.button--blueTheme:active {
-  color: $orange;
-}
+  &:active {
+    background: $blue;
+    color: white;
+  }
 
-.button-left_content {
-  @include large-font();
-  background: $green;
-  text-align: center;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
+  .button-left_content {
+    @include large-font();
+    background: $green;
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
 
-.button-content {
-  @include large-font();
-  flex: 1;
-  padding: $spacing8px;
-  text-align: center;
-}
+  .button-content {
+    @include large-font();
+    flex: 1;
+    padding: $spacing8px;
+    text-align: center;
+  }
 
-.button--largerSize .button-content {
-  @include larger-font();
+  &.button--blueTheme {
+    background: $blue;
+
+    &:hover {
+      background: $green;
+    }
+
+    &:active {
+      background: $orange;
+    }
+  }
+
+  &.button--largerSize {
+    .button-content {
+      @include larger-font();
+    }
+  }
 }
