@@ -1,0 +1,12 @@
+.schedule-item-info {
+  display: grid;
+  grid-template-columns: max-content auto;
+
+  & > dt {
+    grid-column: 1;
+  }
+
+  & > dd {
+    grid-column: 2;
+  }
+}

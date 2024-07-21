@@ -1,5 +1,20 @@
 exclude: ["scripts", "Gemfile", "Gemfile.lock", "README.md"]
 
 collections:
+  schedule:
+    output: true
   pages:
     output: true
+
+defaults:
+  - 
+    scope:
+      path: ""
+    values:
+      layout: "layout.html"
+  -
+    scope:
+      path: ""
+      type: "schedule"
+    values:
+      layout: "schedule-item.html"
