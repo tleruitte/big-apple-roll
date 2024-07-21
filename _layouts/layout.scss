@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 100%;
+  color: $text-color;
+}
+
+.layout-content {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 1160px;
+}
+
+.layout-headerWrapper {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: $background-color;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: $spacing24px;
+  z-index: 1;
+}
+
+header  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing12px 0;
+
+  .logo {
+    font-size: 36px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  nav {
+    @include small-font();
+    display: flex;
+    gap: $spacing24px;
+  
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  
+    .navigation-logoItem {
+      margin: 0 $spacing8px;
+    }
+  
+    .navigation-logoItem-facebook {
+      display: flex;
+      background: black;
+      border-radius: 2px;
+      padding: 1px;
+    }
+  }
+}
+
+footer {
+  height: 3 * $spacing36px;
+}

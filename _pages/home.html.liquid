@@ -1,8 +1,15 @@
 ---
-layout: default
+layout: layout.html
 permalink: /index.html
 ---
-<h1>Home</h1>
-<div>
-  {% include button.html.liquid href='' %}
+<div class="home-logo">
+  <img src="{{ 'assets/img/logo/bar.png' | relative_url }}">
+</div>
+<div class="home-date">August 1-4, 2024</div>
+<div class="home-buttons">
+  {% include button.html.liquid href='google.com' content="Book a room" %}
+  {% include button.html.liquid href='google.com' content="Register" %}
+  {% include button.html.liquid href='google.com' content="Buy a shirt" %}
+  {% include button.html.liquid href='google.com' content="Buy a raffle ticket" %}
+  {% include button.html.liquid href='google.com' content="Buy Saturday night party tickets" %}
 </div>

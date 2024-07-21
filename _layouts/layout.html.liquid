@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+  </head>
+  <body>
+    <div class="layout-headerWrapper">
+      <div class="layout-content">
+        <header>
+          <a class="logo" href="{{ "/" | relative_url }}">Big Apple Roll 2024</a>
+
+          <nav>
+            {% for item in site.data.navigation %}
+              <a
+                href="{{ item.url | relative_url }}"
+                {% if item.matching_url == page.url or item.url == page.url %}
+                  class="current"
+                {% endif %}
+              >
+                {{ item.name }}
+              </a>
+            {% endfor %}
+            <a class="navigation-logoItem" href="https://www.instagram.com/bigappleroll/" target="_blank">
+              <img src="{{ 'assets/img/socials/Instagram_Glyph_Black.svg' | relative_url }}" width="20" height="20">
+            </a>
+            <a class="navigation-logoItem" href="https://www.facebook.com/events/1229407841375481" target="_blank">
+              <span class="navigation-logoItem-facebook">
+                <img src="{{ "assets/img/socials/Facebook_Logo_Secondary.png" | relative_url }}" width="20" height="20">
+              </span>
+            </a>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="layout-content">
+      <main>
+        {{ content }}
+      </main>
+    </div>
+    <footer></footer>
+  </body>
+</html>

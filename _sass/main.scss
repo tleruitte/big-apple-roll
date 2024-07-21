@@ -1,6 +1,11 @@
 @import "font";
+@import "spacing";
 @import "theme";
 
-@import "layouts/default";
+@import "../_includes/button";
 
-@import "includes/header";
+@import "../_layouts/layout";
+
+@import "../_pages/home";
+@import "../_pages/schedule";
+

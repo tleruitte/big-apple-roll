@@ -1,0 +1,19 @@
+.home-logo {
+  text-align: center;
+
+  img {
+    width: 500px;
+  }
+}
+
+.home-date {
+  @include large-font();
+  padding: $spacing24px;
+  text-align: center;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing24px;
+}
