@@ -7,14 +7,20 @@ gem install bundler
 bundle install
 ```
 
-## Dev
+### Update
+
+```sh
+bundle update --all
+```
+
+## Run
+
+### Dev
 
 ```sh
 ./scripts/serve
 ```
 
-## Update
+### Prod
 
-```sh
-bundle update --all
-```
+https://tleruitte.github.io/bigappleroll/
