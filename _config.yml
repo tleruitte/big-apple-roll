@@ -1,7 +1,10 @@
 exclude: ["scripts", "Gemfile", "Gemfile.lock", "README.md"]
+future: true
 
 collections:
-  schedule:
+  schedule_days:
+    output: true
+  schedule_skates:
     output: true
   pages:
     output: true
@@ -15,6 +18,12 @@ defaults:
   -
     scope:
       path: ""
-      type: "schedule"
+      type: "schedule_days"
     values:
-      layout: "schedule-item.html"
+      layout: "schedule/schedule_day.html"
+  -
+    scope:
+      path: ""
+      type: "schedule_skates"
+    values:
+      layout: "schedule/schedule_skate.html"

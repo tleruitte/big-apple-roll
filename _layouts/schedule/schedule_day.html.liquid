@@ -1,0 +1,17 @@
+---
+layout: layout.html
+---
+<h1>{{ page.title }}</h1>
+
+{% assign day_start_date = page.date | date: '%s' %}
+
+{% for schedule_skate in site.schedule_skates %}
+  {% assign schedule_skate_day = schedule_skate.date | date: '%F 00:00:00 %z' | date: '%s' %}
+  {% if day_start_date == schedule_skate_day %}
+    <p>
+      <a href="{{ schedule_skate.url | relative_url }}">{{ schedule_skate.title }}</a>
+    </p>
+  {% endif %}
+{% endfor %}
+
+{{ content }}
