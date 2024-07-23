@@ -4,10 +4,13 @@ future: true
 collections:
   schedule_days:
     output: true
+    permalink: /schedule/:name
   schedule_skates:
     output: true
+    permalink: /schedule/:name
   pages:
     output: true
+    permalink: /:name
 
 defaults:
   - 

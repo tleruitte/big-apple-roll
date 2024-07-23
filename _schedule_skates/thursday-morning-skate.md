@@ -1,6 +1,5 @@
 ---
   date: 2024-08-01 10:00:00 -0400
-  permalink: /schedule/thursday-morning-skate/index.html
   title: Thursday Morning skate
 
   start: New York Marriott Downtown, 9:45 am

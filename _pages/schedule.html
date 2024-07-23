@@ -1,0 +1,10 @@
+---
+title: Schedule
+---
+
+<div class="schedule">
+  {% include button.html.liquid left_content="Pre BAR" content="Tuesday" size="larger" theme="blue" %} {% include button.html.liquid left_content="Pre BAR" content="Wednesday" size="larger" theme="blue" %}
+  {% for schedule_day in site.schedule_days %}
+    {% assign left_content = schedule_day.date | date: '%B %e' %} {% include button.html.liquid href=schedule_day.url left_content=left_content content=schedule_day.title size="larger" %}
+  {% endfor %}
+</div>

@@ -1,6 +1,5 @@
 ---
   date: 2024-08-02 19:00:00 -0400
-  permalink: /schedule/friday-morning-skate/index.html
   title: Friday Morning skate
 
   start: New York Marriott Downtown, 6:45 pm
