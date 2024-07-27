@@ -1,12 +1,14 @@
 ---
 title: Schedule
-date: 2024-01-02 00:00:00 -0400
+
+nav: 2
 ---
 
 <div class="schedule">
   {% include button.html left_content="Pre BAR" content="Tuesday" size="larger" theme="blue" %}
   {% include button.html left_content="Pre BAR" content="Wednesday" size="larger" theme="blue" %}
   {% for schedule_day in site.schedule_days %}
-    {% assign left_content = schedule_day.date | date: '%B %e' %} {% include button.html href=schedule_day.url left_content=left_content content=schedule_day.title size="larger" %}
+    {% assign left_content = schedule_day.date | date: '%B %e' %}
+    {% include button.html href=schedule_day.url left_content=left_content content=schedule_day.title size="larger" %}
   {% endfor %}
 </div>

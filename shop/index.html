@@ -1,0 +1,13 @@
+---
+title: Shop
+
+nav: 4
+---
+
+<h1>Shop</h1>
+
+{% for tshirt in site.shop_tshirts %}
+  <a href="{{ tshirt.url | relative_url }}">{{ tshirt.title }}</a>
+{% endfor %}
+
+<a href="{{ "/shop/cart" | relative_url}}">Cart</a>

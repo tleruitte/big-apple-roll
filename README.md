@@ -18,7 +18,7 @@ bundle update --all
 ### Dev
 
 ```sh
-./scripts/serve
+./_scripts/serve
 ```
 
 ### Prod

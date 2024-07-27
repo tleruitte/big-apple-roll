@@ -1,0 +1,10 @@
+---
+layout: default
+---
+
+<h1>Buy a tshirt</h1>
+
+{{ page.content }}
+
+{% capture cart_url %}/shop/cart#{{ page.shop_id }}{% endcapture %}
+<a href="{{ cart_url | relative_url }}">Add to cart</a>

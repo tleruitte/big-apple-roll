@@ -16,13 +16,14 @@
         <header>
           <a class="logo" href="{{ "/" | relative_url }}">Big Apple Roll 2024</a>
           <nav>
-            {% for root_page in site.root_pages %}
+            {% assign nav_html_pages = site.html_pages | where_exp: "html_page", "html_page.nav" | sort: "nav" %}
+            {% for html_page in nav_html_pages %}
               <a
-                href="{{ root_page.url | relative_url }}"
-                {% if root_page.url == page.url %}
+                href="{{ html_page.url | relative_url }}"
+                {% if html_page.url == page.url %}
                 class="current"
                 {% endif %}>
-                {{ root_page.title }}
+                {{ html_page.title | default: "Page" }}
               </a>
             {% endfor %}
             <a

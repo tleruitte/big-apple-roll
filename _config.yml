@@ -2,15 +2,15 @@ exclude: ["scripts", "Gemfile", "Gemfile.lock", "README.md"]
 future: true
 
 collections:
-  root_pages:
-    output: true
-    permalink: /:name
   schedule_days:
     output: true
     permalink: /schedule/:name
   schedule_skates:
     output: true
     permalink: /schedule/:name
+  shop_tshirts:
+    output: true
+    permalink: /shop/:name
 
 defaults:
   - 
@@ -30,3 +30,9 @@ defaults:
       type: schedule_skates
     values:
       layout: schedule/schedule_skate
+  -
+    scope:
+      path: ""
+      type: shop_tshirts
+    values:
+      layout: shop/shop_tshirt
