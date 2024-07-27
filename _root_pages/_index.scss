@@ -1,4 +1,4 @@
-.home-logo {
+.index-logo {
   text-align: center;
 
   img {
@@ -6,13 +6,13 @@
   }
 }
 
-.home-date {
+.index-date {
   @include large-font();
   padding: $spacing24px;
   text-align: center;
 }
 
-.home-buttons {
+.index-buttons {
   display: flex;
   flex-direction: column;
   gap: $spacing24px;

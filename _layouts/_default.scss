@@ -6,13 +6,13 @@ body {
   color: $text-color;
 }
 
-.layout-content {
+.default-content {
   margin: 0 auto;
   max-width: 100%;
   width: 1160px;
 }
 
-.layout-headerWrapper {
+.default-headerWrapper {
   position: sticky;
   top: 0;
   right: 0;
@@ -23,7 +23,7 @@ body {
   z-index: 1;
 }
 
-header  {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,16 +40,16 @@ header  {
     @include small-font();
     display: flex;
     gap: $spacing24px;
-  
+
     a {
       text-decoration: none;
       text-transform: uppercase;
     }
-  
+
     .navigation-logoItem {
       margin: 0 $spacing8px;
     }
-  
+
     .navigation-logoItem-facebook {
       display: flex;
       background: black;

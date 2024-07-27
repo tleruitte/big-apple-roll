@@ -2,10 +2,10 @@
 @import "spacing";
 @import "theme";
 
-@import "../_includes/button";
+@import "../_includes/_button";
 
-@import "../_layouts/layout";
-@import "../_layouts/schedule/schedule_skate";
+@import "../_layouts/_default";
+@import "../_layouts/schedule/_schedule_skate";
 
-@import "../_pages/home";
-@import "../_pages/_schedule";
+@import "../_root_pages/_index";
+@import "../_root_pages/_schedule";

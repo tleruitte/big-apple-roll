@@ -2,31 +2,31 @@ exclude: ["scripts", "Gemfile", "Gemfile.lock", "README.md"]
 future: true
 
 collections:
+  root_pages:
+    output: true
+    permalink: /:name
   schedule_days:
     output: true
     permalink: /schedule/:name
   schedule_skates:
     output: true
     permalink: /schedule/:name
-  pages:
-    output: true
-    permalink: /:name
 
 defaults:
   - 
     scope:
       path: ""
     values:
-      layout: "layout.html"
+      layout: default
   -
     scope:
       path: ""
-      type: "schedule_days"
+      type: schedule_days
     values:
-      layout: "schedule/schedule_day.html"
+      layout: schedule/schedule_day
   -
     scope:
       path: ""
-      type: "schedule_skates"
+      type: schedule_skates
     values:
-      layout: "schedule/schedule_skate.html"
+      layout: schedule/schedule_skate
