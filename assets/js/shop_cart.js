@@ -1,3 +1,8 @@
+const CART_CONTENT_ID = "cart-content";
+const CART_PAYPAL_ID = "cart-paypal";
+const CART_MESSAGE_SUCCESS_SELECTOR = ".cart-message--success";
+const CART_MESSAGE_ERROR_SELECTOR = ".cart-message--error";
+
 let cart = {};
 
 const loadCart = () => {
@@ -48,13 +53,27 @@ const removeItem = (shopId) => {
   renderCart();
 };
 
-function renderCart() {
-  let html = "";
+const mapCart = () => {
+  return Object.keys(cart).map((shopId) => {
+    return {
+      shopId,
+      name: SHOP_ITEMS[shopId].title,
+      quantity: cart[shopId],
+      price: SHOP_ITEMS[shopId].price.toFixed(2),
+      subtotal: parseFloat(cart[shopId] * SHOP_ITEMS[shopId].price).toFixed(2),
+    };
+  });
+};
 
+const getCartContent = () => {
   if (Object.keys(cart).length == 0) {
-    html = "<h2>Cart is empty</h2>";
-  } else {
-    html = `
+    return {
+      html: "<h2>Cart is empty</h2>",
+      total: 0,
+    };
+  }
+
+  let html = `
     <table>
       <thead>
         <tr>
@@ -66,26 +85,26 @@ function renderCart() {
       <tbody>
     `;
 
-    let total = 0;
-    for (const item in cart) {
-      const price = parseFloat(cart[item] * SHOP_ITEMS[item].price).toFixed(2);
-      total += parseFloat(price);
+  let total = 0;
 
-      html += `
-      <tr>
-        <td>${SHOP_ITEMS[item].title}</td>
-        <td>
-          ${cart[item]}
-          <button onclick="incrementItem('${item}')">+</button>
-          <button onclick="decrementItem('${item}')">-</button>
-          <button onclick="removeItem('${item}')">🗑</button>
-        </td>
-        <td>$${price}</td>
-      </tr>
-      `;
-    }
+  mapCart().forEach(({ shopId, name, quantity, subtotal }) => {
+    total += parseFloat(subtotal);
 
     html += `
+      <tr>
+        <td>${name}</td>
+        <td>
+          ${quantity}
+          <button onclick="incrementItem('${shopId}')">+</button>
+          <button onclick="decrementItem('${shopId}')">-</button>
+          <button onclick="removeItem('${shopId}')">🗑</button>
+        </td>
+        <td>$${subtotal}</td>
+      </tr>
+      `;
+  });
+
+  html += `
       </tbody>
       <tfoot>
         <tr>
@@ -95,9 +114,86 @@ function renderCart() {
       </tfoot>
     </table>
     `;
+
+  return {
+    html,
+    total,
+  };
+};
+
+const renderCart = () => {
+  const { html, total } = getCartContent();
+
+  document.getElementById(CART_CONTENT_ID).innerHTML = html;
+  renderPaypal(total);
+};
+
+const renderPaypal = (total) => {
+  document.getElementById(CART_PAYPAL_ID).innerHTML = "";
+
+  if (!total) {
+    return;
   }
 
-  document.getElementById("cartcontent").innerHTML = html;
-}
+  paypal
+    .Buttons({
+      style: {
+        tagline: false,
+      },
+      createOrder: function (data, actions) {
+        const purchase_units = [
+          {
+            items: mapCart().map(({ name, quantity, price }) => {
+              return {
+                name: name,
+                quantity: quantity,
+                unit_amount: {
+                  currency_code: "USD",
+                  value: price,
+                },
+              };
+            }),
+            amount: {
+              currency_code: "USD",
+              value: total,
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: total,
+                },
+              },
+            },
+          },
+        ];
+
+        return actions.order.create({
+          purchase_units,
+        });
+      },
+      async onApprove(data, actions) {
+        await actions.order.capture();
+
+        renderMessage(true);
+
+        cart = {};
+
+        localStorage.cart = JSON.stringify(cart);
+        renderCart();
+      },
+      onError(error) {
+        renderMessage(false);
+      },
+    })
+    .render(`#${CART_PAYPAL_ID}`);
+};
+
+const renderMessage = (success) => {
+  document.querySelector(CART_MESSAGE_SUCCESS_SELECTOR).style.display = success
+    ? "block"
+    : "none";
+  document.querySelector(CART_MESSAGE_ERROR_SELECTOR).style.display = !success
+    ? "block"
+    : "none";
+};
 
 loadCart();
