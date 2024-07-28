@@ -1,7 +1,4 @@
-<a
-  class="button {% if include.size %} button--{{include.size}}Size{% endif %} {% if include.theme %}button--{{include.theme}}Theme{% endif %}"
-  href="{{ include.href }}"
->
+<a class="button {% if include.size %} button--{{include.size}}Size{% endif %} button--{{ include.theme | default: "orange" }}Theme" href="{{ include.href }}">
   {% if include.left_content %}
     <div class="button-left_content">
       {{ include.left_content }}

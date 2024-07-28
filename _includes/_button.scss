@@ -3,7 +3,6 @@
 
   display: flex;
   align-items: stretch;
-  background: $orange;
   color: white;
   text-decoration: none;
   text-transform: uppercase;
@@ -33,6 +32,18 @@
     text-align: center;
   }
 
+  &.button--orangeTheme {
+    background: $orange;
+
+    &:hover {
+      background: $blue;
+    }
+
+    &:active {
+      background: $green;
+    }
+  }
+
   &.button--blueTheme {
     background: $blue;
 
@@ -42,6 +53,18 @@
 
     &:active {
       background: $orange;
+    }
+  }
+
+  &.button--greenTheme {
+    background: $green;
+
+    &:hover {
+      background: $orange;
+    }
+
+    &:active {
+      background: $blue;
     }
   }
 

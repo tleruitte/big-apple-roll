@@ -23,7 +23,7 @@ layout: default
     <div>
       {% capture cart_url %}/shop/cart#{{ page.shop_id }}{% endcapture %}
       {% assign cart_relative_url = cart_url | relative_url %}
-      {% include button.html href=cart_relative_url content="Add to cart" %}
+      {% include button.html href=cart_relative_url content="Add to cart" theme=page.shop_button_theme %}
     </div>
     <p>
       T-shirts must be picked-up during registration on Friday or Saturday.
