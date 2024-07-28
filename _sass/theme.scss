@@ -5,15 +5,3 @@ $blue: #6699cf;
 $text-color: #1e3566;
 $border-color: rgba(0, 0, 0, 0.05);
 $background-color: white;
-
-a {
-  color: $text-color;
-}
-
-a:active {
-  color: $blue;
-}
-
-a.current {
-  color: $orange;
-}

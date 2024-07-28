@@ -1,4 +1,6 @@
 .button {
+  @include font-family-oswald();
+
   display: flex;
   align-items: stretch;
   background: $orange;
@@ -17,7 +19,7 @@
   }
 
   .button-left_content {
-    @include large-font();
+    @include font-size-large();
     background: $green;
     text-align: center;
     writing-mode: vertical-rl;
@@ -25,7 +27,7 @@
   }
 
   .button-content {
-    @include large-font();
+    @include font-size-large();
     flex: 1;
     padding: $spacing8px;
     text-align: center;
@@ -45,7 +47,7 @@
 
   &.button--largerSize {
     .button-content {
-      @include larger-font();
+      @include font-size-larger();
     }
   }
 }

@@ -1,0 +1,8 @@
+.shop_tshirt {
+  display: grid;
+  grid-template-columns: minmax(0, 66%) minmax(0, 33%);
+}
+
+.shop_tshirt-image {
+  border-radius: 1em;
+}

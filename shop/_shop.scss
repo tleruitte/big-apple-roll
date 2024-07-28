@@ -1,0 +1,14 @@
+.shop-tshirts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 33%));
+  grid-gap: $spacing36px;
+}
+
+.shop-tshirt {
+  text-decoration: none;
+
+  .shop-tshirt-image {
+    border-radius: 1em;
+    max-width: 100%;
+  }
+}

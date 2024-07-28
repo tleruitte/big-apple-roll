@@ -8,53 +8,56 @@
       {% endif %}
       BIG APPLE ROLL 2024
     </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
   </head>
   <body>
     <div class="default-headerWrapper">
-      <div class="default-content">
-        <header>
-          <a class="logo" href="{{ "/" | relative_url }}">Big Apple Roll 2024</a>
-          <nav>
-            {% assign nav_html_pages = site.html_pages | where_exp: "html_page", "html_page.nav" | sort: "nav" %}
-            {% for html_page in nav_html_pages %}
-              <a
-                href="{{ html_page.url | relative_url }}"
-                {% if html_page.url == page.url %}
-                class="current"
-                {% endif %}>
-                {{ html_page.title | default: "Page" }}
-              </a>
-            {% endfor %}
+      <header class="default-header">
+        <a class="default-header-logo" href="{{ "/" | relative_url }}">Big Apple Roll 2024</a>
+        <nav class="default-header-nav">
+          {% assign nav_html_pages = site.html_pages | where_exp: "html_page", "html_page.nav" | sort: "nav" %}
+          {% for html_page in nav_html_pages %}
             <a
-              class="navigation-logoItem"
-              href="https://www.instagram.com/bigappleroll/"
-              target="_blank">
+              href="{{ html_page.url | relative_url }}"
+              {% if html_page.url == page.url %}
+              class="current"
+              {% endif %}>
+              {{ html_page.title | default: "Page" }}
+            </a>
+          {% endfor %}
+          <a
+            class="navigation-logoItem"
+            href="https://www.instagram.com/bigappleroll/"
+            target="_blank">
+            <img
+              src="{{ 'assets/img/socials/Instagram_Glyph_Black.svg' | relative_url }}"
+              width="20"
+              height="20">
+          </a>
+          <a
+            class="navigation-logoItem"
+            href="https://www.facebook.com/events/1229407841375481"
+            target="_blank">
+            <span class="navigation-logoItem-facebook">
               <img
-                src="{{ 'assets/img/socials/Instagram_Glyph_Black.svg' | relative_url }}"
+                src="{{ "assets/img/socials/Facebook_Logo_Secondary.png" | relative_url }}"
                 width="20"
                 height="20">
-            </a>
-            <a
-              class="navigation-logoItem"
-              href="https://www.facebook.com/events/1229407841375481"
-              target="_blank">
-              <span class="navigation-logoItem-facebook">
-                <img
-                  src="{{ "assets/img/socials/Facebook_Logo_Secondary.png" | relative_url }}"
-                  width="20"
-                  height="20">
-              </span>
-            </a>
-          </nav>
-        </header>
-      </div>
+            </span>
+          </a>
+        </nav>
+      </header>
     </div>
-    <div class="default-content">
-      <main>
-        {{ content }}
-      </main>
-    </div>
-    <footer></footer>
+    <main class="default-main">
+      {{ content }}
+    </main>
+    <footer class="default-footer"></footer>
   </body>
 </html>

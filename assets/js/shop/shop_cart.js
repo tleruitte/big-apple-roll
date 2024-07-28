@@ -1,72 +1,35 @@
+import {
+  loadCart,
+  getCartCount,
+  getCart,
+  incrementItem,
+  decrementItem,
+  removeItem,
+  clearCart,
+} from "./modules/shop_common.js";
+
 const CART_CONTENT_ID = "cart-content";
 const CART_PAYPAL_ID = "cart-paypal";
 const CART_MESSAGE_SUCCESS_SELECTOR = ".cart-message--success";
 const CART_MESSAGE_ERROR_SELECTOR = ".cart-message--error";
 
-let cart = {};
-
-const loadCart = () => {
-  // Load cart from local storage
-  if (typeof Storage !== "undefined" && localStorage.cart) {
-    cart = JSON.parse(localStorage.cart);
-    renderCart();
-  }
-
-  // Add item to cart from url hash
-  if (window.location.hash) {
-    var shopId = window.location.hash.substring(1);
-    if (SHOP_ITEMS[shopId]) {
-      incrementItem(shopId);
-    }
-    window.location.hash = "";
-  }
-};
-
-const incrementItem = (shopId) => {
-  if (!cart[shopId]) {
-    cart[shopId] = 1;
-  } else {
-    cart[shopId]++;
-  }
-
-  localStorage.cart = JSON.stringify(cart);
+window.handleIncrementItem = (shopId) => {
+  incrementItem(shopId);
   renderCart();
 };
 
-const decrementItem = (shopId) => {
-  if (cart[shopId]) {
-    if (cart[shopId] == 1) {
-      removeItem(shopId);
-    } else {
-      cart[shopId]--;
-
-      localStorage.cart = JSON.stringify(cart);
-      renderCart();
-    }
-  }
-};
-
-const removeItem = (shopId) => {
-  delete cart[shopId];
-
-  localStorage.cart = JSON.stringify(cart);
+window.handleDecrementItem = (shopId) => {
+  decrementItem(shopId);
   renderCart();
 };
 
-const mapCart = () => {
-  return Object.keys(cart).map((shopId) => {
-    return {
-      shopId,
-      name: SHOP_ITEMS[shopId].title,
-      quantity: cart[shopId],
-      price: SHOP_ITEMS[shopId].price.toFixed(2),
-      subtotal: parseFloat(cart[shopId] * SHOP_ITEMS[shopId].price).toFixed(2),
-    };
-  });
+window.handleRemoveItem = (shopId) => {
+  removeItem(shopId);
+  renderCart();
 };
 
 const getCartContent = () => {
-  if (Object.keys(cart).length == 0) {
+  if (getCartCount() == 0) {
     return {
       html: "<h2>Cart is empty</h2>",
       total: 0,
@@ -87,7 +50,7 @@ const getCartContent = () => {
 
   let total = 0;
 
-  mapCart().forEach(({ shopId, name, quantity, subtotal }) => {
+  getCart().forEach(({ shopId, name, quantity, subtotal }) => {
     total += parseFloat(subtotal);
 
     html += `
@@ -95,9 +58,9 @@ const getCartContent = () => {
         <td>${name}</td>
         <td>
           ${quantity}
-          <button onclick="incrementItem('${shopId}')">+</button>
-          <button onclick="decrementItem('${shopId}')">-</button>
-          <button onclick="removeItem('${shopId}')">🗑</button>
+          <button onclick="handleIncrementItem('${shopId}')">+</button>
+          <button onclick="handleDecrementItem('${shopId}')">-</button>
+          <button onclick="handleRemoveItem('${shopId}')">🗑</button>
         </td>
         <td>$${subtotal}</td>
       </tr>
@@ -143,7 +106,7 @@ const renderPaypal = (total) => {
       createOrder: function (data, actions) {
         const purchase_units = [
           {
-            items: mapCart().map(({ name, quantity, price }) => {
+            items: getCart().map(({ name, quantity, price }) => {
               return {
                 name: name,
                 quantity: quantity,
@@ -173,12 +136,9 @@ const renderPaypal = (total) => {
       async onApprove(data, actions) {
         await actions.order.capture();
 
-        renderMessage(true);
-
-        cart = {};
-
-        localStorage.cart = JSON.stringify(cart);
+        clearCart();
         renderCart();
+        renderMessage(true);
       },
       onError(error) {
         renderMessage(false);
@@ -197,3 +157,4 @@ const renderMessage = (success) => {
 };
 
 loadCart();
+renderCart();

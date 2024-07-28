@@ -2,10 +2,47 @@
 @import "spacing";
 @import "theme";
 
+@import "../_includes/shop/_shop_header";
 @import "../_includes/_button";
+@import "../_includes/_icon";
 
 @import "../_layouts/_default";
 @import "../_layouts/schedule/_schedule_skate";
+@import "../_layouts/shop/_shop_tshirt";
 
 @import "../_index";
 @import "../_schedule";
+@import "../shop/_shop";
+
+body {
+  @include font-family-open-sans();
+  font-size: 100%;
+  line-height: 1.6;
+  background: $background-color;
+  color: $text-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include font-family-oswald();
+}
+
+a {
+  color: $text-color;
+
+  &:hover {
+    color: $blue;
+  }
+
+  &:active {
+    color: $green;
+  }
+
+  &.current {
+    color: $orange;
+  }
+}

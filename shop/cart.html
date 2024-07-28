@@ -2,12 +2,12 @@
 title: Cart
 ---
 
+{% include shop/shop_header.html skip_cart=true %}
+
 <h1>Cart</h1>
 
 <div id="cart-content"></div>
 <div id="cart-paypal"></div>
-
-<a href="{{  "/shop" | relative_url }}">Continue shopping</a>
 
 <div class="cart-message cart-message--success" style="display: none">
   Success! Thank you for your support!
@@ -18,5 +18,4 @@ title: Cart
 </div>
 
 <script src="https://www.paypal.com/sdk/js?client-id=ASkF4WrNyc3lZOXQmFSsXsFl64ggGyH5iUMoR3VVBe8TgEKA8se1RXCdZ01Ys4HqYebewTpXZIoGwhAw&disable-funding=credit"></script>
-<script src="/assets/js/shop_items.js"></script>
-<script src="/assets/js/shop_cart.js"></script>
+<script type="module" src="/assets/js/shop/shop_cart.js"></script>

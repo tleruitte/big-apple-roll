@@ -1,0 +1,22 @@
+---
+title: Shop
+
+nav: 4
+---
+
+{% include shop/shop_header.html skip_shop=true %}
+
+<h1>T-shirts</h1>
+
+<div class="shop-tshirts">
+  {% for shop_tshirt in site.shop_tshirts %}
+    <a class="shop-tshirt" href="{{ shop_tshirt.url | relative_url }}">
+      <img
+        class="shop-tshirt-image"
+        src="{{ shop_tshirt.shop_image_path | relative_url }}"
+        alt="{{ shop_tshirt.title }}">
+      <div>{{ shop_tshirt.title }}</div>
+      <div>${{ shop_tshirt.shop_price }}</div>
+    </a>
+  {% endfor %}
+</div>

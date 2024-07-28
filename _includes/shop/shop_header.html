@@ -1,0 +1,18 @@
+<div class="shop_header">
+  <div>
+    {% if include.skip_shop != true %}
+      <a href="{{  "/shop/shop" | relative_url }}">
+        ← Shop
+      </a>
+    {% endif %}
+  </div>
+  <div>
+    {% if include.skip_cart != true %}
+      <a href="{{ "/shop/cart" | relative_url}}">
+        {% include icon.html icon="shopping_cart" label="Cart <span id=\"shop_header-cart-count\"></span>" %}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<script type="module" src="/assets/js/shop/shop_header.js"></script>

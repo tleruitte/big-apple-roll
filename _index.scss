@@ -7,7 +7,7 @@
 }
 
 .index-date {
-  @include large-font();
+  @include font-size-large();
   padding: $spacing24px;
   text-align: center;
 }
