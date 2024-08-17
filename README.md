@@ -1,16 +1,17 @@
 # Big Apple Roll
 
+
+
 ## Install
 
-```sh
-gem install bundler
-bundle install
-```
+### Dependencies
 
-### Update
+- Node v20
+
+### Install
 
 ```sh
-bundle update --all
+yarn
 ```
 
 ## Run
@@ -18,7 +19,7 @@ bundle update --all
 ### Dev
 
 ```sh
-./_scripts/serve
+yarn dev
 ```
 
 ### Prod
