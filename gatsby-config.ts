@@ -1,9 +1,11 @@
-import type { GatsbyConfig } from "gatsby"
+import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
-  siteMetadata: {},
+  siteMetadata: {
+    title: "Big Apple Roll",
+  },
   graphqlTypegen: true,
   plugins: [],
-}
+};
 
-export default config
+export default config;
