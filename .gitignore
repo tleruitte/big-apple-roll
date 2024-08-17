@@ -15,3 +15,8 @@
 
 #!.yarn/cache
 .pnp.*
+
+# gatsby
+.cache/
+public
+src/gatsby-types.d.ts
