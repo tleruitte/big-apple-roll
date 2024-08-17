@@ -5,6 +5,7 @@
     "typescript": "tsc --noEmit"
   },
   "devDependencies": {
+    "gatsby-cli": "^5.13.3",
     "prettier": "3.3.3",
     "typescript": "^5.5.4"
   }
