@@ -1,9 +1,8 @@
 import React from "react";
-import { PageProps } from "gatsby";
 
 import LayoutHead from "../components/layoutHead";
 
-export default function Hotel(props: PageProps): React.JSX.Element {
+export default function Hotel(): React.JSX.Element {
   return <div className="Hotel">Hotel</div>;
 }
 

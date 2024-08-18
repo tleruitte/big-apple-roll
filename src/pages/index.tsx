@@ -1,12 +1,11 @@
 import "./index.css";
 
 import React from "react";
-import { PageProps } from "gatsby";
 import LayoutHead from "../components/layoutHead";
 import { StaticImage } from "gatsby-plugin-image";
 import Button from "../components/button";
 
-export default (props: PageProps) => {
+export default function Index() {
   return (
     <>
       <div className="index-logo">
@@ -25,7 +24,7 @@ export default (props: PageProps) => {
       </div>
     </>
   );
-};
+}
 
 export function Head() {
   return <LayoutHead />;

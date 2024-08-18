@@ -1,8 +1,8 @@
 import React from "react";
-import { graphql, Link, PageProps, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import LayoutHead from "../components/layoutHead";
 
-export default function Schedule(props: PageProps): React.JSX.Element {
+export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`
     query Schedule {
       allMarkdownRemark(
