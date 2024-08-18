@@ -17,6 +17,7 @@
     "@types/react-dom": "^18",
     "@types/react-helmet": "^6",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.35.0",
     "gatsby-cli": "^5.13.3",
     "globals": "^15.9.0",
