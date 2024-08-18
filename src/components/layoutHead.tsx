@@ -21,9 +21,7 @@ export default function LayoutHead(props: Props): React.JSX.Element {
   return (
     <>
       <title>
-        {pageTitle ?? ""}
-        {pageTitle ? " - " : ""}
-        {data.site?.siteMetadata?.title ?? ""}
+        {`${pageTitle ? `${pageTitle} - ` : ""}${data.site?.siteMetadata?.title ?? ""}`}
       </title>
     </>
   );

@@ -1,0 +1,11 @@
+:root {
+  --openSans-font-family: "Open Sans", sans-serif;
+  --oswald-font-family: "Oswald", sans-serif;
+
+  --small-font-size: 0.875em;
+  --small-font-weight: 200;
+  --small-letter-spacing: 0.16em;
+
+  --large-font-size: 2em;
+  --large-font-weight: 500;
+}
