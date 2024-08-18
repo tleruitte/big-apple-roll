@@ -26,7 +26,7 @@
 			"",
 			"export default function $1(props: Props): React.JSX.Element {",
 			"  return (",
-			"    <div className='$1'>",
+			"    <div className='${1/(.)/${1:/downcase}/}'>",
 			"      $2",
 			"    </div>",
 			"  );",
