@@ -3598,7 +3598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.62.0":
+"@typescript-eslint/utils@npm:5.62.0, @typescript-eslint/utils@npm:^5.10.0":
   version: 5.62.0
   resolution: "@typescript-eslint/utils@npm:5.62.0"
   dependencies:
@@ -6816,6 +6816,24 @@ __metadata:
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
   checksum: 10c0/5f35dfbf4e8e67f741f396987de9504ad125c49f4144508a93282b4ea0127e052bde65ab6def1f31b6ace6d5d430be698333f75bdd7dca3bc14226c92a083196
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-jest@npm:^27.2.2":
+  version: 27.9.0
+  resolution: "eslint-plugin-jest@npm:27.9.0"
+  dependencies:
+    "@typescript-eslint/utils": "npm:^5.10.0"
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ^5.0.0 || ^6.0.0 || ^7.0.0
+    eslint: ^7.0.0 || ^8.0.0
+    jest: "*"
+  peerDependenciesMeta:
+    "@typescript-eslint/eslint-plugin":
+      optional: true
+    jest:
+      optional: true
+  checksum: 10c0/b8b09f7d8ba3d84a8779a6e95702a6e4dce45ab034e4edf5ddb631e77cd38dcdf791dfd9228e0a0d1d80d1eb2d278deb62ad2ec39f10fb8fd43cec07304e0c38
   languageName: node
   linkType: hard
 
@@ -10398,7 +10416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
+"lodash@npm:>=4.17.21, lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
@@ -10531,6 +10549,7 @@ __metadata:
     react-helmet: "npm:^6.1.0"
     stylelint: "npm:^16.8.2"
     stylelint-config-standard: "npm:^36.0.1"
+    stylelint-selector-bem-pattern: "npm:^4.0.0"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.1.0"
   languageName: unknown
@@ -12178,6 +12197,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-bem-linter@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "postcss-bem-linter@npm:4.0.1"
+  dependencies:
+    minimatch: "npm:^3.1.2"
+    postcss-resolve-nested-selector: "npm:^0.1.1"
+  peerDependencies:
+    postcss: ^8.4.21
+  checksum: 10c0/b0f18a83cea880861a7d47edad78741c301b426be1688842a82902db3e46aa9ae6d518f2b423eca5bc1064b1758896bdebd65e132ea23404cbcdee2a8e279994
+  languageName: node
+  linkType: hard
+
 "postcss-calc@npm:^8.2.3":
   version: 8.2.4
   resolution: "postcss-calc@npm:8.2.4"
@@ -12527,7 +12558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-resolve-nested-selector@npm:^0.1.6":
+"postcss-resolve-nested-selector@npm:^0.1.1, postcss-resolve-nested-selector@npm:^0.1.6":
   version: 0.1.6
   resolution: "postcss-resolve-nested-selector@npm:0.1.6"
   checksum: 10c0/84213a2bccce481b1569c595a3c547b25c6ef1cca839fbd6c82c12ab407559966e968613c7454b573aa54f38cfd7e900c1fd603f0efc9f51939ab9f93f115455
@@ -14474,6 +14505,20 @@ __metadata:
   peerDependencies:
     stylelint: ^16.1.0
   checksum: 10c0/7f9b954694358e77be5110418f31335be579ce59dd952bc3c6a9449265297db3170ec520e0905769253b48b99c3109a95c71f5b985bf402e48fd6c89b5364cb2
+  languageName: node
+  linkType: hard
+
+"stylelint-selector-bem-pattern@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "stylelint-selector-bem-pattern@npm:4.0.0"
+  dependencies:
+    eslint-plugin-jest: "npm:^27.2.2"
+    lodash: "npm:>=4.17.21"
+    postcss: "npm:^8.4.24"
+    postcss-bem-linter: "npm:^4.0.1"
+  peerDependencies:
+    stylelint: ^16.2.1
+  checksum: 10c0/ee6fc21131fed9aaa2e1db16758329cd8d57cf37e9ea4987684d523f5f650ece602a83daec25ee17c76287af1ff6835792ca9e5c5c172ced63d96aec00127749
   languageName: node
   linkType: hard
 

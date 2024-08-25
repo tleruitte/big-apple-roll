@@ -1,5 +1,3 @@
-import "./scheduleTemplate.css";
-
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 

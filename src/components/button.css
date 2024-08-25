@@ -1,3 +1,11 @@
+.truc {
+  color: red;
+}
+
+.button * {
+  top: calc(1em+ 2em);
+}
+
 .button {
   display: flex;
   align-items: stretch;
@@ -8,6 +16,10 @@
 
   &:hover {
     color: white;
+  }
+
+  &.button--orange-Tuc {
+    color: red;
   }
 
   &.button--orangeTheme {
