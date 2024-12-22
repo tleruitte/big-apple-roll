@@ -2,8 +2,11 @@
   "name": "main",
   "packageManager": "yarn@4.4.0",
   "scripts": {
-    "dev": "gatsby develop",
-    "typescript": "tsc --noEmit"
+    "lint:eslint": "eslint",
+    "lint:stylelint": "stylelint \"src/**/*.css\"",
+    "lint:tsc": "tsc --noEmit",
+    "lint": "concurrently --names \"eslint,stylelint,tsc\" --prefix-colors gray --pad-prefix --group \"yarn lint:eslint\" \"yarn lint:stylelint\" \"yarn lint:tsc\"",
+    "dev": "gatsby develop"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -16,6 +19,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/react-helmet": "^6.1.11",
+    "concurrently": "^9.1.0",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.37.2",

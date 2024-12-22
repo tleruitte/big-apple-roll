@@ -14,6 +14,12 @@ yarn
 
 ## Run
 
+### Lint
+
+```sh
+yarn lint
+```
+
 ### Dev
 
 ```sh
