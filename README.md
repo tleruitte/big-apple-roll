@@ -23,3 +23,9 @@ yarn dev
 ### Prod
 
 https://tleruitte.github.io/bigappleroll/
+
+## Update
+
+```sh
+yarn upgrade-interactive
+```
