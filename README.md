@@ -1,12 +1,10 @@
 # Big Apple Roll
 
-
-
 ## Install
 
 ### Dependencies
 
-- Node v20
+- Node v20 (Install with [nvm](https://github.com/nvm-sh/nvm))
 
 ### Install
 
