@@ -1,11 +1,3 @@
-.truc {
-  color: red;
-}
-
-.button * {
-  top: calc(1em+ 2em);
-}
-
 .button {
   display: flex;
   align-items: stretch;
@@ -17,45 +9,41 @@
   &:hover {
     color: white;
   }
+}
 
-  &.button--orange-Tuc {
-    color: red;
-  }
+.button--orangeTheme {
+  background: var(--orange);
 
-  &.button--orangeTheme {
-    background: var(--orange);
-
-    &:hover {
-      background: var(--blue);
-    }
-
-    &:active {
-      background: var(--green);
-    }
-  }
-
-  &.button--blueTheme {
+  &:hover {
     background: var(--blue);
-
-    &:hover {
-      background: var(--green);
-    }
-
-    &:active {
-      background: var(--orange);
-    }
   }
 
-  &.button--greenTheme {
+  &:active {
     background: var(--green);
+  }
+}
 
-    &:hover {
-      background: var(--orange);
-    }
+.button--blueTheme {
+  background: var(--blue);
 
-    &:active {
-      background: var(--blue);
-    }
+  &:hover {
+    background: var(--green);
+  }
+
+  &:active {
+    background: var(--orange);
+  }
+}
+
+.button--greenTheme {
+  background: var(--green);
+
+  &:hover {
+    background: var(--orange);
+  }
+
+  &:active {
+    background: var(--blue);
   }
 }
 
