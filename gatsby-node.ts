@@ -1,5 +1,7 @@
-import { GatsbyNode } from "gatsby";
 import path from "path";
+
+import { GatsbyNode } from "gatsby";
+
 import { ScheduleTemplateContext } from "./src/templates/scheduleTemplate";
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {

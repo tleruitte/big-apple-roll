@@ -1,8 +1,9 @@
 import "./index.css";
 
 import React from "react";
-import LayoutHead from "../components/layoutHead";
 import { StaticImage } from "gatsby-plugin-image";
+
+import LayoutHead from "../components/layoutHead";
 import Button from "../components/button";
 
 export default function Index() {

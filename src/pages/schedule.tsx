@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
+
 import LayoutHead from "../components/layoutHead";
 
 export default function Schedule(): React.JSX.Element {
