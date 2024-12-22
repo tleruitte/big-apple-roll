@@ -3,9 +3,10 @@
   "packageManager": "yarn@4.4.0",
   "scripts": {
     "lint:eslint": "eslint",
+    "lint:prettier": "prettier --write \"**/*.{ts,tsx,mjs,js,css}\"",
     "lint:stylelint": "stylelint \"src/**/*.css\"",
     "lint:tsc": "tsc --noEmit",
-    "lint": "concurrently --names \"eslint,stylelint,tsc\" --prefix-colors gray --pad-prefix --group \"yarn lint:eslint\" \"yarn lint:stylelint\" \"yarn lint:tsc\"",
+    "lint": "concurrently --names \"prettier,eslint,stylelint,tsc\" --prefix-colors gray --pad-prefix --group \"yarn lint:prettier\" \"yarn lint:eslint\" \"yarn lint:stylelint\" \"yarn lint:tsc\"",
     "dev": "gatsby develop"
   },
   "devDependencies": {
