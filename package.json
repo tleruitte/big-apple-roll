@@ -7,7 +7,8 @@
     "lint:stylelint": "stylelint \"src/**/*.css\"",
     "lint:tsc": "tsc --noEmit",
     "lint": "concurrently --names \"prettier,eslint,stylelint,tsc\" --prefix-colors gray --pad-prefix --group \"yarn lint:prettier\" \"yarn lint:eslint\" \"yarn lint:stylelint\" \"yarn lint:tsc\"",
-    "dev": "gatsby develop"
+    "dev": "gatsby develop",
+    "build": "gatsby build"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
