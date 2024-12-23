@@ -19,11 +19,6 @@ export const query = graphql`
 export default function ScheduleTemplate(
   props: PageProps<Queries.ScheduleTemplateQuery, ScheduleTemplateContext>,
 ): React.JSX.Element {
-  console.log(
-    "DEBUG: schedule template",
-    { props },
-    JSON.stringify({}, null, 2),
-  );
   const { data } = props;
 
   return (
