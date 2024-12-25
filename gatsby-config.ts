@@ -1,7 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
-  pathPrefix: "/bigappleroll",
+  pathPrefix: "/big-apple-roll",
   siteMetadata: {
     title: "Big Apple Roll",
     siteUrl: "https://tleruitte.github.io/",
@@ -33,7 +33,7 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        policy: [{ userAgent: "*", disallow: "/bigappleroll" }],
+        policy: [{ userAgent: "*", disallow: "/big-apple-roll" }],
       },
     },
     {

@@ -28,7 +28,7 @@ yarn dev
 
 ### Prod
 
-https://tleruitte.github.io/bigappleroll/
+https://tleruitte.github.io/big-apple-roll/
 
 ## Update
 
