@@ -4,6 +4,7 @@ const config: GatsbyConfig = {
   pathPrefix: "/bigappleroll",
   siteMetadata: {
     title: "Big Apple Roll",
+    siteUrl: "https://tleruitte.github.io/",
   },
   graphqlTypegen: true,
   plugins: [
@@ -29,6 +30,12 @@ const config: GatsbyConfig = {
     },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        policy: [{ userAgent: "*", disallow: "/bigappleroll" }],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
