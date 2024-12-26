@@ -7,3 +7,12 @@
   --large-font-size: 2em;
   --large-font-weight: 500;
 }
+
+h1 {
+  font-family: var(--oswald-font-family);
+  font-size: 3em;
+  font-weight: var(--large-font-weight);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--orange);
+}

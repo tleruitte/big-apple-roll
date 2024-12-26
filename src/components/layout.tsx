@@ -34,6 +34,9 @@ export default function Layout(props: Props): React.JSX.Element {
             <Link to="/hotel/" className="layout-headerNavItem">
               Hotel
             </Link>
+            <Link to="/sponsors/" className="layout-headerNavItem">
+              Sponsors
+            </Link>
           </nav>
         </div>
       </header>

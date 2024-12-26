@@ -1,8 +1,15 @@
 /* spacing */
 :root {
+  /* 16px = 1em */
   --spacing4px: 0.25em;
   --spacing8px: 0.5em;
   --spacing12px: 0.75em;
   --spacing24px: 1.5em;
   --spacing36px: 2.25em;
+  --spacing48px: 3em;
+  --spacing72px: 4.5em;
+  --spacing96px: 6em;
+  --spacing144px: 9em;
+  --spacing192px: 12em;
+  --spacing240px: 15em;
 }

@@ -3494,6 +3494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.17.13
+  resolution: "@types/lodash@npm:4.17.13"
+  checksum: 10c0/c3d0b7efe7933ac0369b99f2f7bff9240d960680fdb74b41ed4bd1b3ca60cca1e31fe4046d9abbde778f941a41bc2a75eb629abf8659fa6c27b66efbbb0802a9
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:^4.14.92":
   version: 4.17.7
   resolution: "@types/lodash@npm:4.17.7"
@@ -8890,6 +8897,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-transformer-sharp@npm:^5.14.0":
+  version: 5.14.0
+  resolution: "gatsby-transformer-sharp@npm:5.14.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.20.13"
+    bluebird: "npm:^3.7.2"
+    common-tags: "npm:^1.8.2"
+    fs-extra: "npm:^11.2.0"
+    gatsby-plugin-utils: "npm:^4.14.0"
+    probe-image-size: "npm:^7.2.3"
+    semver: "npm:^7.5.3"
+    sharp: "npm:^0.32.6"
+  peerDependencies:
+    gatsby: ^5.0.0-next
+    gatsby-plugin-sharp: ^5.0.0-next
+  checksum: 10c0/e57e78c28006c106571ca907f41cd84b838f66060c86328eb46f8696650adcf5657f54de892a8ffb8b83138715529c74ec9a536bc41345b9ac27f6eca43fe017
+  languageName: node
+  linkType: hard
+
 "gatsby-worker@npm:^2.14.0":
   version: 2.14.0
   resolution: "gatsby-worker@npm:2.14.0"
@@ -11452,6 +11478,7 @@ __metadata:
     "@types/babel__core": "npm:^7.20.5"
     "@types/eslint": "npm:^9.6.1"
     "@types/eslint__js": "npm:^8.42.3"
+    "@types/lodash": "npm:^4"
     "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^18.3.18"
     "@types/react-dom": "npm:^18.3.5"
@@ -11473,7 +11500,9 @@ __metadata:
     gatsby-plugin-sharp: "npm:^5.14.0"
     gatsby-source-filesystem: "npm:^5.14.0"
     gatsby-transformer-remark: "npm:^6.14.0"
+    gatsby-transformer-sharp: "npm:^5.14.0"
     globals: "npm:^15.14.0"
+    lodash: "npm:^4.17.21"
     prettier: "npm:3.4.2"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"

@@ -1,6 +1,6 @@
 ---
-title: SOLO Inline
+title: Sonic Sports
 
-type: presenting
+type: general
 url: https://solo-inline.com
 ---
