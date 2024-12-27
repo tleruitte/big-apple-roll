@@ -9014,6 +9014,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-root-import@npm:^2.0.9":
+  version: 2.0.9
+  resolution: "gatsby-plugin-root-import@npm:2.0.9"
+  peerDependencies:
+    gatsby: ^2 || ^3 || ^4 || ^5
+  checksum: 10c0/b1c5a99765f4072870862413d33e79ffcb1a9d8e081abb5e6bf9de553e1e61e222b8b50ec2f6f8aaad08d30bce0c73cbb7bc05a88bb543fa32534ca16a370d8e
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-sharp@npm:^5.14.0":
   version: 5.14.0
   resolution: "gatsby-plugin-sharp@npm:5.14.0"
@@ -11758,6 +11767,7 @@ __metadata:
     gatsby-omni-font-loader: "npm:^2.0.2"
     gatsby-plugin-image: "npm:^3.14.0"
     gatsby-plugin-robots-txt: "npm:^1.8.0"
+    gatsby-plugin-root-import: "npm:^2.0.9"
     gatsby-plugin-sharp: "npm:^5.14.0"
     gatsby-source-filesystem: "npm:^5.14.0"
     gatsby-transformer-remark: "npm:^6.14.0"

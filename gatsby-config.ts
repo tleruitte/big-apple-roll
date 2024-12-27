@@ -29,6 +29,7 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-image",
+    "gatsby-plugin-root-import",
     "gatsby-plugin-sharp",
     {
       resolve: "gatsby-plugin-robots-txt",

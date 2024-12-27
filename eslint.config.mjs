@@ -9,19 +9,39 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginImportX from "eslint-plugin-import-x";
 import { includeIgnoreFile } from "@eslint/compat";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import tsParser from "@typescript-eslint/parser";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const gitignorePath = path.resolve(__dirname, ".gitignore");
-import tsParser from "@typescript-eslint/parser";
 
 export default typescript.config(
   js.configs.recommended,
   typescript.configs.recommended,
   eslintPluginImportX.flatConfigs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
+  react.configs.flat.recommended,
+  eslintConfigPrettier,
+  includeIgnoreFile(gitignorePath),
   {
+    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+  },
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
+    plugins: {
+      "react-hooks": reactHooksPlugin,
+    },
     rules: {
+      "no-unused-vars": "off",
+      ...reactHooksPlugin.configs.recommended.rules,
       "import-x/no-dynamic-require": "warn",
       "import-x/no-named-as-default": "off",
       "import-x/no-named-as-default-member": "off",
@@ -32,47 +52,11 @@ export default typescript.config(
         },
       ],
     },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-    languageOptions: {
-      parser: tsParser,
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
-    rules: {
-      "no-unused-vars": "off",
-    },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-  },
-  {
-    files: ["**/*.js"],
-    languageOptions: {
-      sourceType: "script",
-    },
-  },
-  includeIgnoreFile(gitignorePath),
-  { ignores: [".yarn"] },
-  {
     settings: {
+      "import/resolver-next": [createTypeScriptImportResolver()],
       react: {
         version: "detect",
       },
     },
-  },
-  {
-    languageOptions: {
-      globals: globals.browser,
-    },
-  },
-  react.configs.flat.recommended,
-  eslintConfigPrettier,
-  {
-    plugins: {
-      "react-hooks": reactHooksPlugin,
-    },
-    rules: reactHooksPlugin.configs.recommended.rules,
   },
 );
