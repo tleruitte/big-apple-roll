@@ -13,7 +13,7 @@ export default function Index() {
         <StaticImage
           src="../images/logo.png"
           alt="Logo"
-          placeholder="blurred"
+          placeholder="none"
           layout="fixed"
           width={500}
         />

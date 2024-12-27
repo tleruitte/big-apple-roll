@@ -47,7 +47,7 @@ export default function Sponsors(): React.JSX.Element {
           name
           publicURL
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(placeholder: NONE)
           }
         }
       }
