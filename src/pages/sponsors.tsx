@@ -7,8 +7,8 @@ import { keyBy } from "lodash";
 
 import clsx from "clsx";
 
-import isEnumValue from "helpers/isEnumValue";
-import LayoutHead from "components/layoutHead";
+import isEnumValue from "src/helpers/isEnumValue";
+import LayoutHead from "src/components/layoutHead";
 
 enum SponsorType {
   Presenting = "presenting",

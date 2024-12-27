@@ -3,8 +3,8 @@ import "./index.css";
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 
-import Button from "components/button";
-import LayoutHead from "components/layoutHead";
+import Button from "src/components/button";
+import LayoutHead from "src/components/layoutHead";
 
 export default function Index() {
   return (

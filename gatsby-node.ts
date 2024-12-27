@@ -2,7 +2,7 @@ import path from "path";
 
 import { GatsbyNode } from "gatsby";
 
-import { ScheduleTemplateContext } from "./src/templates/scheduleTemplate";
+import { ScheduleTemplateContext } from "src/templates/scheduleTemplate";
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
   const { actions, graphql, reporter } = args;
