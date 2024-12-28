@@ -6,14 +6,18 @@ import LayoutHead from "src/components/layoutHead";
 export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`
     query Schedule {
-      allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/src/content/schedule/" } }
+      allFile(
+        filter: { relativeDirectory: { eq: "schedule" } }
+        sort: { childMarkdownRemark: { frontmatter: { date: ASC } } }
       ) {
         nodes {
-          id
-          frontmatter {
-            slug
-            title
+          name
+          childMarkdownRemark {
+            frontmatter {
+              title
+              date
+              pre_bar
+            }
           }
         }
       }
@@ -24,20 +28,19 @@ export default function Schedule(): React.JSX.Element {
     <>
       <div className="schedule">Schedule</div>
       <div>
-        {data.allMarkdownRemark.nodes.map((node) => {
-          const { frontmatter } = node;
-          if (!frontmatter) {
-            return null;
-          }
-
-          const { slug, title } = frontmatter;
-          if (!slug || !title) {
+        {data.allFile.nodes.map((node) => {
+          const { name } = node;
+          const { title, date, pre_bar } =
+            node.childMarkdownRemark?.frontmatter ?? {};
+          if (!title || !date) {
             return null;
           }
 
           return (
-            <div key={node.id}>
-              <Link to={`/schedule/${slug}`}>{title}</Link>
+            <div key={title}>
+              <Link to={`/schedule/${name}`}>
+                {title} {date} {pre_bar ? "PRE" : null}
+              </Link>
             </div>
           );
         })}
