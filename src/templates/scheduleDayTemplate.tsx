@@ -22,15 +22,15 @@ export const query = graphql`
       }
     }
     events: allFile(
-      filter: { relativeDirectory: { regex: $relativeDirectoryRegex } }
       sort: { childMarkdownRemark: { frontmatter: { date: ASC } } }
+      filter: { relativeDirectory: { regex: $relativeDirectoryRegex } }
     ) {
       nodes {
         name
         childMarkdownRemark {
           frontmatter {
             title
-            time
+            date
           }
         }
       }
@@ -45,27 +45,24 @@ export default function ScheduleDayTemplate(
   >,
 ): React.JSX.Element {
   const { data } = props;
+  const { day, events } = data;
 
-  const { name } = data.day ?? {};
-  const { date } = data.day?.childMarkdownRemark?.frontmatter ?? {};
-  if (!name || !date) {
+  if (!day || !day.childMarkdownRemark?.frontmatter?.date) {
     return <div />;
   }
 
   return (
     <div className="scheduleDayTemplate">
-      <h1>{formatDate(date)}</h1>
-      {data.events.nodes.map((node) => {
-        const { title, time } = node.childMarkdownRemark?.frontmatter ?? {};
-        if (!title || !time) {
+      <h1>{formatDate(day.childMarkdownRemark.frontmatter.date)}</h1>
+      {events.nodes.map((node) => {
+        const { title, date } = node.childMarkdownRemark?.frontmatter ?? {};
+        if (!title || !date) {
           return null;
         }
 
-        const formattedTime = formatTime(date, time);
-
         return (
           <div key={node.name}>
-            {formattedTime}{" "}
+            {formatTime(date)}{" "}
             <Link to={`/schedule/${name}/${node.name}`}>{title}</Link>
           </div>
         );
