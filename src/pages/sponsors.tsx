@@ -3,7 +3,6 @@ import "./sponsors.css";
 import React, { useMemo } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { keyBy } from "lodash";
 
 import clsx from "clsx";
 
@@ -37,18 +36,28 @@ export default function Sponsors(): React.JSX.Element {
           }
         }
       }
-      sponsorLogos: allFile(
+      sponsorImageLogos: allFile(
         filter: {
           relativeDirectory: { eq: "sponsors" }
-          extension: { ne: "md" }
+          extension: { nin: ["md", "svg"] }
+        }
+      ) {
+        nodes {
+          name
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE)
+          }
+        }
+      }
+      sponsorSVGLogos: allFile(
+        filter: {
+          relativeDirectory: { eq: "sponsors" }
+          extension: { eq: "svg" }
         }
       ) {
         nodes {
           name
           publicURL
-          childImageSharp {
-            gatsbyImageData(placeholder: NONE)
-          }
         }
       }
     }
@@ -78,8 +87,28 @@ export default function Sponsors(): React.JSX.Element {
   }, [data.sponsors.nodes]);
 
   const sponsorLogosByName = useMemo(() => {
-    return keyBy(data.sponsorLogos.nodes, "name");
-  }, [data.sponsorLogos.nodes]);
+    const sponsorLogosByName: Record<
+      string,
+      | {
+          type: "image";
+          node: Queries.SponsorsQuery["sponsorImageLogos"]["nodes"][0];
+        }
+      | {
+          type: "svg";
+          node: Queries.SponsorsQuery["sponsorSVGLogos"]["nodes"][0];
+        }
+    > = {};
+
+    data.sponsorImageLogos.nodes.forEach((node) => {
+      sponsorLogosByName[node.name] = { type: "image", node };
+    });
+
+    data.sponsorSVGLogos.nodes.forEach((node) => {
+      sponsorLogosByName[node.name] = { type: "svg", node };
+    });
+
+    return sponsorLogosByName;
+  }, [data.sponsorImageLogos.nodes, data.sponsorSVGLogos.nodes]);
 
   return (
     <div className="sponsors">
@@ -114,21 +143,23 @@ export default function Sponsors(): React.JSX.Element {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {sponsorLogo.childImageSharp?.gatsbyImageData ? (
+                    {sponsorLogo.type === "image" &&
+                    sponsorLogo.node.childImageSharp?.gatsbyImageData ? (
                       <GatsbyImage
                         className="sponsors-sponsorLogo"
-                        image={sponsorLogo.childImageSharp.gatsbyImageData}
+                        image={sponsorLogo.node.childImageSharp.gatsbyImageData}
                         alt={title}
                         objectFit="contain"
                         sizes=""
                       />
-                    ) : (
+                    ) : null}
+                    {sponsorLogo.type === "svg" ? (
                       <img
                         className="sponsors-sponsorLogo"
-                        src={sponsorLogo.publicURL ?? undefined}
+                        src={sponsorLogo.node.publicURL ?? undefined}
                         alt={title}
                       />
-                    )}
+                    ) : null}
                   </a>
                 );
               })}
