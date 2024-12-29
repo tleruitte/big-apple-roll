@@ -3,6 +3,7 @@ import path from "path";
 import { GatsbyNode } from "gatsby";
 
 import { ScheduleDayTemplateContext } from "src/templates/scheduleDayTemplate";
+import { ScheduleEventTemplateContext } from "src/templates/scheduleEventTemplate";
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
   const { actions, graphql, reporter } = args;
@@ -12,20 +13,18 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
     query CreatePages {
       scheduleDays: allFile(filter: { relativeDirectory: { eq: "schedule" } }) {
         nodes {
+          id
           name
+          relativeDirectory
         }
       }
-      allMarkdownRemark {
+      scheduleEvents: allFile(
+        filter: { relativeDirectory: { regex: "/^schedule/.*/" } }
+      ) {
         nodes {
           id
-          frontmatter {
-            slug
-          }
-          parent {
-            ... on File {
-              relativePath
-            }
-          }
+          name
+          relativeDirectory
         }
       }
     }
@@ -39,31 +38,25 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
   // Schedule day templates
   result.data.scheduleDays.nodes.forEach((node) => {
     const context: ScheduleDayTemplateContext = {
-      day: node.name,
-      relativeDirectoryRegex: `^schedule/${node.name}/`,
+      id: node.id,
+      relativeDirectoryRegex: `^${node.relativeDirectory}/${node.name}/`,
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleDayTemplate.tsx`),
-      path: `/schedule/${node.name}`,
+      path: `/${node.relativeDirectory}/${node.name}`,
       context,
     });
   });
 
-  // result.data.allMarkdownRemark.nodes.forEach((node) => {
-  //   if (
-  //     node.parent &&
-  //     "relativePath" in node.parent &&
-  //     node.parent.relativePath?.startsWith("schedule") &&
-  //     node.frontmatter?.slug
-  //   ) {
-  //     const context: ScheduleTemplateContext = {
-  //       id: node.id,
-  //     };
-  //     createPage({
-  //       component: path.resolve(`./src/templates/scheduleTemplate.tsx`),
-  //       path: `/schedule/${node.frontmatter.slug}`,
-  //       context,
-  //     });
-  //   }
-  // });
+  // Schedule event templates
+  result.data.scheduleEvents.nodes.forEach((node) => {
+    const context: ScheduleEventTemplateContext = {
+      id: node.id,
+    };
+    createPage({
+      component: path.resolve(`./src/templates/scheduleEventTemplate.tsx`),
+      path: `/${node.relativeDirectory}/${node.name}`,
+      context,
+    });
+  });
 };

@@ -6,13 +6,13 @@ import LayoutHead from "src/components/layoutHead";
 import { formatDate, formatTime } from "src/helpers/date";
 
 export type ScheduleDayTemplateContext = {
-  day: string;
+  id: string;
   relativeDirectoryRegex: string;
 };
 
 export const query = graphql`
-  query ScheduleDayTemplate($day: String!, $relativeDirectoryRegex: String!) {
-    day: file(relativeDirectory: { eq: "schedule" }, name: { eq: $day }) {
+  query ScheduleDayTemplate($id: String!, $relativeDirectoryRegex: String!) {
+    day: file(id: { eq: $id }) {
       name
       childMarkdownRemark {
         frontmatter {
@@ -47,6 +47,12 @@ export default function ScheduleDayTemplate(
   const { data } = props;
   const { day, events } = data;
 
+  console.log(
+    "DEBUG: ScheduleDayTemplate",
+    { props },
+    JSON.stringify({}, null, 2),
+  );
+
   if (!day || !day.childMarkdownRemark?.frontmatter?.date) {
     return <div />;
   }
@@ -63,7 +69,7 @@ export default function ScheduleDayTemplate(
         return (
           <div key={node.name}>
             {formatTime(date)}{" "}
-            <Link to={`/schedule/${name}/${node.name}`}>{title}</Link>
+            <Link to={`/schedule/${day.name}/${node.name}`}>{title}</Link>
           </div>
         );
       })}
