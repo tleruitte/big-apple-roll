@@ -11,7 +11,7 @@
   }
 }
 
-.button--orangeTheme {
+.button--orangeColor {
   background: var(--orange);
 
   &:hover {
@@ -23,7 +23,7 @@
   }
 }
 
-.button--blueTheme {
+.button--blueColor {
   background: var(--blue);
 
   &:hover {
@@ -35,7 +35,7 @@
   }
 }
 
-.button--greenTheme {
+.button--greenColor {
   background: var(--green);
 
   &:hover {
@@ -47,10 +47,24 @@
   }
 }
 
+.button-banner {
+  font-size: 2em;
+  font-weight: 500;
+  background: var(--green);
+  text-align: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
 .button-content {
   flex: 1;
   padding: var(--spacing8px);
   font-size: var(--large-font-size);
   font-weight: var(--large-font-weight);
   text-align: center;
+
+  .button--large & {
+    padding: 0.5em;
+    font-size: 5em;
+  }
 }

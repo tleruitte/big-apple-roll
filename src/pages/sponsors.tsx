@@ -1,11 +1,9 @@
-import "./sponsors.css";
-
 import React, { useMemo } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-
 import clsx from "clsx";
 
+import * as style from "src/pages/sponsors.module.css";
 import isEnumValue from "src/helpers/isEnumValue";
 import LayoutHead from "src/components/layoutHead";
 
@@ -111,13 +109,13 @@ export default function Sponsors(): React.JSX.Element {
   }, [data.sponsorImageLogos.nodes, data.sponsorSVGLogos.nodes]);
 
   return (
-    <div className="sponsors">
+    <div>
       {Object.entries(sponsorsByType).map(([type, sponsors]) => {
         return (
           <React.Fragment key={type}>
             <h1>{type} sponsors</h1>
             {type === SponsorType.Presenting ? (
-              <p className="sponsors-intro">
+              <p className={style.sponsorsIntro}>
                 A huge “Thank You” to all of our generous sponsors. BAR Sponsors
                 donate money, services, skate equipment, accessories and free or
                 discounted entrance fees to skating instruction & events. We use
@@ -126,7 +124,24 @@ export default function Sponsors(): React.JSX.Element {
                 support.
               </p>
             ) : null}
-            <div className={clsx("sponsors-grid", `sponsors-grid--${type}`)}>
+            <div
+              className={clsx(
+                style.sponsorsGrid,
+                (() => {
+                  switch (type) {
+                    case SponsorType.Presenting: {
+                      return style.sponsorsGridPresenting;
+                    }
+                    case SponsorType.Supporting: {
+                      return style.sponsorsGridSupporting;
+                    }
+                    case SponsorType.General: {
+                      return undefined;
+                    }
+                  }
+                })(),
+              )}
+            >
               {sponsors.map((sponsor) => {
                 const { title, url } =
                   sponsor.childMarkdownRemark?.frontmatter ?? {};
@@ -138,7 +153,7 @@ export default function Sponsors(): React.JSX.Element {
                 return (
                   <a
                     key={sponsor.name}
-                    className="sponsors-sponsor"
+                    className={style.sponsorsSponsor}
                     href={url}
                     target="_blank"
                     rel="noreferrer"
@@ -146,7 +161,7 @@ export default function Sponsors(): React.JSX.Element {
                     {sponsorLogo.type === "image" &&
                     sponsorLogo.node.childImageSharp?.gatsbyImageData ? (
                       <GatsbyImage
-                        className="sponsors-sponsorLogo"
+                        className={style.sponsorsSponsorLogo}
                         image={sponsorLogo.node.childImageSharp.gatsbyImageData}
                         alt={title}
                         objectFit="contain"
@@ -155,7 +170,7 @@ export default function Sponsors(): React.JSX.Element {
                     ) : null}
                     {sponsorLogo.type === "svg" ? (
                       <img
-                        className="sponsors-sponsorLogo"
+                        className={style.sponsorsSponsorLogo}
                         src={sponsorLogo.node.publicURL ?? undefined}
                         alt={title}
                       />

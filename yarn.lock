@@ -7025,6 +7025,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dts-css-modules-loader@npm:2.0.0":
+  version: 2.0.0
+  resolution: "dts-css-modules-loader@npm:2.0.0"
+  peerDependencies:
+    css-loader: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+  checksum: 10c0/ed64c79313dd3383d9bf2a19f19be6561826e6f6caccd10bda567cf2c37be1589d0820d60a79336c3f0931c8aa2660df34ef09f83982a5640f5ca7a103eae12f
+  languageName: node
+  linkType: hard
+
 "dunder-proto@npm:^1.0.0, dunder-proto@npm:^1.0.1":
   version: 1.0.1
   resolution: "dunder-proto@npm:1.0.1"
@@ -8951,6 +8960,18 @@ __metadata:
   peerDependencies:
     "@parcel/core": ^2.0.0
   checksum: 10c0/a9a079fc0844c9f13496660645c6f3d4c0892027caacd6bf6891f21259e42936253f576689ee5dc3ad4ff76d6e62646f93ee395fa11fd79988d62f50e740dc1c
+  languageName: node
+  linkType: hard
+
+"gatsby-plugin-dts-css-modules@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gatsby-plugin-dts-css-modules@npm:3.0.0"
+  dependencies:
+    dts-css-modules-loader: "npm:2.0.0"
+  peerDependencies:
+    gatsby: ">= 3"
+    joi: ^17.0.0
+  checksum: 10c0/0635b2ec138288f4cb3e29c8842f4890537d003d15c2344f4a70367574f9742cd788cd4560598f6b967e8675c5b9da153b66d5ee3c434a3fc8b38ae280704c35
   languageName: node
   linkType: hard
 
@@ -11780,6 +11801,7 @@ __metadata:
     gatsby: "npm:^5.14.1"
     gatsby-cli: "npm:^5.14.0"
     gatsby-omni-font-loader: "npm:^2.0.2"
+    gatsby-plugin-dts-css-modules: "npm:^3.0.0"
     gatsby-plugin-image: "npm:^3.14.0"
     gatsby-plugin-robots-txt: "npm:^1.8.0"
     gatsby-plugin-root-import: "npm:^2.0.9"

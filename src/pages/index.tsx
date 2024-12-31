@@ -1,15 +1,14 @@
-import "./index.css";
-
 import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 
+import * as style from "src/pages/index.module.css";
 import Button from "src/components/button";
 import LayoutHead from "src/components/layoutHead";
 
 export default function Index() {
   return (
     <>
-      <div className="index-logo">
+      <div className={style.indexLogo}>
         <StaticImage
           src="../images/logo.png"
           alt="Logo"
@@ -18,8 +17,8 @@ export default function Index() {
           width={500}
         />
       </div>
-      <div className="index-date">August 1-4, 2023</div>
-      <div className="index-menu">
+      <div className={style.indexDate}>August 1-4, 2023</div>
+      <div className={style.indexMenu}>
         <Button label="Book a room" to="/hotel/" />
         <Button label="Schedule" to="/schedule/" />
       </div>

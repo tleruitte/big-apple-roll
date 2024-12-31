@@ -43,3 +43,7 @@
   text-decoration: none;
   text-transform: uppercase;
 }
+
+.layout-main {
+  margin-bottom: var(--spacing96px);
+}

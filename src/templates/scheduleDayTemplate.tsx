@@ -1,5 +1,4 @@
 import React from "react";
-
 import { graphql, HeadProps, Link, PageProps } from "gatsby";
 
 import LayoutHead from "src/components/layoutHead";
@@ -46,12 +45,6 @@ export default function ScheduleDayTemplate(
 ): React.JSX.Element {
   const { data } = props;
   const { day, events } = data;
-
-  console.log(
-    "DEBUG: ScheduleDayTemplate",
-    { props },
-    JSON.stringify({}, null, 2),
-  );
 
   if (!day || !day.childMarkdownRemark?.frontmatter?.date) {
     return <div />;

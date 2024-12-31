@@ -1,7 +1,8 @@
-import "./layout.css";
-
+import clsx from "clsx";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
+
+import * as style from "src/components/layout.module.css";
 
 type Props = {
   children: React.ReactNode;
@@ -22,25 +23,27 @@ export default function Layout(props: Props): React.JSX.Element {
 
   return (
     <>
-      <header className="layout-header">
-        <div className="layout-headerContent layout-content">
-          <Link to="/" className="layout-headerLogo">
+      <header className={style.layoutHeader}>
+        <div className={clsx(style.layoutHeaderContent, style.layoutContent)}>
+          <Link to="/" className={style.layoutHeaderLogo}>
             {data.site?.siteMetadata?.title ?? ""}
           </Link>
-          <nav className="layout-headerNav">
-            <Link to="/schedule/" className="layout-headerNavItem">
+          <nav className={style.layoutHeaderNav}>
+            <Link to="/schedule/" className={style.layoutHeaderNavItem}>
               Schedule
             </Link>
-            <Link to="/hotel/" className="layout-headerNavItem">
+            <Link to="/hotel/" className={style.layoutHeaderNavItem}>
               Hotel
             </Link>
-            <Link to="/sponsors/" className="layout-headerNavItem">
+            <Link to="/sponsors/" className={style.layoutHeaderNavItem}>
               Sponsors
             </Link>
           </nav>
         </div>
       </header>
-      <main className="layout-content">{children}</main>
+      <main className={clsx(style.layoutMain, style.layoutContent)}>
+        {children}
+      </main>
     </>
   );
 }

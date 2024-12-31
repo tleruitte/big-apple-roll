@@ -48,7 +48,7 @@ export default typescript.config(
       "import-x/order": [
         "warn",
         {
-          "newlines-between": "always-and-inside-groups",
+          "newlines-between": "always",
         },
       ],
     },

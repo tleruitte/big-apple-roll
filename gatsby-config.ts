@@ -28,6 +28,7 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    "gatsby-plugin-dts-css-modules",
     "gatsby-plugin-image",
     "gatsby-plugin-root-import",
     "gatsby-plugin-sharp",

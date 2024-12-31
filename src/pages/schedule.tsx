@@ -1,7 +1,10 @@
 import React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 
+import * as style from "src/pages/schedule.module.css";
 import LayoutHead from "src/components/layoutHead";
+import Button from "src/components/button";
+import { formatDate } from "src/helpers/date";
 
 export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`
@@ -25,27 +28,30 @@ export default function Schedule(): React.JSX.Element {
   `);
 
   return (
-    <>
-      <div className="schedule">Schedule</div>
-      <div>
-        {data.allFile.nodes.map((node) => {
-          const { name } = node;
-          const { title, date, pre_bar } =
-            node.childMarkdownRemark?.frontmatter ?? {};
-          if (!title || !date) {
-            return null;
-          }
+    <div className={style.schedule}>
+      {data.allFile.nodes.map((node) => {
+        const { name } = node;
+        const { title, date, pre_bar } =
+          node.childMarkdownRemark?.frontmatter ?? {};
+        if (!title || !date) {
+          return null;
+        }
 
-          return (
-            <div key={title}>
-              <Link to={`/schedule/${name}`}>
-                {title} {date} {pre_bar ? "PRE" : null}
-              </Link>
-            </div>
-          );
-        })}
-      </div>
-    </>
+        return (
+          <div key={title}>
+            <Button
+              color={pre_bar ? "blue" : undefined}
+              size="large"
+              to={`/schedule/${name}`}
+              banner={
+                pre_bar ? "Pre bar" : formatDate(date, { format: "short" })
+              }
+              label={title}
+            ></Button>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
