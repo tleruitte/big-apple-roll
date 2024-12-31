@@ -1,5 +1,7 @@
 import { DateTime } from "luxon";
 
+import assertNever from "src/helpers/assertNever";
+
 const parseDate = (date: string): DateTime => {
   return DateTime.fromISO(date, { zone: "utc" });
 };
@@ -12,13 +14,19 @@ export const formatDate = (
 
   const dateTimeFormatOptions = ((): Intl.DateTimeFormatOptions => {
     switch (format) {
-      case "huge":
+      case "huge": {
         return DateTime.DATE_HUGE;
-      case "short":
+      }
+      case "short": {
         return {
           day: "numeric",
           month: "long",
         };
+      }
+      default: {
+        assertNever(format);
+        return {};
+      }
     }
   })();
 

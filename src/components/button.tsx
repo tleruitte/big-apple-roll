@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import React from "react";
 
 import * as style from "src/components/button.module.css";
+import assertNever from "src/helpers/assertNever";
 
 type Props = {
   color?: "orange" | "blue" | "green";
@@ -21,12 +22,19 @@ export default function Button(props: Props): React.JSX.Element {
         style.button,
         (() => {
           switch (color) {
-            case "orange":
+            case "orange": {
               return style.buttonOrangeColor;
-            case "blue":
+            }
+            case "blue": {
               return style.buttonBlueColor;
-            case "green":
+            }
+            case "green": {
               return style.buttonGreenColor;
+            }
+            default: {
+              assertNever(color);
+              return null;
+            }
           }
         })(),
         { [style.buttonLarge]: size === "large" },

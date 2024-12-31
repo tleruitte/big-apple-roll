@@ -6,6 +6,7 @@ import clsx from "clsx";
 import * as style from "src/pages/sponsors.module.css";
 import isEnumValue from "src/helpers/isEnumValue";
 import LayoutHead from "src/components/layoutHead";
+import assertNever from "src/helpers/assertNever";
 
 enum SponsorType {
   Presenting = "presenting",
@@ -128,15 +129,21 @@ export default function Sponsors(): React.JSX.Element {
               className={clsx(
                 style.sponsorsGrid,
                 (() => {
-                  switch (type) {
-                    case SponsorType.Presenting: {
-                      return style.sponsorsGridPresenting;
-                    }
-                    case SponsorType.Supporting: {
-                      return style.sponsorsGridSupporting;
-                    }
-                    case SponsorType.General: {
-                      return undefined;
+                  if (isEnumValue(type, SponsorType)) {
+                    switch (type) {
+                      case SponsorType.Presenting: {
+                        return style.sponsorsGridPresenting;
+                      }
+                      case SponsorType.Supporting: {
+                        return style.sponsorsGridSupporting;
+                      }
+                      case SponsorType.General: {
+                        return undefined;
+                      }
+                      default: {
+                        assertNever(type);
+                        return undefined;
+                      }
                     }
                   }
                 })(),

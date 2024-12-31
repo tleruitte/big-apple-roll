@@ -11,6 +11,7 @@ import { includeIgnoreFile } from "@eslint/compat";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import tsParser from "@typescript-eslint/parser";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,10 +38,25 @@ export default typescript.config(
       globals: globals.browser,
     },
     plugins: {
+      unicorn: eslintPluginUnicorn,
       "react-hooks": reactHooksPlugin,
     },
     rules: {
+      "default-case": "error",
       "no-unused-vars": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            'SwitchStatement > SwitchCase[test=null] > BlockStatement:first-child > :first-child:not(ExpressionStatement[expression.callee.name="assertNever"])',
+          message:
+            "`assertNever` should be the first statement of a switch default case - or disable rule if all cases cannot be enumerated",
+        },
+      ],
+      "unicorn/no-unnecessary-await": "error",
+      "unicorn/prefer-node-protocol": "error",
+      "unicorn/prefer-string-raw": "error",
+      "unicorn/switch-case-braces": "error",
       ...reactHooksPlugin.configs.recommended.rules,
       "import-x/no-dynamic-require": "warn",
       "import-x/no-named-as-default": "off",
