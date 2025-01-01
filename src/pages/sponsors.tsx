@@ -6,7 +6,7 @@ import clsx from "clsx";
 import * as style from "src/pages/sponsors.module.css";
 import isEnumValue from "src/helpers/isEnumValue";
 import LayoutHead from "src/components/layoutHead";
-import assertNever from "src/helpers/assertNever";
+import switchOn from "src/helpers/switchOn";
 
 enum SponsorType {
   Presenting = "presenting",
@@ -128,25 +128,13 @@ export default function Sponsors(): React.JSX.Element {
             <div
               className={clsx(
                 style.sponsorsGrid,
-                (() => {
-                  if (isEnumValue(type, SponsorType)) {
-                    switch (type) {
-                      case SponsorType.Presenting: {
-                        return style.sponsorsGridPresenting;
-                      }
-                      case SponsorType.Supporting: {
-                        return style.sponsorsGridSupporting;
-                      }
-                      case SponsorType.General: {
-                        return undefined;
-                      }
-                      default: {
-                        assertNever(type);
-                        return undefined;
-                      }
-                    }
-                  }
-                })(),
+                isEnumValue(type, SponsorType)
+                  ? switchOn(type, {
+                      [SponsorType.Presenting]: style.sponsorsGridPresenting,
+                      [SponsorType.Supporting]: style.sponsorsGridSupporting,
+                      [SponsorType.General]: null,
+                    })
+                  : null,
               )}
             >
               {sponsors.map((sponsor) => {
