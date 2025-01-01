@@ -7797,18 +7797,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-justinanastos@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "eslint-plugin-justinanastos@npm:1.3.1"
-  dependencies:
-    lodash: "npm:^4.0.0"
-    requireindex: "npm:^1.1.0"
-  peerDependencies:
-    eslint: ">=3.16.0"
-  checksum: 10c0/7db01dc68079e5981925732c28d008eaec14df5a75c25a22637e9bdd80e9526be2197a06e11ad74a4c70bd88eafb078fbf753bf07d9356f8c66a9c1c79e06c65
-  languageName: node
-  linkType: hard
-
 "eslint-plugin-react-hooks@npm:^4.6.0":
   version: 4.6.2
   resolution: "eslint-plugin-react-hooks@npm:4.6.2"
@@ -11744,7 +11732,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:>=4.17.21, lodash@npm:^4.0.0, lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
+"lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
@@ -11875,7 +11863,6 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-typescript: "npm:^3.7.0"
     eslint-plugin-import-x: "npm:^4.6.1"
-    eslint-plugin-justinanastos: "npm:^1.3.1"
     eslint-plugin-react: "npm:^7.37.3"
     eslint-plugin-react-hooks: "npm:^5.1.0"
     eslint-plugin-unicorn: "npm:^56.0.1"
@@ -11900,7 +11887,6 @@ __metadata:
     sharp: "npm:^0.33.5"
     stylelint: "npm:^16.12.0"
     stylelint-config-standard: "npm:^36.0.1"
-    stylelint-selector-bem-pattern: "npm:^4.0.1"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.7.2"
     typescript-eslint: "npm:^8.18.2"
@@ -13626,18 +13612,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-bem-linter@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "postcss-bem-linter@npm:4.0.1"
-  dependencies:
-    minimatch: "npm:^3.1.2"
-    postcss-resolve-nested-selector: "npm:^0.1.1"
-  peerDependencies:
-    postcss: ^8.4.21
-  checksum: 10c0/b0f18a83cea880861a7d47edad78741c301b426be1688842a82902db3e46aa9ae6d518f2b423eca5bc1064b1758896bdebd65e132ea23404cbcdee2a8e279994
-  languageName: node
-  linkType: hard
-
 "postcss-calc@npm:^8.2.3":
   version: 8.2.4
   resolution: "postcss-calc@npm:8.2.4"
@@ -13987,7 +13961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-resolve-nested-selector@npm:^0.1.1, postcss-resolve-nested-selector@npm:^0.1.6":
+"postcss-resolve-nested-selector@npm:^0.1.6":
   version: 0.1.6
   resolution: "postcss-resolve-nested-selector@npm:0.1.6"
   checksum: 10c0/84213a2bccce481b1569c595a3c547b25c6ef1cca839fbd6c82c12ab407559966e968613c7454b573aa54f38cfd7e900c1fd603f0efc9f51939ab9f93f115455
@@ -14889,13 +14863,6 @@ __metadata:
   version: 2.0.1
   resolution: "require-package-name@npm:2.0.1"
   checksum: 10c0/2da87caecdd2157489deaf8add246696dc9cbcebd89ef49b062ad1183594b979f96f8194d4b0f5447a92ad72d39b9fae2df38ec5b9ecef9c7c0157af38eeecbc
-  languageName: node
-  linkType: hard
-
-"requireindex@npm:^1.1.0":
-  version: 1.2.0
-  resolution: "requireindex@npm:1.2.0"
-  checksum: 10c0/7fb42aed73bf8de9acc4d6716cf07acc7fbe180e58729433bafcf702e76e7bb10e54f8266c06bfec62d752e0ac14d50e8758833de539e6f4e2cd642077866153
   languageName: node
   linkType: hard
 
@@ -16311,19 +16278,6 @@ __metadata:
   peerDependencies:
     stylelint: ^16.1.0
   checksum: 10c0/7f9b954694358e77be5110418f31335be579ce59dd952bc3c6a9449265297db3170ec520e0905769253b48b99c3109a95c71f5b985bf402e48fd6c89b5364cb2
-  languageName: node
-  linkType: hard
-
-"stylelint-selector-bem-pattern@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "stylelint-selector-bem-pattern@npm:4.0.1"
-  dependencies:
-    lodash: "npm:>=4.17.21"
-    postcss: "npm:^8.4.24"
-    postcss-bem-linter: "npm:^4.0.1"
-  peerDependencies:
-    stylelint: ^16.2.1
-  checksum: 10c0/28ed29d9cb439ec714a8d84a7cf77b0ec2a987dd4a77ec6554a40d5ad8ae71bb6e192d577470404a2367e13d0362b8cf830738bcf9506df99bf8b439776c972f
   languageName: node
   linkType: hard
 

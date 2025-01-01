@@ -23,27 +23,25 @@ export default function Layout(props: Props): React.JSX.Element {
 
   return (
     <>
-      <header className={style.layoutHeader}>
-        <div className={clsx(style.layoutHeaderContent, style.layoutContent)}>
-          <Link to="/" className={style.layoutHeaderLogo}>
+      <header className={style.header}>
+        <div className={clsx(style.headerContent, style.content)}>
+          <Link to="/" className={style.headerLogo}>
             {data.site?.siteMetadata?.title ?? ""}
           </Link>
-          <nav className={style.layoutHeaderNav}>
-            <Link to="/schedule/" className={style.layoutHeaderNavItem}>
+          <nav className={style.headerNav}>
+            <Link to="/schedule/" className={style.headerNavItem}>
               Schedule
             </Link>
-            <Link to="/hotel/" className={style.layoutHeaderNavItem}>
+            <Link to="/hotel/" className={style.headerNavItem}>
               Hotel
             </Link>
-            <Link to="/sponsors/" className={style.layoutHeaderNavItem}>
+            <Link to="/sponsors/" className={style.headerNavItem}>
               Sponsors
             </Link>
           </nav>
         </div>
       </header>
-      <main className={clsx(style.layoutMain, style.layoutContent)}>
-        {children}
-      </main>
+      <main className={clsx(style.main, style.content)}>{children}</main>
     </>
   );
 }

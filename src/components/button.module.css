@@ -9,62 +9,62 @@
   &:hover {
     color: white;
   }
-}
 
-.button--orangeColor {
-  background: var(--orange);
-
-  &:hover {
-    background: var(--blue);
-  }
-
-  &:active {
-    background: var(--green);
-  }
-}
-
-.button--blueColor {
-  background: var(--blue);
-
-  &:hover {
-    background: var(--green);
-  }
-
-  &:active {
+  &.is-orangeColor {
     background: var(--orange);
+
+    &:hover {
+      background: var(--blue);
+    }
+
+    &:active {
+      background: var(--green);
+    }
   }
-}
 
-.button--greenColor {
-  background: var(--green);
-
-  &:hover {
-    background: var(--orange);
-  }
-
-  &:active {
+  &.is-blueColor {
     background: var(--blue);
+
+    &:hover {
+      background: var(--green);
+    }
+
+    &:active {
+      background: var(--orange);
+    }
   }
-}
 
-.button-banner {
-  font-size: 2em;
-  font-weight: 500;
-  background: var(--green);
-  text-align: center;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
+  &.is-greenColor {
+    background: var(--green);
 
-.button-content {
-  flex: 1;
-  padding: var(--spacing8px);
-  font-size: var(--large-font-size);
-  font-weight: var(--large-font-weight);
-  text-align: center;
+    &:hover {
+      background: var(--orange);
+    }
 
-  .button--large & {
-    padding: 0.5em;
-    font-size: 5em;
+    &:active {
+      background: var(--blue);
+    }
+  }
+
+  & .buttonBanner {
+    font-size: 2em;
+    font-weight: 500;
+    background: var(--green);
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  & .buttonLabel {
+    flex: 1;
+    padding: var(--spacing8px);
+    font-size: var(--large-font-size);
+    font-weight: var(--large-font-weight);
+    text-align: center;
+
+    .is-large & {
+      padding: 0.5em;
+      font-size: 5em;
+    }
   }
 }

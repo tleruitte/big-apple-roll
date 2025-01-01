@@ -1,28 +1,28 @@
-.sponsors-grid {
+.description {
+  margin-bottom: var(--spacing36px);
+}
+
+.sponsors {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: var(--spacing144px);
   gap: var(--spacing36px);
   margin-bottom: var(--spacing96px);
+
+  &.is-presenting {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: var(--spacing240px);
+    gap: var(--spacing96px);
+  }
+
+  &.is-supporting {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: var(--spacing192px);
+    gap: var(--spacing48px);
+  }
 }
 
-.sponsors-grid--presenting {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: var(--spacing240px);
-  gap: var(--spacing96px);
-}
-
-.sponsors-grid--supporting {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: var(--spacing192px);
-  gap: var(--spacing48px);
-}
-
-.sponsors-intro {
-  margin-bottom: var(--spacing36px);
-}
-
-.sponsors-sponsor {
+.sponsor {
   position: relative;
   display: flex;
   justify-content: center;
@@ -37,9 +37,9 @@
     background: var(--blue);
     opacity: 0.3;
   }
-}
 
-.sponsors-sponsorLogo {
-  max-width: 100%;
-  max-height: 100%;
+  & .sponsorLogo {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

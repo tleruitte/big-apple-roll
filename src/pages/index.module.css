@@ -1,16 +1,16 @@
-.index-logo {
+.logo {
   display: flex;
   justify-content: center;
 }
 
-.index-date {
+.date {
   padding: var(--spacing24px);
   font-size: var(--large-font-size);
   font-weight: var(--large-font-weight);
   text-align: center;
 }
 
-.index-menu {
+.menu {
   display: flex;
   flex-direction: column;
   gap: var(--spacing24px);

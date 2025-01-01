@@ -116,7 +116,7 @@ export default function Sponsors(): React.JSX.Element {
           <React.Fragment key={type}>
             <h1>{type} sponsors</h1>
             {type === SponsorType.Presenting ? (
-              <p className={style.sponsorsIntro}>
+              <p className={style.description}>
                 A huge “Thank You” to all of our generous sponsors. BAR Sponsors
                 donate money, services, skate equipment, accessories and free or
                 discounted entrance fees to skating instruction & events. We use
@@ -127,11 +127,11 @@ export default function Sponsors(): React.JSX.Element {
             ) : null}
             <div
               className={clsx(
-                style.sponsorsGrid,
+                style.sponsors,
                 isEnumValue(type, SponsorType)
                   ? switchOn(type, {
-                      [SponsorType.Presenting]: style.sponsorsGridPresenting,
-                      [SponsorType.Supporting]: style.sponsorsGridSupporting,
+                      [SponsorType.Presenting]: style.isPresenting,
+                      [SponsorType.Supporting]: style.isSupporting,
                       [SponsorType.General]: null,
                     })
                   : null,
@@ -148,7 +148,7 @@ export default function Sponsors(): React.JSX.Element {
                 return (
                   <a
                     key={sponsor.name}
-                    className={style.sponsorsSponsor}
+                    className={style.sponsor}
                     href={url}
                     target="_blank"
                     rel="noreferrer"
@@ -156,7 +156,7 @@ export default function Sponsors(): React.JSX.Element {
                     {sponsorLogo.type === "image" &&
                     sponsorLogo.node.childImageSharp?.gatsbyImageData ? (
                       <GatsbyImage
-                        className={style.sponsorsSponsorLogo}
+                        className={style.sponsorLogo}
                         image={sponsorLogo.node.childImageSharp.gatsbyImageData}
                         alt={title}
                         objectFit="contain"
@@ -165,7 +165,7 @@ export default function Sponsors(): React.JSX.Element {
                     ) : null}
                     {sponsorLogo.type === "svg" ? (
                       <img
-                        className={style.sponsorsSponsorLogo}
+                        className={style.sponsorLogo}
                         src={sponsorLogo.node.publicURL ?? undefined}
                         alt={title}
                       />

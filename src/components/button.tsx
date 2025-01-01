@@ -21,16 +21,20 @@ export default function Button(props: Props): React.JSX.Element {
       className={clsx(
         style.button,
         switchOn(color, {
-          orange: style.buttonOrangeColor,
-          blue: style.buttonBlueColor,
-          green: style.buttonGreenColor,
+          orange: style.isOrangeColor,
+          blue: style.isBlueColor,
+          green: style.isGreenColor,
         }),
-        { [style.buttonLarge]: size === "large" },
+        size
+          ? switchOn(size, {
+              large: style.isLarge,
+            })
+          : null,
       )}
       to={to}
     >
       {banner ? <div className={style.buttonBanner}>{banner}</div> : null}
-      <div className={style.buttonContent}>{label}</div>
+      <div className={style.buttonLabel}>{label}</div>
     </Link>
   );
 }
