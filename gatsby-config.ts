@@ -42,7 +42,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `content`,
-        path: `./src/content`,
+        path: `./content/2024/`,
       },
     },
     "gatsby-transformer-remark",
