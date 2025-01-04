@@ -11,20 +11,39 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
 
   const result = await graphql<Queries.CreatePagesQuery>(`
     query CreatePages {
-      scheduleDays: allFile(filter: { relativeDirectory: { eq: "schedule" } }) {
-        nodes {
-          id
-          name
-          relativeDirectory
+      scheduleDays: allMarkdownRemark(
+        filter: { fileRelativeDirectory: { eq: "schedule" } }
+        sort: { frontmatter: { date: ASC } }
+      ) {
+        edges {
+          node {
+            id
+            fileName
+          }
+          previous {
+            id
+          }
+          next {
+            id
+          }
         }
       }
-      scheduleEvents: allFile(
-        filter: { relativeDirectory: { regex: "/^schedule/.*/" } }
+      scheduleEvents: allMarkdownRemark(
+        filter: { fileRelativeDirectory: { regex: "/^schedule/.*/" } }
+        sort: { frontmatter: { date: ASC } }
       ) {
-        nodes {
-          id
-          name
-          relativeDirectory
+        edges {
+          node {
+            id
+            fileName
+            fileRelativeDirectory
+          }
+          previous {
+            id
+          }
+          next {
+            id
+          }
         }
       }
     }
@@ -36,27 +55,68 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
   }
 
   // Schedule day templates
-  result.data.scheduleDays.nodes.forEach((node) => {
+  result.data.scheduleDays.edges.forEach(({ node, previous, next }) => {
     const context: ScheduleDayTemplateContext = {
-      id: node.id,
-      relativeDirectoryRegex: `^${node.relativeDirectory}/${node.name}/`,
+      scheduleDayId: node.id,
+      previousScheduleDayId: previous?.id,
+      nextScheduleDayId: next?.id,
+      scheduleEventsFileRelativeDirectoryRegex: `/^schedule/${node.fileName}/`,
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleDayTemplate.tsx`),
-      path: `/${node.relativeDirectory}/${node.name}`,
+      path: `/schedule/${node.fileName}`,
       context,
     });
   });
 
   // Schedule event templates
-  result.data.scheduleEvents.nodes.forEach((node) => {
+  result.data.scheduleEvents.edges.forEach(({ node, previous, next }) => {
     const context: ScheduleEventTemplateContext = {
-      id: node.id,
+      scheduleEventId: node.id,
+      previousScheduleEventId: previous?.id,
+      nextScheduleEventId: next?.id,
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleEventTemplate.tsx`),
-      path: `/${node.relativeDirectory}/${node.name}`,
+      path: `/${node.fileRelativeDirectory}/${node.fileName}`,
       context,
     });
   });
+};
+
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }) => {
+    const { createTypes } = actions;
+
+    createTypes(`
+    type MarkdownRemark implements Node {
+      fileName: String @proxy(from: "fields.fileName")
+      fileRelativeDirectory: String @proxy(from: "fields.fileRelativeDirectory")
+    }
+  `);
+  };
+
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+  node,
+  getNode,
+  actions,
+}) => {
+  const { createNodeField } = actions;
+
+  // Add file information on MarkdownRemark nodes
+  if (node.internal.type === "MarkdownRemark" && node.parent) {
+    const parentNode = getNode(node.parent);
+    if (parentNode) {
+      createNodeField({
+        node,
+        name: "fileName",
+        value: parentNode.name,
+      });
+      createNodeField({
+        node,
+        name: "fileRelativeDirectory",
+        value: parentNode.relativeDirectory,
+      });
+    }
+  }
 };

@@ -2,13 +2,13 @@ import clsx from "clsx";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 
-import * as style from "src/components/layout.module.css";
+import * as style from "src/components/layouts/pageLayout.module.css";
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function Layout(props: Props): React.JSX.Element {
+export default function PageLayout(props: Props): React.JSX.Element {
   const { children } = props;
 
   const data = useStaticQuery<Queries.LayoutQuery>(graphql`

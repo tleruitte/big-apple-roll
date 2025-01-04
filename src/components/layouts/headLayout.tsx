@@ -5,7 +5,7 @@ type Props = {
   pageTitle?: string;
 };
 
-export default function LayoutHead(props: Props): React.JSX.Element {
+export default function HeadLayout(props: Props): React.JSX.Element {
   const { pageTitle: pageTitle } = props;
 
   const data = useStaticQuery<Queries.LayoutHeadQuery>(graphql`

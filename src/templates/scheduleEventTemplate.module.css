@@ -1,0 +1,51 @@
+.difficulty {
+  text-transform: uppercase;
+  margin: var(--spacing36px) 0;
+  background: var(--blue);
+  padding: var(--spacing8px);
+  color: white;
+
+  & .difficultyLabel {
+    font-weight: 600;
+    font-size: 2em;
+  }
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing24px);
+
+  & .detailsList {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--spacing4px) var(--spacing12px);
+
+    & .detailsListTerm {
+      grid-column: 1;
+      font-weight: var(--large-font-weight);
+      text-transform: uppercase;
+    }
+
+    & .detailsListDescription {
+      grid-column: 2;
+      margin: 0;
+    }
+  }
+
+  & .detailsMap {
+    & .detailsMapFrame {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+    }
+  }
+}
+
+.description {
+  margin: var(--spacing36px) 0;
+}
+
+.pagination {
+  margin: var(--spacing36px) 0;
+}

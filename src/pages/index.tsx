@@ -3,7 +3,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import * as style from "src/pages/index.module.css";
 import Button from "src/components/button";
-import LayoutHead from "src/components/layoutHead";
+import HeadLayout from "src/components/layouts/headLayout";
 
 export default function Index() {
   return (
@@ -27,5 +27,5 @@ export default function Index() {
 }
 
 export function Head() {
-  return <LayoutHead />;
+  return <HeadLayout />;
 }

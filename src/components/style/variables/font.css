@@ -1,0 +1,21 @@
+:root {
+  /* Font families */
+  --openSans-font-family: "Open Sans", sans-serif;
+  --oswald-font-family: "Oswald", sans-serif;
+
+  /* Font sizes */
+  --small-font-size: 0.875em;
+  --large-font-size: 2em;
+  --font-size-08: 0.875em;
+  --font-size-2: 2em;
+  --font-size-3: 3em;
+  --font-size-4: 4em;
+  --font-size-5: 5em;
+
+  /* Font weights */
+  --small-font-weight: 200;
+  --large-font-weight: 500;
+
+  /* - */
+  --small-letter-spacing: 0.16em;
+}

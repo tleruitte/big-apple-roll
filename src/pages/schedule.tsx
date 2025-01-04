@@ -2,26 +2,19 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
 import * as style from "src/pages/schedule.module.css";
-import LayoutHead from "src/components/layoutHead";
+import HeadLayout from "src/components/layouts/headLayout";
 import Button from "src/components/button";
 import { formatDate } from "src/helpers/date";
 
 export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`
     query Schedule {
-      allFile(
-        sort: { childMarkdownRemark: { frontmatter: { date: ASC } } }
-        filter: { relativeDirectory: { eq: "schedule" } }
+      scheduleDays: allMarkdownRemark(
+        filter: { fileRelativeDirectory: { eq: "schedule" } }
+        sort: { frontmatter: { date: ASC } }
       ) {
         nodes {
-          name
-          childMarkdownRemark {
-            frontmatter {
-              title
-              date
-              pre_bar
-            }
-          }
+          ...ScheduleDayFragment
         }
       }
     }
@@ -29,20 +22,19 @@ export default function Schedule(): React.JSX.Element {
 
   return (
     <div className={style.schedule}>
-      {data.allFile.nodes.map((node) => {
-        const { name } = node;
-        const { title, date, pre_bar } =
-          node.childMarkdownRemark?.frontmatter ?? {};
+      {data.scheduleDays.nodes.map((node) => {
+        const { fileName } = node;
+        const { title, date, pre_bar } = node.frontmatter ?? {};
         if (!title || !date) {
           return null;
         }
 
         return (
-          <div key={title}>
+          <div key={node.id}>
             <Button
               color={pre_bar ? "blue" : undefined}
               size="large"
-              to={`/schedule/${name}`}
+              to={`/schedule/${fileName}`}
               banner={
                 pre_bar ? "Pre bar" : formatDate(date, { format: "short" })
               }
@@ -56,5 +48,5 @@ export default function Schedule(): React.JSX.Element {
 }
 
 export function Head() {
-  return <LayoutHead pageTitle="Schedule" />;
+  return <HeadLayout pageTitle="Schedule" />;
 }

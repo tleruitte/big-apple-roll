@@ -1,0 +1,38 @@
+.events {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--spacing12px) var(--spacing24px);
+
+  & .event {
+    display: contents;
+
+    & .eventTime {
+      font-family: var(--oswald-font-family);
+      font-size: var(--large-font-size);
+      font-weight: var(--large-font-weight);
+    }
+
+    & .eventSeparator {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: var(--border-color);
+      }
+    }
+
+    & .eventName {
+      grid-column: 2 / 3;
+      margin-bottom: var(--spacing8px);
+      font-family: var(--oswald-font-family);
+      font-size: 3em;
+      font-weight: var(--large-font-weight);
+      text-transform: uppercase;
+    }
+  }
+}

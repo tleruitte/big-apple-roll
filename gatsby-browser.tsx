@@ -1,15 +1,15 @@
 import React from "react";
 import { GatsbyBrowser } from "gatsby";
 
-import Layout from "./src/components/layout";
+import PageLayout from "./src/components/layouts/pageLayout";
 
-import "./src/styles/font.css";
-import "./src/styles/global.css";
-import "./src/styles/theme.css";
-import "./src/styles/variables.css";
+import "./src/components/style/variables/font.css";
+import "./src/components/style/variables/spacing.css";
+import "./src/components/style/variables/theme.css";
+import "./src/components/style/global.css";
 
 export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = (args) => {
   const { element, props } = args;
 
-  return <Layout {...props}>{element}</Layout>;
+  return <PageLayout {...props}>{element}</PageLayout>;
 };

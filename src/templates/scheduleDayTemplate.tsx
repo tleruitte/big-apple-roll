@@ -1,37 +1,44 @@
 import React from "react";
 import { graphql, HeadProps, Link, PageProps } from "gatsby";
 
-import LayoutHead from "src/components/layoutHead";
+import * as style from "src/templates/scheduleDayTemplate.module.css";
+import HeadLayout from "src/components/layouts/headLayout";
 import { formatDate, formatTime } from "src/helpers/date";
+import Pagination from "src/components/pagination";
 
 export type ScheduleDayTemplateContext = {
-  id: string;
-  relativeDirectoryRegex: string;
+  scheduleDayId: string;
+  previousScheduleDayId?: string;
+  nextScheduleDayId?: string;
+  scheduleEventsFileRelativeDirectoryRegex: string;
 };
 
 export const query = graphql`
-  query ScheduleDayTemplate($id: String!, $relativeDirectoryRegex: String!) {
-    day: file(id: { eq: $id }) {
-      name
-      childMarkdownRemark {
-        frontmatter {
-          title
-          date
+  query ScheduleDayTemplate(
+    $scheduleDayId: String!
+    $previousScheduleDayId: String
+    $nextScheduleDayId: String
+    $scheduleEventsFileRelativeDirectoryRegex: String!
+  ) {
+    scheduleDay: markdownRemark(id: { eq: $scheduleDayId }) {
+      ...ScheduleDayFragment
+    }
+    previousScheduleDay: markdownRemark(id: { eq: $previousScheduleDayId }) {
+      ...ScheduleDayFragment
+    }
+    nextScheduleDay: markdownRemark(id: { eq: $nextScheduleDayId }) {
+      ...ScheduleDayFragment
+    }
+    scheduleEvents: allMarkdownRemark(
+      filter: {
+        fileRelativeDirectory: {
+          regex: $scheduleEventsFileRelativeDirectoryRegex
         }
       }
-    }
-    events: allFile(
-      sort: { childMarkdownRemark: { frontmatter: { date: ASC } } }
-      filter: { relativeDirectory: { regex: $relativeDirectoryRegex } }
+      sort: { frontmatter: { date: ASC } }
     ) {
       nodes {
-        name
-        childMarkdownRemark {
-          frontmatter {
-            title
-            date
-          }
-        }
+        ...ScheduleEventFragment
       }
     }
   }
@@ -44,29 +51,49 @@ export default function ScheduleDayTemplate(
   >,
 ): React.JSX.Element {
   const { data } = props;
-  const { day, events } = data;
+  const { scheduleDay, previousScheduleDay, nextScheduleDay, scheduleEvents } =
+    data;
 
-  if (!day || !day.childMarkdownRemark?.frontmatter?.date) {
+  if (!scheduleDay || !scheduleDay.frontmatter?.date) {
     return <div />;
   }
 
   return (
-    <div className="scheduleDayTemplate">
-      <h1>{formatDate(day.childMarkdownRemark.frontmatter.date)}</h1>
-      {events.nodes.map((node) => {
-        const { title, date } = node.childMarkdownRemark?.frontmatter ?? {};
-        if (!title || !date) {
-          return null;
-        }
+    <>
+      <h1>{formatDate(scheduleDay.frontmatter.date)}</h1>
+      <div className={style.events}>
+        {scheduleEvents.nodes.map((node) => {
+          const { title, date } = node.frontmatter ?? {};
+          if (!title || !date) {
+            return null;
+          }
 
-        return (
-          <div key={node.name}>
-            {formatTime(date)}{" "}
-            <Link to={`/schedule/${day.name}/${node.name}`}>{title}</Link>
-          </div>
-        );
-      })}
-    </div>
+          return (
+            <div key={node.id} className={style.event}>
+              <div className={style.eventTime}>{formatTime(date)}</div>
+              <div className={style.eventSeparator}></div>
+              <div className={style.eventName}>
+                <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>
+                  {title}
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <Pagination
+        previousHref={
+          previousScheduleDay
+            ? `/schedule/${previousScheduleDay.fileName}`
+            : undefined
+        }
+        previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
+        nextHref={
+          nextScheduleDay ? `/schedule/${nextScheduleDay.fileName}` : undefined
+        }
+        nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
+      ></Pagination>
+    </>
   );
 }
 
@@ -78,8 +105,6 @@ export function Head(
 ): React.JSX.Element {
   const { data } = props;
   return (
-    <LayoutHead
-      pageTitle={data.day?.childMarkdownRemark?.frontmatter?.title ?? undefined}
-    />
+    <HeadLayout pageTitle={data.scheduleDay?.frontmatter?.title ?? undefined} />
   );
 }

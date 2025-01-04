@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--openSans-font-family);
+  font-size: 100%;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--oswald-font-family);
+  font-weight: var(--large-font-weight);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-family: var(--oswald-font-family);
+  font-size: var(--font-size-3);
+  font-weight: var(--large-font-weight);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+a {
+  color: var(--text-color);
+
+  &:hover {
+    color: var(--blue);
+  }
+
+  &:active {
+    color: var(--green);
+  }
+
+  &.current {
+    color: var(--orange);
+  }
+}
+
+iframe {
+  border: none;
+}

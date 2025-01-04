@@ -19,8 +19,8 @@ export const formatDate = (
       }
       case "short": {
         return {
-          day: "numeric",
           month: "long",
+          day: "numeric",
         };
       }
       default: {
@@ -35,4 +35,13 @@ export const formatDate = (
 
 export const formatTime = (date: string): string => {
   return parseDate(date).toLocaleString(DateTime.TIME_SIMPLE);
+};
+
+export const formatDateTime = (date: string): string => {
+  return parseDate(date).toLocaleString({
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+    hour: "numeric",
+  });
 };

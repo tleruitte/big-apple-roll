@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import * as style from "src/pages/sponsors.module.css";
 import isEnumValue from "src/helpers/isEnumValue";
-import LayoutHead from "src/components/layoutHead";
+import HeadLayout from "src/components/layouts/headLayout";
 import switchOn from "src/helpers/switchOn";
 
 enum SponsorType {
@@ -182,5 +182,5 @@ export default function Sponsors(): React.JSX.Element {
 }
 
 export function Head() {
-  return <LayoutHead pageTitle="Sponsors" />;
+  return <HeadLayout pageTitle="Sponsors" />;
 }

@@ -1,23 +1,41 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import React from "react";
 
+import Pagination from "src/components/pagination";
+import { formatDate, formatDateTime } from "src/helpers/date";
+import isEnumValue from "src/helpers/isEnumValue";
+import switchOn from "src/helpers/switchOn";
+import * as style from "src/templates/scheduleEventTemplate.module.css";
+
 export type ScheduleEventTemplateContext = {
-  id: string;
+  scheduleEventId: string;
+  previousScheduleEventId?: string;
+  nextScheduleEventId?: string;
 };
 
 export const query = graphql`
-  query ScheduleEventTemplate($id: String!) {
-    event: file(id: { eq: $id }) {
-      name
-      childMarkdownRemark {
-        frontmatter {
-          title
-          date
-        }
-      }
+  query ScheduleEventTemplate(
+    $scheduleEventId: String!
+    $previousScheduleEventId: String
+    $nextScheduleEventId: String
+  ) {
+    scheduleEvent: markdownRemark(id: { eq: $scheduleEventId }) {
+      ...ScheduleEventFragment
+    }
+    previousScheduleEvent: markdownRemark(
+      id: { eq: $previousScheduleEventId }
+    ) {
+      ...ScheduleEventFragment
+    }
+    nextScheduleEvent: markdownRemark(id: { eq: $nextScheduleEventId }) {
+      ...ScheduleEventFragment
     }
   }
 `;
+
+enum Difficulty {
+  Moderate = "moderate",
+}
 
 export default function ScheduleEventTemplate(
   props: PageProps<
@@ -26,20 +44,109 @@ export default function ScheduleEventTemplate(
   >,
 ): React.JSX.Element {
   const { data } = props;
-  const { event } = data;
-  if (!event || !event.childMarkdownRemark?.frontmatter?.date) {
+  const { scheduleEvent, previousScheduleEvent, nextScheduleEvent } = data;
+  if (!scheduleEvent || !scheduleEvent.frontmatter?.date) {
     return <div />;
   }
 
   return (
-    <div className="scheduleEventTemplate">
-      <h1>{event.childMarkdownRemark.frontmatter.title}</h1>
-      {/* {data.markdownRemark?.html ? (
+    <>
+      <h1>{scheduleEvent.frontmatter.title}</h1>
+      <h2>{formatDateTime(scheduleEvent.frontmatter.date)}</h2>
+      {scheduleEvent.frontmatter.difficulty &&
+      isEnumValue(scheduleEvent.frontmatter.difficulty, Difficulty) ? (
+        <div className={style.difficulty}>
+          <span className={style.difficultyLabel}>
+            {switchOn(scheduleEvent.frontmatter.difficulty, {
+              [Difficulty.Moderate]: "Moderate street skate",
+            })}
+          </span>
+        </div>
+      ) : null}
+      <div className={style.details}>
+        <dl className={style.detailsList}>
+          {scheduleEvent.frontmatter.start ? (
+            <>
+              <dt className={style.detailsListTerm}>Start:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.start}
+              </dd>
+            </>
+          ) : null}
+          {scheduleEvent.frontmatter.end ? (
+            <>
+              <dt className={style.detailsListTerm}>End:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.end}
+              </dd>
+            </>
+          ) : null}
+          {scheduleEvent.frontmatter.leader ? (
+            <>
+              <dt className={style.detailsListTerm}>Leader:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.leader}
+              </dd>
+            </>
+          ) : null}
+          {scheduleEvent.frontmatter.distance ? (
+            <>
+              <dt className={style.detailsListTerm}>Distance:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.distance}
+              </dd>
+            </>
+          ) : null}
+          {scheduleEvent.frontmatter.highlights ? (
+            <>
+              <dt className={style.detailsListTerm}>Highlights:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.highlights}
+              </dd>
+            </>
+          ) : null}
+        </dl>
+        {scheduleEvent.frontmatter.start_map ? (
+          <div className={style.detailsMap}>
+            <iframe
+              className={style.detailsMapFrame}
+              src={scheduleEvent.frontmatter.start_map}
+            ></iframe>
+          </div>
+        ) : null}
+      </div>
+      {scheduleEvent.html ? (
         <div
-          className="scheduleEventTemplate-description"
-          dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
+          className={style.description}
+          dangerouslySetInnerHTML={{ __html: scheduleEvent.html }}
         ></div>
-      ) : null} */}
-    </div>
+      ) : null}
+      {scheduleEvent.frontmatter.route_map ? (
+        <>
+          <h3>Route map</h3>
+          <iframe
+            src={scheduleEvent.frontmatter.route_map}
+            width="640"
+            height="480"
+          ></iframe>
+        </>
+      ) : null}
+      <div className={style.pagination}>
+        <Pagination
+          previousHref={
+            previousScheduleEvent
+              ? `/${previousScheduleEvent.fileRelativeDirectory}/${previousScheduleEvent.fileName}`
+              : undefined
+          }
+          previousTitle={previousScheduleEvent?.frontmatter?.title ?? undefined}
+          nextHref={
+            nextScheduleEvent
+              ? `/${nextScheduleEvent.fileRelativeDirectory}/${nextScheduleEvent.fileName}`
+              : undefined
+          }
+          nextTitle={nextScheduleEvent?.frontmatter?.title ?? undefined}
+        ></Pagination>
+      </div>
+    </>
   );
 }
