@@ -43,6 +43,7 @@ export default typescript.config(
     },
     rules: {
       "default-case": "error",
+      "no-console": "warn",
       "no-unused-vars": "off",
       "no-restricted-syntax": [
         "error",
