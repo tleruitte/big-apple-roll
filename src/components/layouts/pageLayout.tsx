@@ -25,17 +25,17 @@ export default function PageLayout(props: Props): React.JSX.Element {
     <>
       <header className={style.header}>
         <div className={clsx(style.headerContent, style.content)}>
-          <Link to="/" className={style.headerLogo}>
+          <Link to="/" className={style.headerLogo} draggable={false}>
             {data.site?.siteMetadata?.title ?? ""}
           </Link>
           <nav className={style.headerNav}>
-            <Link to="/schedule/" className={style.headerNavItem}>
+            <Link to="/schedule/" className={style.headerNavItem} draggable={false}>
               Schedule
             </Link>
-            <Link to="/hotel/" className={style.headerNavItem}>
+            <Link to="/hotel/" className={style.headerNavItem} draggable={false}>
               Hotel
             </Link>
-            <Link to="/sponsors/" className={style.headerNavItem}>
+            <Link to="/sponsors/" className={style.headerNavItem} draggable={false}>
               Sponsors
             </Link>
           </nav>

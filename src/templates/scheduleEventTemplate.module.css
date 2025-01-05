@@ -3,7 +3,7 @@
   margin: var(--spacing-2) 0;
   background: var(--color-accent-3);
   padding: var(--spacing-50);
-  color: white;
+  color: var(--color-text-inverted);
 
   & .difficultyLabel {
     font-weight: 600;

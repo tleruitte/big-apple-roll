@@ -2,7 +2,7 @@ import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 
 import * as style from "src/pages/index.module.css";
-import Button from "src/components/button";
+import Button from "src/components/buttons/button";
 import HeadLayout from "src/components/layouts/headLayout";
 
 export default function Index() {
@@ -19,8 +19,8 @@ export default function Index() {
       </div>
       <h2 className={style.date}>August 1-4, 2024</h2>
       <div className={style.menu}>
-        <Button label="Schedule" to="/schedule/" />
-        <Button label="Book a room" to="/hotel/" />
+        <Button to="/schedule/">Schedule</Button>
+        <Button to="/hotel/">Book a room</Button>
       </div>
     </>
   );

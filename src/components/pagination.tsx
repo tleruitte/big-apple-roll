@@ -1,6 +1,6 @@
-import { Link } from "gatsby";
 import React from "react";
 
+import LinkButton from "src/components/buttons/linkButton";
 import * as style from "src/components/pagination.module.css";
 
 type Props = {
@@ -17,12 +17,12 @@ export default function Pagination(props: Props): React.JSX.Element {
     <div className={style.pagination}>
       {previousSlug && previousTitle ? (
         <div className={style.paginationPrevious}>
-          <Link to={previousSlug}>← {previousTitle}</Link>
+          <LinkButton to={previousSlug}>← {previousTitle}</LinkButton>
         </div>
       ) : null}
       {nextSlug && nextTitle ? (
         <div className={style.paginationNext}>
-          <Link to={nextSlug}>{nextTitle} →</Link>
+          <LinkButton to={nextSlug}>{nextTitle} →</LinkButton>
         </div>
       ) : null}
     </div>

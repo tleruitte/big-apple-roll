@@ -2,19 +2,19 @@ import clsx from "clsx";
 import { Link } from "gatsby";
 import React from "react";
 
-import * as style from "src/components/button.module.css";
+import * as style from "src/components/buttons/button.module.css";
 import switchOn from "src/helpers/switchOn";
 
 type Props = {
   color?: "accent1" | "accent2" | "accent3";
   size?: "large";
   banner?: string;
-  label: string;
   to: string;
+  children: React.ReactNode;
 };
 
 export default function Button(props: Props): React.JSX.Element {
-  const { color: color = "accent1", size, banner, label, to } = props;
+  const { color = "accent1", size, banner, to, children } = props;
 
   return (
     <Link
@@ -32,6 +32,7 @@ export default function Button(props: Props): React.JSX.Element {
           : null,
       )}
       to={to}
+      draggable={false}
     >
       {banner ? (
         <div className={style.buttonBanner}>
@@ -39,7 +40,7 @@ export default function Button(props: Props): React.JSX.Element {
         </div>
       ) : null}
       <div className={style.buttonLabel}>
-        <span className={style.buttonLabelText}>{label}</span>
+        <span className={style.buttonLabelText}>{children}</span>
       </div>
     </Link>
   );

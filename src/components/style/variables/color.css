@@ -1,6 +1,7 @@
 :root {
   /* Primary */
   --color-text: #1e3566;
+  --color-text-inverted: white;
   --color-border: rgb(0 0 0 / 5%);
   --color-background: white;
 

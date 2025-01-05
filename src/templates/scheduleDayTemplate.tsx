@@ -73,7 +73,9 @@ export default function ScheduleDayTemplate(
               <div className={style.eventSeparator}></div>
               <div className={style.eventName}>
                 <span className={style.eventNameText}>
-                  <Link to={node.slug}>{title}</Link>
+                  <Link to={node.slug} draggable={false}>
+                    {title}
+                  </Link>
                 </span>
               </div>
             </div>

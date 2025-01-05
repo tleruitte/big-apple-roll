@@ -1,13 +1,15 @@
 .button {
   display: flex;
   align-items: stretch;
-  color: white;
+  color: var(--color-text-inverted);
   font-family: var(--font-family-oswald);
   text-decoration: none;
   text-transform: uppercase;
+  user-select: none;
 
-  &:hover {
-    color: white;
+  &:hover,
+  &:active {
+    color: var(--color-text-inverted);
   }
 
   &.is-accent1 {
