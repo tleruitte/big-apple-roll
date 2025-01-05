@@ -19,7 +19,9 @@
   & .detailsList {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
+    align-content: start;
     gap: var(--spacing4px) var(--spacing12px);
+    margin: 0;
 
     & .detailsListTerm {
       grid-column: 1;

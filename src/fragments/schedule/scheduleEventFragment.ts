@@ -9,7 +9,8 @@ export const scheduleEventFragment = graphql`
     frontmatter {
       title
       date # Format: YYYY-MM-DD HH:mm:ss
-      difficulty # Either moderate
+      difficulty # Either easy, casual, moderate, advanced
+      location # string, optional
       start # string, optional
       start_map # Link to google maps, optional
       end # string, optional

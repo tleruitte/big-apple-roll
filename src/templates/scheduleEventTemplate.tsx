@@ -1,8 +1,8 @@
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import React from "react";
 
 import Pagination from "src/components/pagination";
-import { formatDate, formatDateTime } from "src/helpers/date";
+import { formatDateTime } from "src/helpers/date";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
 import * as style from "src/templates/scheduleEventTemplate.module.css";
@@ -34,7 +34,10 @@ export const query = graphql`
 `;
 
 enum Difficulty {
+  Easy = "easy",
+  Casual = "casual",
   Moderate = "moderate",
+  Advanced = "advanced",
 }
 
 export default function ScheduleEventTemplate(
@@ -58,13 +61,24 @@ export default function ScheduleEventTemplate(
         <div className={style.difficulty}>
           <span className={style.difficultyLabel}>
             {switchOn(scheduleEvent.frontmatter.difficulty, {
+              [Difficulty.Easy]: "Easy street skate",
+              [Difficulty.Casual]: "Casual street skate",
               [Difficulty.Moderate]: "Moderate street skate",
+              [Difficulty.Advanced]: "Advanced street skate",
             })}
           </span>
         </div>
       ) : null}
       <div className={style.details}>
         <dl className={style.detailsList}>
+          {scheduleEvent.frontmatter.location ? (
+            <>
+              <dt className={style.detailsListTerm}>Location:</dt>
+              <dd className={style.detailsListDescription}>
+                {scheduleEvent.frontmatter.location}
+              </dd>
+            </>
+          ) : null}
           {scheduleEvent.frontmatter.start ? (
             <>
               <dt className={style.detailsListTerm}>Start:</dt>
