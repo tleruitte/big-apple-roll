@@ -1,13 +1,29 @@
 .difficulty {
-  text-transform: uppercase;
   margin: var(--spacing-2) 0;
-  background: var(--color-accent-3);
-  padding: var(--spacing-50);
+  padding: var(--spacing-1) var(--spacing-2);
   color: var(--color-text-inverted);
 
+  &.is-easy {
+    background: linear-gradient(90deg, rgb(44 189 0) 0%, rgb(0 255 102) 100%);
+  }
+
+  &.is-casual {
+    background: linear-gradient(90deg, rgb(0 234 255) 0%, rgb(0 204 255) 100%);
+  }
+
+  &.is-moderate {
+    background: linear-gradient(90deg, rgb(0 119 255) 0%, rgb(0 204 255) 100%);
+  }
+
+  &.is-advanced {
+    background: linear-gradient(90deg, rgb(187 0 255) 0%, rgb(217 0 255) 100%);
+  }
+
   & .difficultyLabel {
-    font-weight: 600;
-    font-size: 2em;
+    font-family: var(--font-family-oswald);
+    font-size: var(--font-size-1_5);
+    font-weight: var(--font-weight-500);
+    text-transform: uppercase;
   }
 }
 

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 
@@ -58,7 +59,17 @@ export default function ScheduleEventTemplate(
       <h2>{formatDateTime(scheduleEvent.frontmatter.date)}</h2>
       {scheduleEvent.frontmatter.difficulty &&
       isEnumValue(scheduleEvent.frontmatter.difficulty, Difficulty) ? (
-        <div className={style.difficulty}>
+        <div
+          className={clsx(
+            style.difficulty,
+            switchOn(scheduleEvent.frontmatter.difficulty, {
+              [Difficulty.Easy]: style.isEasy,
+              [Difficulty.Casual]: style.isCasual,
+              [Difficulty.Moderate]: style.isModerate,
+              [Difficulty.Advanced]: style.isAdvanced,
+            }),
+          )}
+        >
           <span className={style.difficultyLabel}>
             {switchOn(scheduleEvent.frontmatter.difficulty, {
               [Difficulty.Easy]: "Easy street skate",
