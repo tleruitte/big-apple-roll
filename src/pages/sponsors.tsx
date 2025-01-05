@@ -17,18 +17,13 @@ enum SponsorType {
 export default function Sponsors(): React.JSX.Element {
   const data = useStaticQuery<Queries.SponsorsQuery>(graphql`
     query Sponsors {
-      sponsors: allFile(
-        filter: { relativeDirectory: { eq: "sponsors" }, extension: { eq: "md" } }
-        sort: { relativePath: ASC }
+      groupedSponsors: allMarkdownRemark(
+        filter: { fileRelativeDirectory: { eq: "sponsors" } }
+        sort: { fileName: ASC }
       ) {
-        nodes {
-          name
-          childMarkdownRemark {
-            frontmatter {
-              title
-              type
-              url
-            }
+        group(field: { frontmatter: { type: SELECT } }) {
+          nodes {
+            ...SponsorFragment
           }
         }
       }
@@ -54,18 +49,17 @@ export default function Sponsors(): React.JSX.Element {
   `);
 
   const sponsorsByType = useMemo(() => {
-    return data.sponsors.nodes.reduce<
-      Record<SponsorType, Queries.SponsorsQuery["sponsors"]["nodes"]>
+    return data.groupedSponsors.group.reduce<
+      Record<SponsorType, Queries.SponsorsQuery["groupedSponsors"]["group"][number]["nodes"]>
     >(
-      (acc, node) => {
-        const { type } = node.childMarkdownRemark?.frontmatter ?? {};
-        if (!type || !isEnumValue(type, SponsorType)) {
+      (acc, group) => {
+        const { type } = group.nodes[0].frontmatter ?? {};
+        if (!isEnumValue(type, SponsorType)) {
           return acc;
         }
-
         return {
           ...acc,
-          [type]: [...acc[type], node],
+          [type]: group.nodes,
         };
       },
       {
@@ -74,7 +68,7 @@ export default function Sponsors(): React.JSX.Element {
         [SponsorType.General]: [],
       },
     );
-  }, [data.sponsors.nodes]);
+  }, [data.groupedSponsors.group]);
 
   const sponsorLogosByName = useMemo(() => {
     const sponsorLogosByName: Record<
@@ -128,15 +122,17 @@ export default function Sponsors(): React.JSX.Element {
               )}
             >
               {sponsors.map((sponsor) => {
-                const { title, url } = sponsor.childMarkdownRemark?.frontmatter ?? {};
-                const sponsorLogo = sponsorLogosByName[sponsor.name];
+                const { title, url } = sponsor.frontmatter ?? {};
+                const sponsorLogo = sponsor.fileName
+                  ? sponsorLogosByName[sponsor.fileName]
+                  : undefined;
                 if (!title || !url || !sponsorLogo) {
                   return null;
                 }
 
                 return (
                   <a
-                    key={sponsor.name}
+                    key={sponsor.id}
                     className={style.sponsor}
                     href={url}
                     target="_blank"
