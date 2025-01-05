@@ -1,0 +1,16 @@
+:root {
+  /* Primary */
+  --color-text: #1e3566;
+  --color-border: rgb(0 0 0 / 5%);
+  --color-background: white;
+
+  /* Color */
+  --color-blue: #6699cf;
+  --color-green: #7fb64d;
+  --color-orange: #f69a34;
+
+  /* Accent */
+  --color-accent-1: var(--color-orange);
+  --color-accent-2: var(--color-green);
+  --color-accent-3: var(--color-blue);
+}

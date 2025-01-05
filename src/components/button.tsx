@@ -6,7 +6,7 @@ import * as style from "src/components/button.module.css";
 import switchOn from "src/helpers/switchOn";
 
 type Props = {
-  color?: "orange" | "blue" | "green";
+  color?: "accent1" | "accent2" | "accent3";
   size?: "large";
   banner?: string;
   label: string;
@@ -14,16 +14,16 @@ type Props = {
 };
 
 export default function Button(props: Props): React.JSX.Element {
-  const { color: color = "orange", size, banner, label, to } = props;
+  const { color: color = "accent1", size, banner, label, to } = props;
 
   return (
     <Link
       className={clsx(
         style.button,
         switchOn(color, {
-          orange: style.isOrangeColor,
-          blue: style.isBlueColor,
-          green: style.isGreenColor,
+          accent1: style.isAccent1,
+          accent2: style.isAccent2,
+          accent3: style.isAccent3,
         }),
         size
           ? switchOn(size, {
@@ -33,8 +33,14 @@ export default function Button(props: Props): React.JSX.Element {
       )}
       to={to}
     >
-      {banner ? <div className={style.buttonBanner}>{banner}</div> : null}
-      <div className={style.buttonLabel}>{label}</div>
+      {banner ? (
+        <div className={style.buttonBanner}>
+          <span className={style.buttonBannerText}>{banner}</span>
+        </div>
+      ) : null}
+      <div className={style.buttonLabel}>
+        <span className={style.buttonLabelText}>{label}</span>
+      </div>
     </Link>
   );
 }

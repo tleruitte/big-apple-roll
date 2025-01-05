@@ -1,8 +1,8 @@
 .difficulty {
   text-transform: uppercase;
-  margin: var(--spacing36px) 0;
-  background: var(--blue);
-  padding: var(--spacing8px);
+  margin: var(--spacing-2) 0;
+  background: var(--color-accent-3);
+  padding: var(--spacing-50);
   color: white;
 
   & .difficultyLabel {
@@ -14,18 +14,18 @@
 .details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing24px);
+  gap: var(--spacing-1_5);
 
   & .detailsList {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-content: start;
-    gap: var(--spacing4px) var(--spacing12px);
+    gap: var(--spacing-25) var(--spacing-75);
     margin: 0;
 
     & .detailsListTerm {
       grid-column: 1;
-      font-weight: var(--large-font-weight);
+      font-weight: var(--font-weight-600);
       text-transform: uppercase;
     }
 
@@ -45,9 +45,9 @@
 }
 
 .description {
-  margin: var(--spacing36px) 0;
+  margin: var(--spacing-2) 0;
 }
 
 .pagination {
-  margin: var(--spacing36px) 0;
+  margin: var(--spacing-2) 0;
 }

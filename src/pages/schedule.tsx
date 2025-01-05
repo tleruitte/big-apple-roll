@@ -32,7 +32,7 @@ export default function Schedule(): React.JSX.Element {
         return (
           <div key={node.id}>
             <Button
-              color={pre_bar ? "blue" : undefined}
+              color={pre_bar ? "accent3" : undefined}
               size="large"
               to={`/schedule/${fileName}`}
               banner={pre_bar ? "Pre bar" : formatDate(date, { format: "short" })}

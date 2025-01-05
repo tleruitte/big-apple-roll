@@ -9,12 +9,18 @@ export default function Index() {
   return (
     <>
       <div className={style.logo}>
-        <StaticImage src="../images/logo.png" alt="Logo" placeholder="none" layout="fixed" width={500} />
+        <StaticImage
+          src="../images/logo.png"
+          alt="Logo"
+          placeholder="none"
+          layout="fixed"
+          width={500}
+        />
       </div>
-      <div className={style.date}>August 1-4, 2024</div>
+      <h2 className={style.date}>August 1-4, 2024</h2>
       <div className={style.menu}>
-        <Button label="Book a room" to="/hotel/" />
         <Button label="Schedule" to="/schedule/" />
+        <Button label="Book a room" to="/hotel/" />
       </div>
     </>
   );

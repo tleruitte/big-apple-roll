@@ -62,10 +62,14 @@ export default function ScheduleDayTemplate(
 
           return (
             <div key={node.id} className={style.event}>
-              <div className={style.eventTime}>{formatTime(date)}</div>
+              <div className={style.eventTime}>
+                <span className={style.eventTimeText}>{formatTime(date)}</span>
+              </div>
               <div className={style.eventSeparator}></div>
               <div className={style.eventName}>
-                <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>{title}</Link>
+                <span className={style.eventNameText}>
+                  <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>{title}</Link>
+                </span>
               </div>
             </div>
           );

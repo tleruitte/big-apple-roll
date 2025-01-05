@@ -2,5 +2,7 @@
 export const events: string;
 export const event: string;
 export const eventTime: string;
+export const eventTimeText: string;
 export const eventSeparator: string;
 export const eventName: string;
+export const eventNameText: string;

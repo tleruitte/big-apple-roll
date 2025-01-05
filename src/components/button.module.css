@@ -2,7 +2,7 @@
   display: flex;
   align-items: stretch;
   color: white;
-  font-family: var(--oswald-font-family);
+  font-family: var(--font-family-oswald);
   text-decoration: none;
   text-transform: uppercase;
 
@@ -10,61 +10,71 @@
     color: white;
   }
 
-  &.is-orangeColor {
-    background: var(--orange);
+  &.is-accent1 {
+    background: var(--color-accent-1);
 
     &:hover {
-      background: var(--blue);
+      background: var(--color-accent-3);
     }
 
     &:active {
-      background: var(--green);
+      background: var(--color-accent-2);
     }
   }
 
-  &.is-blueColor {
-    background: var(--blue);
+  &.is-accent2 {
+    background: var(--color-accent-2);
 
     &:hover {
-      background: var(--green);
+      background: var(--color-accent-1);
     }
 
     &:active {
-      background: var(--orange);
+      background: var(--color-accent-3);
     }
   }
 
-  &.is-greenColor {
-    background: var(--green);
+  &.is-accent3 {
+    background: var(--color-accent-3);
 
     &:hover {
-      background: var(--orange);
+      background: var(--color-accent-2);
     }
 
     &:active {
-      background: var(--blue);
+      background: var(--color-accent-1);
     }
   }
 
   & .buttonBanner {
-    font-size: 2em;
-    font-weight: 500;
-    background: var(--green);
+    background: var(--color-accent-2);
     text-align: center;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+
+    & .buttonBannerText {
+      font-size: var(--font-size-2_5);
+      font-weight: var(--font-weight-500);
+    }
   }
 
   & .buttonLabel {
     flex: 1;
-    padding: var(--spacing8px);
-    font-size: var(--large-font-size);
-    font-weight: var(--large-font-weight);
+    padding: var(--spacing-50);
     text-align: center;
 
+    & .buttonLabelText {
+      font-size: var(--font-size-2);
+      font-weight: var(--font-weight-500);
+      letter-spacing: var(--letter-spacing-minus02);
+    }
+
     .is-large & {
-      padding: 0.5em;
-      font-size: 5em;
+      padding: var(--spacing-2);
+
+      & .buttonLabelText {
+        font-size: var(--font-size-5);
+      }
     }
   }
 }
