@@ -2,7 +2,8 @@ import { graphql, PageProps } from "gatsby";
 import React from "react";
 
 import Pagination from "src/components/pagination";
-import { formatDateTime } from "src/helpers/date";
+import { formatDate, formatDateTime } from "src/helpers/date";
+import getParentSlug from "src/helpers/getParentSlug";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
 import * as style from "src/templates/scheduleEventTemplate.module.css";
@@ -49,6 +50,10 @@ export default function ScheduleEventTemplate(
 
   return (
     <>
+      <Pagination
+        previousSlug={getParentSlug(scheduleEvent?.slug)}
+        previousTitle={formatDate(scheduleEvent.frontmatter.date, { format: "weekday" })}
+      ></Pagination>
       <h1>{scheduleEvent.frontmatter.title}</h1>
       <h2>{formatDateTime(scheduleEvent.frontmatter.date)}</h2>
       {scheduleEvent.frontmatter.difficulty &&

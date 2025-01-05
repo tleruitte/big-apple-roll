@@ -5,6 +5,7 @@ import * as style from "src/templates/scheduleDayTemplate.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
 import { formatDate, formatTime } from "src/helpers/date";
 import Pagination from "src/components/pagination";
+import getParentSlug from "src/helpers/getParentSlug";
 
 export type ScheduleDayTemplateContext = {
   scheduleDayId: string;
@@ -52,6 +53,10 @@ export default function ScheduleDayTemplate(
 
   return (
     <>
+      <Pagination
+        previousSlug={getParentSlug(scheduleDay?.slug)}
+        previousTitle="Schedule"
+      ></Pagination>
       <h1>{formatDate(scheduleDay.frontmatter.date)}</h1>
       <div className={style.events}>
         {scheduleEvents.nodes.map((node) => {

@@ -6,7 +6,10 @@ const parseDate = (date: string): DateTime => {
   return DateTime.fromISO(date, { zone: "utc" });
 };
 
-export const formatDate = (date: string, options: { format?: "huge" | "short" } = {}): string => {
+export const formatDate = (
+  date: string,
+  options: { format?: "huge" | "short" | "weekday" } = {},
+): string => {
   const { format = "huge" } = options;
 
   const dateTimeFormatOptions = ((): Intl.DateTimeFormatOptions => {
@@ -18,6 +21,11 @@ export const formatDate = (date: string, options: { format?: "huge" | "short" } 
         return {
           month: "long",
           day: "numeric",
+        };
+      }
+      case "weekday": {
+        return {
+          weekday: "long",
         };
       }
       default: {
