@@ -6,3 +6,4 @@ export const eventTimeText: string;
 export const eventSeparator: string;
 export const eventName: string;
 export const eventNameText: string;
+export const pagination: string;

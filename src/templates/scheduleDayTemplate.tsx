@@ -82,12 +82,14 @@ export default function ScheduleDayTemplate(
           );
         })}
       </div>
-      <Pagination
-        previousSlug={previousScheduleDay?.slug ?? undefined}
-        previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
-        nextSlug={nextScheduleDay?.slug ?? undefined}
-        nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
-      ></Pagination>
+      <div className={style.pagination}>
+        <Pagination
+          previousSlug={previousScheduleDay?.slug ?? undefined}
+          previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
+          nextSlug={nextScheduleDay?.slug ?? undefined}
+          nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
+        ></Pagination>
+      </div>
     </>
   );
 }
