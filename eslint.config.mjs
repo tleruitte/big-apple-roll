@@ -44,7 +44,6 @@ export default typescript.config(
     rules: {
       "default-case": "error",
       "no-console": "warn",
-      "no-unused-vars": "off",
       "no-restricted-syntax": [
         "error",
         {
@@ -54,6 +53,9 @@ export default typescript.config(
             "`assertNever` should be the first statement of a switch default case - or disable rule if all cases cannot be enumerated",
         },
       ],
+      "no-unused-vars": "off",
+      "no-useless-rename": "error",
+      "object-shorthand": "error",
       "unicorn/no-unnecessary-await": "error",
       "unicorn/prefer-node-protocol": "error",
       "unicorn/prefer-string-raw": "error",

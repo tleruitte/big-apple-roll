@@ -1,6 +1,7 @@
 import path from "node:path";
 
 import { GatsbyNode } from "gatsby";
+import { createFilePath } from "gatsby-source-filesystem";
 
 import { ScheduleDayTemplateContext } from "src/templates/scheduleDayTemplate";
 import { ScheduleEventTemplateContext } from "src/templates/scheduleEventTemplate";
@@ -18,7 +19,7 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
         edges {
           node {
             id
-            fileName
+            slug
           }
           previous {
             id
@@ -35,8 +36,7 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
         edges {
           node {
             id
-            fileName
-            fileRelativeDirectory
+            slug
           }
           previous {
             id
@@ -56,21 +56,27 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
 
   // Schedule day templates
   result.data.scheduleDays.edges.forEach(({ node, previous, next }) => {
+    if (!node.slug) {
+      return;
+    }
     const context: ScheduleDayTemplateContext = {
       scheduleDayId: node.id,
       previousScheduleDayId: previous?.id,
       nextScheduleDayId: next?.id,
-      scheduleEventsFileRelativeDirectoryRegex: `/^schedule/${node.fileName}/`,
+      scheduleEventsSlugRegex: `/^${node.slug}.+/`,
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleDayTemplate.tsx`),
-      path: `/schedule/${node.fileName}`,
+      path: node.slug,
       context,
     });
   });
 
   // Schedule event templates
   result.data.scheduleEvents.edges.forEach(({ node, previous, next }) => {
+    if (!node.slug) {
+      return;
+    }
     const context: ScheduleEventTemplateContext = {
       scheduleEventId: node.id,
       previousScheduleEventId: previous?.id,
@@ -78,7 +84,7 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleEventTemplate.tsx`),
-      path: `/${node.fileRelativeDirectory}/${node.fileName}`,
+      path: node.slug,
       context,
     });
   });
@@ -91,6 +97,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
     type MarkdownRemark implements Node {
       fileName: String @proxy(from: "fields.fileName")
       fileRelativeDirectory: String @proxy(from: "fields.fileRelativeDirectory")
+      slug: String @proxy(from: "fields.slug")
     }
   `);
 };
@@ -99,19 +106,30 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, getNode, action
   const { createNodeField } = actions;
 
   // Add file information on MarkdownRemark nodes
-  if (node.internal.type === "MarkdownRemark" && node.parent) {
-    const parentNode = getNode(node.parent);
-    if (parentNode) {
-      createNodeField({
-        node,
-        name: "fileName",
-        value: parentNode.name,
-      });
-      createNodeField({
-        node,
-        name: "fileRelativeDirectory",
-        value: parentNode.relativeDirectory,
-      });
+  if (node.internal.type === "MarkdownRemark") {
+    // Create slug field on markdown nodes
+    const slug = createFilePath({ node, getNode });
+    createNodeField({
+      node,
+      name: "slug",
+      value: slug,
+    });
+
+    // Create file fields on markdown nodes
+    if (node.parent) {
+      const parentNode = getNode(node.parent);
+      if (parentNode) {
+        createNodeField({
+          node,
+          name: "fileName",
+          value: parentNode.name,
+        });
+        createNodeField({
+          node,
+          name: "fileRelativeDirectory",
+          value: parentNode.relativeDirectory,
+        });
+      }
     }
   }
 };

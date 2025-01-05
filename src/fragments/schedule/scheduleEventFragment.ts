@@ -6,6 +6,7 @@ export const scheduleEventFragment = graphql`
     fileName
     fileRelativeDirectory
     html
+    slug
     frontmatter {
       title
       date # Format: YYYY-MM-DD HH:mm:ss

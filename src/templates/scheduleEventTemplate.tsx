@@ -128,17 +128,9 @@ export default function ScheduleEventTemplate(
       ) : null}
       <div className={style.pagination}>
         <Pagination
-          previousHref={
-            previousScheduleEvent
-              ? `/${previousScheduleEvent.fileRelativeDirectory}/${previousScheduleEvent.fileName}`
-              : undefined
-          }
+          previousSlug={previousScheduleEvent?.slug ?? undefined}
           previousTitle={previousScheduleEvent?.frontmatter?.title ?? undefined}
-          nextHref={
-            nextScheduleEvent
-              ? `/${nextScheduleEvent.fileRelativeDirectory}/${nextScheduleEvent.fileName}`
-              : undefined
-          }
+          nextSlug={nextScheduleEvent?.slug ?? undefined}
           nextTitle={nextScheduleEvent?.frontmatter?.title ?? undefined}
         ></Pagination>
       </div>

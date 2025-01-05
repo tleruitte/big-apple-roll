@@ -4,6 +4,7 @@ export const scheduleDayFragment = graphql`
   fragment ScheduleDayFragment on MarkdownRemark {
     id
     fileName
+    slug
     frontmatter {
       title
       date # Format: YYYY-MM-DD

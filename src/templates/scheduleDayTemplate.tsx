@@ -10,7 +10,7 @@ export type ScheduleDayTemplateContext = {
   scheduleDayId: string;
   previousScheduleDayId?: string;
   nextScheduleDayId?: string;
-  scheduleEventsFileRelativeDirectoryRegex: string;
+  scheduleEventsSlugRegex: string;
 };
 
 export const query = graphql`
@@ -18,7 +18,7 @@ export const query = graphql`
     $scheduleDayId: String!
     $previousScheduleDayId: String
     $nextScheduleDayId: String
-    $scheduleEventsFileRelativeDirectoryRegex: String!
+    $scheduleEventsSlugRegex: String!
   ) {
     scheduleDay: markdownRemark(id: { eq: $scheduleDayId }) {
       ...ScheduleDayFragment
@@ -30,7 +30,7 @@ export const query = graphql`
       ...ScheduleDayFragment
     }
     scheduleEvents: allMarkdownRemark(
-      filter: { fileRelativeDirectory: { regex: $scheduleEventsFileRelativeDirectoryRegex } }
+      filter: { slug: { regex: $scheduleEventsSlugRegex } }
       sort: { frontmatter: { date: ASC } }
     ) {
       nodes {
@@ -56,7 +56,7 @@ export default function ScheduleDayTemplate(
       <div className={style.events}>
         {scheduleEvents.nodes.map((node) => {
           const { title, date } = node.frontmatter ?? {};
-          if (!title || !date) {
+          if (!title || !date || !node.slug) {
             return null;
           }
 
@@ -68,7 +68,7 @@ export default function ScheduleDayTemplate(
               <div className={style.eventSeparator}></div>
               <div className={style.eventName}>
                 <span className={style.eventNameText}>
-                  <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>{title}</Link>
+                  <Link to={node.slug}>{title}</Link>
                 </span>
               </div>
             </div>
@@ -76,9 +76,9 @@ export default function ScheduleDayTemplate(
         })}
       </div>
       <Pagination
-        previousHref={previousScheduleDay ? `/schedule/${previousScheduleDay.fileName}` : undefined}
+        previousSlug={previousScheduleDay?.slug ?? undefined}
         previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
-        nextHref={nextScheduleDay ? `/schedule/${nextScheduleDay.fileName}` : undefined}
+        nextSlug={nextScheduleDay?.slug ?? undefined}
         nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
       ></Pagination>
     </>

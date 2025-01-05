@@ -4,25 +4,25 @@ import React from "react";
 import * as style from "src/components/pagination.module.css";
 
 type Props = {
-  previousHref?: string;
+  previousSlug?: string;
   previousTitle?: string;
-  nextHref?: string;
+  nextSlug?: string;
   nextTitle?: string;
 };
 
 export default function Pagination(props: Props): React.JSX.Element {
-  const { previousHref, previousTitle, nextHref, nextTitle } = props;
+  const { previousSlug, previousTitle, nextSlug, nextTitle } = props;
 
   return (
     <div className={style.pagination}>
-      {previousHref && previousTitle ? (
+      {previousSlug && previousTitle ? (
         <div className={style.paginationPrevious}>
-          <Link to={previousHref}>← {previousTitle}</Link>
+          <Link to={previousSlug}>← {previousTitle}</Link>
         </div>
       ) : null}
-      {nextHref && nextTitle ? (
+      {nextSlug && nextTitle ? (
         <div className={style.paginationNext}>
-          <Link to={nextHref}>{nextTitle} →</Link>
+          <Link to={nextSlug}>{nextTitle} →</Link>
         </div>
       ) : null}
     </div>

@@ -23,9 +23,8 @@ export default function Schedule(): React.JSX.Element {
   return (
     <div className={style.schedule}>
       {data.scheduleDays.nodes.map((node) => {
-        const { fileName } = node;
         const { title, date, pre_bar } = node.frontmatter ?? {};
-        if (!title || !date) {
+        if (!title || !date || !node.slug) {
           return null;
         }
 
@@ -34,7 +33,7 @@ export default function Schedule(): React.JSX.Element {
             <Button
               color={pre_bar ? "accent3" : undefined}
               size="large"
-              to={`/schedule/${fileName}`}
+              to={node.slug}
               banner={pre_bar ? "Pre bar" : formatDate(date, { format: "short" })}
               label={title}
             ></Button>
