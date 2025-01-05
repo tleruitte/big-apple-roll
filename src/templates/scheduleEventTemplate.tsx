@@ -22,9 +22,7 @@ export const query = graphql`
     scheduleEvent: markdownRemark(id: { eq: $scheduleEventId }) {
       ...ScheduleEventFragment
     }
-    previousScheduleEvent: markdownRemark(
-      id: { eq: $previousScheduleEventId }
-    ) {
+    previousScheduleEvent: markdownRemark(id: { eq: $previousScheduleEventId }) {
       ...ScheduleEventFragment
     }
     nextScheduleEvent: markdownRemark(id: { eq: $nextScheduleEventId }) {
@@ -41,10 +39,7 @@ enum Difficulty {
 }
 
 export default function ScheduleEventTemplate(
-  props: PageProps<
-    Queries.ScheduleEventTemplateQuery,
-    ScheduleEventTemplateContext
-  >,
+  props: PageProps<Queries.ScheduleEventTemplateQuery, ScheduleEventTemplateContext>,
 ): React.JSX.Element {
   const { data } = props;
   const { scheduleEvent, previousScheduleEvent, nextScheduleEvent } = data;
@@ -74,41 +69,31 @@ export default function ScheduleEventTemplate(
           {scheduleEvent.frontmatter.location ? (
             <>
               <dt className={style.detailsListTerm}>Location:</dt>
-              <dd className={style.detailsListDescription}>
-                {scheduleEvent.frontmatter.location}
-              </dd>
+              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.location}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.start ? (
             <>
               <dt className={style.detailsListTerm}>Start:</dt>
-              <dd className={style.detailsListDescription}>
-                {scheduleEvent.frontmatter.start}
-              </dd>
+              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.start}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.end ? (
             <>
               <dt className={style.detailsListTerm}>End:</dt>
-              <dd className={style.detailsListDescription}>
-                {scheduleEvent.frontmatter.end}
-              </dd>
+              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.end}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.leader ? (
             <>
               <dt className={style.detailsListTerm}>Leader:</dt>
-              <dd className={style.detailsListDescription}>
-                {scheduleEvent.frontmatter.leader}
-              </dd>
+              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.leader}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.distance ? (
             <>
               <dt className={style.detailsListTerm}>Distance:</dt>
-              <dd className={style.detailsListDescription}>
-                {scheduleEvent.frontmatter.distance}
-              </dd>
+              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.distance}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.highlights ? (
@@ -138,11 +123,7 @@ export default function ScheduleEventTemplate(
       {scheduleEvent.frontmatter.route_map ? (
         <>
           <h3>Route map</h3>
-          <iframe
-            src={scheduleEvent.frontmatter.route_map}
-            width="640"
-            height="480"
-          ></iframe>
+          <iframe src={scheduleEvent.frontmatter.route_map} width="640" height="480"></iframe>
         </>
       ) : null}
       <div className={style.pagination}>

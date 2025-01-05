@@ -84,23 +84,18 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
   });
 };
 
-export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
-  ({ actions }) => {
-    const { createTypes } = actions;
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({ actions }) => {
+  const { createTypes } = actions;
 
-    createTypes(`
+  createTypes(`
     type MarkdownRemark implements Node {
       fileName: String @proxy(from: "fields.fileName")
       fileRelativeDirectory: String @proxy(from: "fields.fileRelativeDirectory")
     }
   `);
-  };
+};
 
-export const onCreateNode: GatsbyNode["onCreateNode"] = ({
-  node,
-  getNode,
-  actions,
-}) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
 
   // Add file information on MarkdownRemark nodes

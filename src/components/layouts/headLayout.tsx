@@ -20,9 +20,7 @@ export default function HeadLayout(props: Props): React.JSX.Element {
 
   return (
     <>
-      <title>
-        {`${pageTitle ? `${pageTitle} - ` : ""}${data.site?.siteMetadata?.title ?? ""}`}
-      </title>
+      <title>{`${pageTitle ? `${pageTitle} - ` : ""}${data.site?.siteMetadata?.title ?? ""}`}</title>
     </>
   );
 }

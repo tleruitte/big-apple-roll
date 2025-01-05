@@ -9,13 +9,7 @@ export default function Index() {
   return (
     <>
       <div className={style.logo}>
-        <StaticImage
-          src="../images/logo.png"
-          alt="Logo"
-          placeholder="none"
-          layout="fixed"
-          width={500}
-        />
+        <StaticImage src="../images/logo.png" alt="Logo" placeholder="none" layout="fixed" width={500} />
       </div>
       <div className={style.date}>August 1-4, 2024</div>
       <div className={style.menu}>

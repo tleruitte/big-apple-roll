@@ -30,11 +30,7 @@ export const query = graphql`
       ...ScheduleDayFragment
     }
     scheduleEvents: allMarkdownRemark(
-      filter: {
-        fileRelativeDirectory: {
-          regex: $scheduleEventsFileRelativeDirectoryRegex
-        }
-      }
+      filter: { fileRelativeDirectory: { regex: $scheduleEventsFileRelativeDirectoryRegex } }
       sort: { frontmatter: { date: ASC } }
     ) {
       nodes {
@@ -45,14 +41,10 @@ export const query = graphql`
 `;
 
 export default function ScheduleDayTemplate(
-  props: PageProps<
-    Queries.ScheduleDayTemplateQuery,
-    ScheduleDayTemplateContext
-  >,
+  props: PageProps<Queries.ScheduleDayTemplateQuery, ScheduleDayTemplateContext>,
 ): React.JSX.Element {
   const { data } = props;
-  const { scheduleDay, previousScheduleDay, nextScheduleDay, scheduleEvents } =
-    data;
+  const { scheduleDay, previousScheduleDay, nextScheduleDay, scheduleEvents } = data;
 
   if (!scheduleDay || !scheduleDay.frontmatter?.date) {
     return <div />;
@@ -73,24 +65,16 @@ export default function ScheduleDayTemplate(
               <div className={style.eventTime}>{formatTime(date)}</div>
               <div className={style.eventSeparator}></div>
               <div className={style.eventName}>
-                <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>
-                  {title}
-                </Link>
+                <Link to={`/${node.fileRelativeDirectory}/${node.fileName}`}>{title}</Link>
               </div>
             </div>
           );
         })}
       </div>
       <Pagination
-        previousHref={
-          previousScheduleDay
-            ? `/schedule/${previousScheduleDay.fileName}`
-            : undefined
-        }
+        previousHref={previousScheduleDay ? `/schedule/${previousScheduleDay.fileName}` : undefined}
         previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
-        nextHref={
-          nextScheduleDay ? `/schedule/${nextScheduleDay.fileName}` : undefined
-        }
+        nextHref={nextScheduleDay ? `/schedule/${nextScheduleDay.fileName}` : undefined}
         nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
       ></Pagination>
     </>
@@ -98,13 +82,8 @@ export default function ScheduleDayTemplate(
 }
 
 export function Head(
-  props: HeadProps<
-    Queries.ScheduleDayTemplateQuery,
-    ScheduleDayTemplateContext
-  >,
+  props: HeadProps<Queries.ScheduleDayTemplateQuery, ScheduleDayTemplateContext>,
 ): React.JSX.Element {
   const { data } = props;
-  return (
-    <HeadLayout pageTitle={data.scheduleDay?.frontmatter?.title ?? undefined} />
-  );
+  return <HeadLayout pageTitle={data.scheduleDay?.frontmatter?.title ?? undefined} />;
 }
