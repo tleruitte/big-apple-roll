@@ -31,10 +31,7 @@ export default function Sponsors(): React.JSX.Element {
         filter: { relativeDirectory: { eq: "sponsors" }, extension: { nin: ["md", "svg"] } }
       ) {
         nodes {
-          name
-          childImageSharp {
-            gatsbyImageData(placeholder: NONE)
-          }
+          ...ImageFragment
         }
       }
       sponsorSVGLogos: allFile(

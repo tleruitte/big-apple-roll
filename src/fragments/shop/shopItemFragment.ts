@@ -9,6 +9,8 @@ export const shopItemFragment = graphql`
     slug
     frontmatter {
       title
+      order_index # Number to order items by
+      price # Number (no currency symbol)
     }
   }
 `;

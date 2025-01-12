@@ -1,8 +1,8 @@
 ---
 title: Orange unisex t-shirt
+order_index: 2
+price: 29.99
 
-shop_order: 2
-shop_price: 29.99
 shop_button_theme: orange
 ---
 

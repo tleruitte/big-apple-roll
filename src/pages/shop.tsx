@@ -1,38 +1,76 @@
-import React from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import React, { useMemo } from "react";
+import { graphql, useStaticQuery } from "gatsby";
 
 import * as style from "src/pages/shop.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
+import Link from "src/components/link";
+import Image from "src/components/image";
 
 export default function Shop(): React.JSX.Element {
-  const data = useStaticQuery<Queries.ShopQuery>(graphql`
+  const { shopItems, shopImages } = useStaticQuery<Queries.ShopQuery>(graphql`
     query Shop {
-      shopItems: allMarkdownRemark(filter: { fileRelativeDirectory: { eq: "shop" } }) {
+      shopItems: allMarkdownRemark(
+        sort: { frontmatter: { order_index: ASC } }
+        filter: { fileRelativeDirectory: { eq: "shop" } }
+      ) {
         nodes {
           ...ShopItemFragment
+        }
+      }
+      shopImages: allFile(filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }) {
+        nodes {
+          ...ImageFragment
         }
       }
     }
   `);
 
-  return (
-    <div className={style.shop}>
-      <h1>T-shirts</h1>
-      {data.shopItems.nodes.map((node) => {
-        if (!node.slug) {
-          return null;
+  const shopImagesByName = useMemo(() => {
+    return shopItems.nodes.reduce<Record<string, Queries.ShopQuery["shopImages"]["nodes"]>>(
+      (acc, shopItemNode) => {
+        const { fileName } = shopItemNode;
+        if (!fileName) {
+          return acc;
         }
 
-        return (
-          <div key={node.id}>
-            item:
-            <Link to={node.slug} draggable={false}>
-              {node.frontmatter?.title}
-            </Link>
-          </div>
-        );
-      })}
-    </div>
+        return {
+          ...acc,
+          [fileName]: shopImages.nodes.filter((shopImageNode) => {
+            return shopImageNode.name.startsWith(fileName);
+          }),
+        };
+      },
+      {},
+    );
+  }, [shopImages.nodes, shopItems.nodes]);
+
+  return (
+    <>
+      <h1>T-shirts</h1>
+      <div className={style.shopItems}>
+        {shopItems.nodes.map((shopItemNode) => {
+          if (!shopItemNode.fileName || !shopItemNode.frontmatter) {
+            return null;
+          }
+
+          return (
+            <div key={shopItemNode.id}>
+              <Link className={style.shopItemLink} to={shopItemNode.slug}>
+                <Image
+                  className={style.shopItemImage}
+                  image={
+                    shopImagesByName[shopItemNode.fileName]?.[0]?.childImageSharp?.gatsbyImageData
+                  }
+                  alt={shopItemNode.frontmatter.title}
+                />
+                <div>{shopItemNode.frontmatter.title}</div>
+                <div>${shopItemNode.frontmatter.price}</div>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

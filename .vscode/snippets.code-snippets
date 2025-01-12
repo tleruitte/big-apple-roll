@@ -16,6 +16,20 @@
 	// 	"description": "Log output to console"
 	// }
 
+	"Component": {
+		"scope": "typescriptreact",
+		"prefix": "component",
+		"body":[
+			"import React from 'react';",
+			"import * as style from 'src/pages/${TM_FILENAME_BASE}.module.css';",
+			"",
+			"type Props = {};",
+			"",
+			"export default function ${TM_FILENAME_BASE/^(.)(.*)$/${1:/upcase}$2/}(props: Props): React.JSX.Element | null {",
+			"  return <div className={style.${TM_FILENAME_BASE}}></div>;",
+			"}",
+		]
+	},
 	"Page": {
 		"scope": "typescriptreact",
 		"prefix": "page",

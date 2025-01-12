@@ -1,8 +1,8 @@
 ---
 title: Blue unisex t-shirt
+order_index: 3
+price: 29.99
 
-shop_order: 3
-shop_price: 29.99
 shop_button_theme: blue
 ---
 

@@ -52,6 +52,7 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
           node {
             id
             slug
+            fileName
           }
         }
       }
@@ -105,6 +106,7 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
     }
     const context: ShopItemTemplateContext = {
       shopItemId: node.id,
+      shopImagesNameRegex: `/^${node.fileName}.+/`,
     };
     createPage({
       component: path.resolve(`./src/templates/shopItemTemplate.tsx`),
