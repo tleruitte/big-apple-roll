@@ -5,8 +5,10 @@ import React from "react";
 import * as style from "src/components/buttons/button.module.css";
 import switchOn from "src/helpers/switchOn";
 
+export type ButtonColor = "accent1" | "accent2" | "accent3";
+
 type Props = {
-  color?: "accent1" | "accent2" | "accent3";
+  color?: ButtonColor;
   size?: "large";
   banner?: string;
   to: string;

@@ -1,9 +1,8 @@
 ---
 title: Green unisex t-shirt
+color: green
 order_index: 1
 price: 29.99
-
-shop_button_theme: green
 ---
 
 Next Level Jersey Blend T-shirt

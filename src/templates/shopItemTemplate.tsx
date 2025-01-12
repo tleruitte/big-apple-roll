@@ -1,11 +1,14 @@
 import { graphql, PageProps } from "gatsby";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import cartSlice from "src/app/slices/cart/cartSlice";
-import Button from "src/components/buttons/button";
+import Button, { ButtonColor } from "src/components/buttons/button";
 import Image from "src/components/image";
 import ShopNavigation from "src/components/shopNavigation";
+import { ShopItemColor } from "src/fragments/shop/shopItemFragment";
+import isEnumValue from "src/helpers/isEnumValue";
+import switchOn from "src/helpers/switchOn";
 import * as style from "src/templates/shopItemTemplate.module.css";
 
 export type ShopItemTemplateContext = {
@@ -33,6 +36,17 @@ export default function ShopItemTemplate(
   const { shopItem } = data;
 
   const dispatch = useAppDispatch();
+
+  const buttonColor = useMemo((): ButtonColor | undefined => {
+    if (shopItem?.frontmatter?.color && isEnumValue(shopItem.frontmatter.color, ShopItemColor)) {
+      return switchOn(shopItem.frontmatter.color, {
+        [ShopItemColor.Orange]: "accent1",
+        [ShopItemColor.Green]: "accent2",
+        [ShopItemColor.Blue]: "accent3",
+      });
+    }
+    return undefined;
+  }, [shopItem?.frontmatter?.color]);
 
   const handleAddToCart = useCallback(() => {
     const shopItemId = shopItem?.fileName;
@@ -67,7 +81,7 @@ export default function ShopItemTemplate(
         <div className={style.itemDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopItem.html ?? "" }}></div>
           <div>
-            <Button to="/cart/" onClick={handleAddToCart}>
+            <Button to="/cart/" color={buttonColor} onClick={handleAddToCart}>
               Add to cart
             </Button>
           </div>

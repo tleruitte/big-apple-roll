@@ -1,9 +1,8 @@
 ---
 title: Orange unisex t-shirt
+color: orange
 order_index: 2
 price: 29.99
-
-shop_button_theme: orange
 ---
 
 Next Level Jersey Blend T-shirt
