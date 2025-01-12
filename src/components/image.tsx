@@ -14,5 +14,13 @@ export default function Image(props: Props): React.JSX.Element | null {
     return null;
   }
 
-  return <GatsbyImage className={className} image={image} alt={alt ?? ""} objectFit="contain" />;
+  return (
+    <GatsbyImage
+      className={className}
+      image={image}
+      alt={alt ?? ""}
+      objectFit="contain"
+      draggable={false}
+    />
+  );
 }

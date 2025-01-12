@@ -4,6 +4,7 @@ import * as style from "src/pages/cart.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
 import useAppSelector from "src/app/hooks/useAppSelector";
 import useAppDispatch from "src/app/hooks/useAppDispatch";
+import ShopNavigation from "src/components/shopNavigation";
 
 export default function Cart(): React.JSX.Element {
   // const data = useStaticQuery<Queries.CartQuery>(graphql`
@@ -20,6 +21,7 @@ export default function Cart(): React.JSX.Element {
 
   return (
     <div className={style.cart}>
+      <ShopNavigation goToShop />
       <h1>Cart</h1>
       <div>
         {cartItems.map((cartItem) => (

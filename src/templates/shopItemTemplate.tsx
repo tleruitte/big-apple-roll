@@ -1,11 +1,11 @@
 import { graphql, PageProps } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useCallback } from "react";
 
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import cartSlice from "src/app/slices/cart/cartSlice";
 import Button from "src/components/buttons/button";
 import Image from "src/components/image";
+import ShopNavigation from "src/components/shopNavigation";
 import * as style from "src/templates/shopItemTemplate.module.css";
 
 export type ShopItemTemplateContext = {
@@ -18,7 +18,7 @@ export const query = graphql`
     shopItem: markdownRemark(id: { eq: $shopItemId }) {
       ...ShopItemFragment
     }
-    shopImages: allFile(filter: { name: { regex: $shopImagesNameRegex } }) {
+    shopImages: allFile(filter: { name: { regex: $shopImagesNameRegex } }, sort: { name: ASC }) {
       nodes {
         ...ImageFragment
       }
@@ -49,6 +49,7 @@ export default function ShopItemTemplate(
 
   return (
     <>
+      <ShopNavigation goToShop goToCart />
       <h1>{shopItem.frontmatter?.title}</h1>
       <div className={style.item}>
         <div className={style.itemImages}>

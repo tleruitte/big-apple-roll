@@ -5,6 +5,7 @@ import * as style from "src/pages/shop.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
 import Link from "src/components/link";
 import Image from "src/components/image";
+import ShopNavigation from "src/components/shopNavigation";
 
 export default function Shop(): React.JSX.Element {
   const { shopItems, shopImages } = useStaticQuery<Queries.ShopQuery>(graphql`
@@ -17,7 +18,10 @@ export default function Shop(): React.JSX.Element {
           ...ShopItemFragment
         }
       }
-      shopImages: allFile(filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }) {
+      shopImages: allFile(
+        filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
+        sort: { name: ASC }
+      ) {
         nodes {
           ...ImageFragment
         }
@@ -46,6 +50,7 @@ export default function Shop(): React.JSX.Element {
 
   return (
     <>
+      <ShopNavigation goToCart />
       <h1>T-shirts</h1>
       <div className={style.shopItems}>
         {shopItems.nodes.map((shopItemNode) => {
