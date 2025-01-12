@@ -10,11 +10,12 @@ type Props = {
   size?: "large";
   banner?: string;
   to: string;
+  onClick?: () => void;
   children: React.ReactNode;
 };
 
 export default function Button(props: Props): React.JSX.Element {
-  const { color = "accent1", size, banner, to, children } = props;
+  const { color = "accent1", size, banner, to, onClick, children } = props;
 
   return (
     <Link
@@ -33,6 +34,7 @@ export default function Button(props: Props): React.JSX.Element {
       )}
       to={to}
       draggable={false}
+      onClick={onClick}
     >
       {banner ? (
         <div className={style.buttonBanner}>

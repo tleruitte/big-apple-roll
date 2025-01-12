@@ -7,7 +7,7 @@
     "lint:stylelint": "stylelint \"src/**/*.css\"",
     "lint:tsc": "tsc --noEmit",
     "lint": "concurrently --names \"prettier,eslint,stylelint,tsc\" --prefix-colors gray --pad-prefix --group \"yarn lint:prettier\" \"yarn lint:eslint\" \"yarn lint:stylelint\" \"yarn lint:tsc\"",
-    "dev": "gatsby develop",
+    "dev": "gatsby clean && gatsby develop",
     "build": "gatsby build --prefix-paths"
   },
   "devDependencies": {
@@ -43,6 +43,7 @@
     "typescript-eslint": "^8.18.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "clsx": "^2.1.1",
     "gatsby": "^5.14.1",
     "gatsby-omni-font-loader": "^2.0.2",
@@ -58,6 +59,7 @@
     "luxon": "^3.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-redux": "^9.2.0"
   }
 }

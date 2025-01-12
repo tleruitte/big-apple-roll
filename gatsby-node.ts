@@ -5,6 +5,7 @@ import { createFilePath } from "gatsby-source-filesystem";
 
 import { ScheduleDayTemplateContext } from "src/templates/scheduleDayTemplate";
 import { ScheduleEventTemplateContext } from "src/templates/scheduleEventTemplate";
+import { ShopItemTemplateContext } from "src/templates/shopItemTemplate";
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
   const { actions, graphql, reporter } = args;
@@ -46,6 +47,14 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
           }
         }
       }
+      shopItems: allMarkdownRemark(filter: { fileRelativeDirectory: { eq: "shop" } }) {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
     }
   `);
 
@@ -84,6 +93,21 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
     };
     createPage({
       component: path.resolve(`./src/templates/scheduleEventTemplate.tsx`),
+      path: node.slug,
+      context,
+    });
+  });
+
+  // Shop item templates
+  result.data.shopItems.edges.forEach(({ node }) => {
+    if (!node.slug) {
+      return;
+    }
+    const context: ShopItemTemplateContext = {
+      shopItemId: node.id,
+    };
+    createPage({
+      component: path.resolve(`./src/templates/shopItemTemplate.tsx`),
       path: node.slug,
       context,
     });

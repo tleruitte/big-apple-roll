@@ -38,6 +38,9 @@ export default function PageLayout(props: Props): React.JSX.Element {
             <Link to="/sponsors/" className={style.headerNavItem} draggable={false}>
               Sponsors
             </Link>
+            <Link to="/shop/" className={style.headerNavItem} draggable={false}>
+              Shop
+            </Link>
           </nav>
         </div>
       </header>
