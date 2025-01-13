@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
 import * as style from "src/pages/shop.module.css";
@@ -6,6 +6,7 @@ import HeadLayout from "src/components/layouts/headLayout";
 import Link from "src/components/link";
 import Image from "src/components/image";
 import ShopNavigation from "src/components/shopNavigation";
+import useShopItems from "src/components/shop/useShopItems";
 
 export default function Shop(): React.JSX.Element {
   const { shopItems, shopImages } = useStaticQuery<Queries.ShopQuery>(graphql`
@@ -29,24 +30,7 @@ export default function Shop(): React.JSX.Element {
     }
   `);
 
-  const shopImagesByName = useMemo(() => {
-    return shopItems.nodes.reduce<Record<string, Queries.ShopQuery["shopImages"]["nodes"]>>(
-      (acc, shopItemNode) => {
-        const { fileName } = shopItemNode;
-        if (!fileName) {
-          return acc;
-        }
-
-        return {
-          ...acc,
-          [fileName]: shopImages.nodes.filter((shopImageNode) => {
-            return shopImageNode.name.startsWith(fileName);
-          }),
-        };
-      },
-      {},
-    );
-  }, [shopImages.nodes, shopItems.nodes]);
+  const { shopImagesByName } = useShopItems(shopItems, shopImages);
 
   return (
     <>

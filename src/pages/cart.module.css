@@ -1,3 +1,15 @@
 .cart {
-  color: red;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--spacing-2);
+
+  & .cartItems {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr) auto;
+    gap: var(--spacing-2) var(--spacing-1);
+
+    & .cartItemImage {
+      border-radius: var(--spacing-50);
+    }
+  }
 }

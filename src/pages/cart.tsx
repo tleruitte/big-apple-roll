@@ -1,38 +1,70 @@
 import React, { useCallback } from "react";
+import { graphql, useStaticQuery } from "gatsby";
 
 import * as style from "src/pages/cart.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
-import useAppSelector from "src/app/hooks/useAppSelector";
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import ShopNavigation from "src/components/shopNavigation";
+import useCartItems from "src/components/shop/useCartItems";
+import Image from "src/components/image";
 
 export default function Cart(): React.JSX.Element {
-  // const data = useStaticQuery<Queries.CartQuery>(graphql`
-  //   query Cart {
-  //   }
-  // `);
+  const { shopItems, shopImages } = useStaticQuery<Queries.CartQuery>(graphql`
+    query Cart {
+      shopItems: allMarkdownRemark(
+        sort: { frontmatter: { order_index: ASC } }
+        filter: { fileRelativeDirectory: { eq: "shop" } }
+      ) {
+        nodes {
+          ...ShopItemFragment
+        }
+      }
+      shopImages: allFile(
+        filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
+        sort: { name: ASC }
+      ) {
+        nodes {
+          ...ImageFragment
+        }
+      }
+    }
+  `);
 
-  const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
+
+  const { cartItems } = useCartItems(shopItems, shopImages);
 
   const handleAddItem = useCallback(() => {
     // dispatch(cartSlice.actions.addItem("item"));
   }, []);
 
   return (
-    <div className={style.cart}>
+    <>
       <ShopNavigation goToShop />
       <h1>Cart</h1>
-      <div>
-        {cartItems.map((cartItem) => (
-          <div key={cartItem.shopItemId}>
-            <div>{cartItem.shopItemId}</div>
-            <div>{cartItem.size}</div>
-            <div>{cartItem.count}</div>
-          </div>
-        ))}
+      <div className={style.cart}>
+        <div className={style.cartItems}>
+          {cartItems.map((cartItem) => (
+            <React.Fragment key={cartItem.shopItem.id}>
+              <Image
+                className={style.cartItemImage}
+                image={cartItem.shopImages[0].childImageSharp?.gatsbyImageData}
+                alt={cartItem.shopItem.frontmatter?.title}
+              />
+              <div>
+                <div>
+                  <strong>{cartItem.shopItem.frontmatter?.title}</strong>
+                </div>
+                <div>{cartItem.cartItemModel.size}</div>
+                <div>${cartItem.shopItem.frontmatter?.price}</div>
+                <div>- {cartItem.cartItemModel.count} +</div>
+              </div>
+              <div>remove</div>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

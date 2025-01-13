@@ -53,3 +53,7 @@ a {
 iframe {
   border: none;
 }
+
+strong {
+  font-weight: var(--font-weight-600);
+}
