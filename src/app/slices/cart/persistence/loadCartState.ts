@@ -7,6 +7,10 @@ const DEFAULT_CART_STATE: CartState = {
 };
 
 const loadCartState = (): CartState => {
+  if (typeof localStorage === "undefined") {
+    return DEFAULT_CART_STATE;
+  }
+
   const savedCartState = localStorage.getItem(CART_STATE_LOCAL_STORAGE_KEY);
   if (!savedCartState) {
     return DEFAULT_CART_STATE;
