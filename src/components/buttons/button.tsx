@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import { Link } from "gatsby";
 import React from "react";
 
 import * as style from "src/components/buttons/button.module.css";
+import Link from "src/components/link";
 import switchOn from "src/helpers/switchOn";
 
 export type ButtonColor = "accent1" | "accent2" | "accent3";
@@ -11,7 +11,7 @@ type Props = {
   color?: ButtonColor;
   size?: "large";
   banner?: string;
-  to: string;
+  to?: string;
   onClick?: () => void;
   children: React.ReactNode;
 };
@@ -35,7 +35,6 @@ export default function Button(props: Props): React.JSX.Element {
           : null,
       )}
       to={to}
-      draggable={false}
       onClick={onClick}
     >
       {banner ? (

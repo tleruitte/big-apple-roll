@@ -7,6 +7,7 @@ import useAppDispatch from "src/app/hooks/useAppDispatch";
 import ShopNavigation from "src/components/shopNavigation";
 import useCartItems from "src/components/shop/useCartItems";
 import Image from "src/components/image";
+import TextButton from "src/components/buttons/textButton";
 
 export default function Cart(): React.JSX.Element {
   const { shopItems, shopImages } = useStaticQuery<Queries.CartQuery>(graphql`
@@ -59,7 +60,9 @@ export default function Cart(): React.JSX.Element {
                 <div>${cartItem.shopItem.frontmatter?.price}</div>
                 <div>- {cartItem.cartItemModel.count} +</div>
               </div>
-              <div>remove</div>
+              <div>
+                <TextButton>Remove</TextButton>
+              </div>
             </React.Fragment>
           ))}
         </div>

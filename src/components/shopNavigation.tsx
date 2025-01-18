@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import * as style from "src/pages/shopNavigation.module.css";
 
 import Pagination from "src/components/pagination";
 import useAppSelector from "src/app/hooks/useAppSelector";

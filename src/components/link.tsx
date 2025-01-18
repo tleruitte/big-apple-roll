@@ -3,19 +3,24 @@ import { Link as GatsbyLink } from "gatsby";
 
 type Props = {
   className?: string;
-  to: string | null;
+  to?: string;
+  onClick?: React.MouseEventHandler;
   children: React.ReactNode;
 };
 
 export default function Link(props: Props): React.JSX.Element | null {
-  const { className, to, children } = props;
+  const { className, to, onClick, children } = props;
 
   if (!to) {
-    return <span className={className}>{children}</span>;
+    return (
+      <span className={className} onClick={onClick}>
+        {children}
+      </span>
+    );
   }
 
   return (
-    <GatsbyLink to={to} className={className} draggable={false}>
+    <GatsbyLink to={to} className={className} draggable={false} onClick={onClick}>
       {children}
     </GatsbyLink>
   );
