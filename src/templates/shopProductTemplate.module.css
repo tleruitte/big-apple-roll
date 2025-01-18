@@ -1,21 +1,21 @@
-.item {
+.shopProduct {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--spacing-2);
 
-  & .itemImages {
+  & .shopProductImages {
     grid-column: 1 / 2;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-2);
 
-    & .itemImage {
+    & .shopProductImage {
       border-radius: var(--spacing-1);
     }
   }
 
-  & .itemDetails {
+  & .shopProductDetails {
     grid-column: 2 / 3;
   }
 }

@@ -4,16 +4,17 @@ import * as style from "src/components/buttons/textButton.module.css";
 import Link from "src/components/link";
 
 type Props = {
+  id?: string;
   to?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
 };
 
 export default function TextButton(props: Props): React.JSX.Element {
-  const { to, onClick, children } = props;
+  const { id, to, onClick, children } = props;
 
   return (
-    <Link className={style.textButton} to={to} onClick={onClick}>
+    <Link className={style.textButton} id={id} to={to} onClick={onClick}>
       {children}
     </Link>
   );

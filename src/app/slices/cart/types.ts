@@ -1,9 +1,12 @@
-export type CartItemModel = {
-  shopItemId: string;
+export type CartEntryKey = `${string}-${string}`;
+
+export type CartEntry = {
+  key: CartEntryKey;
+  name: string;
   size: string;
   count: number;
 };
 
 export type CartState = {
-  cartItems: Array<CartItemModel>;
+  cartEntriesByKey: Partial<Record<CartEntryKey, CartEntry>>;
 };

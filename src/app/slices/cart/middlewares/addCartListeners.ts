@@ -7,9 +7,10 @@ import saveCartState from "src/app/slices/cart/persistence/saveCartState";
 const addCartListeners = (startListening: AppStartListening) => {
   startListening({
     matcher: isAnyOf(
-      cartSlice.actions.incrementCartItem,
-      cartSlice.actions.decrementCartItem,
-      cartSlice.actions.removeCartItem,
+      cartSlice.actions.addCartEntry,
+      cartSlice.actions.incrementCartEntry,
+      cartSlice.actions.decrementCartEntry,
+      cartSlice.actions.removeCartEntry,
     ),
     effect: (action, api) => {
       saveCartState(api.getState().cart);

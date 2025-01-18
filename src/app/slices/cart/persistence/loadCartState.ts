@@ -1,17 +1,23 @@
-import { CART_STATE_LOCAL_STORAGE_KEY } from "src/app/slices/cart/persistence/saveCartState";
 import { CartState } from "src/app/slices/cart/types";
 
+export const CART_STATE_LOCAL_STORAGE_KEY = "cartState";
+
 const DEFAULT_CART_STATE: CartState = {
-  cartItems: [],
+  cartEntriesByKey: {},
 };
 
 const loadCartState = (): CartState => {
-  const item = localStorage.getItem(CART_STATE_LOCAL_STORAGE_KEY);
-  if (!item) {
+  const savedCartState = localStorage.getItem(CART_STATE_LOCAL_STORAGE_KEY);
+  if (!savedCartState) {
     return DEFAULT_CART_STATE;
   }
+
   try {
-    return JSON.parse(item);
+    const parsedCartState = JSON.parse(savedCartState);
+    return {
+      ...DEFAULT_CART_STATE,
+      ...parsedCartState,
+    };
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);

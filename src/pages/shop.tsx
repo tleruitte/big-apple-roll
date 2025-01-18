@@ -5,21 +5,21 @@ import * as style from "src/pages/shop.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
 import Link from "src/components/link";
 import Image from "src/components/image";
-import ShopNavigation from "src/components/shopNavigation";
-import useShopItems from "src/components/shop/useShopItems";
+import ShopNavigation from "src/components/shop/shopNavigation";
+import useShop from "src/components/shop/useShop";
 
 export default function Shop(): React.JSX.Element {
-  const { shopItems, shopImages } = useStaticQuery<Queries.ShopQuery>(graphql`
+  const { shopProducts, shopProductsImages } = useStaticQuery<Queries.ShopQuery>(graphql`
     query Shop {
-      shopItems: allMarkdownRemark(
+      shopProducts: allMarkdownRemark(
         sort: { frontmatter: { order_index: ASC } }
         filter: { fileRelativeDirectory: { eq: "shop" } }
       ) {
         nodes {
-          ...ShopItemFragment
+          ...ShopProductFragment
         }
       }
-      shopImages: allFile(
+      shopProductsImages: allFile(
         filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
         sort: { name: ASC }
       ) {
@@ -30,30 +30,31 @@ export default function Shop(): React.JSX.Element {
     }
   `);
 
-  const { shopImagesByName } = useShopItems(shopItems, shopImages);
+  const { cartItemCount, shopProductImagesByName } = useShop(shopProducts, shopProductsImages);
 
   return (
     <>
-      <ShopNavigation goToCart />
+      <ShopNavigation cartItemCount={cartItemCount} goToCart />
       <h1>T-shirts</h1>
-      <div className={style.shopItems}>
-        {shopItems.nodes.map((shopItemNode) => {
-          if (!shopItemNode.fileName || !shopItemNode.frontmatter) {
+      <div className={style.shopProducts}>
+        {shopProducts.nodes.map((shopProductNode) => {
+          if (!shopProductNode.fileName || !shopProductNode.frontmatter) {
             return null;
           }
 
           return (
-            <div key={shopItemNode.id}>
-              <Link className={style.shopItemLink} to={shopItemNode.slug}>
+            <div key={shopProductNode.id}>
+              <Link className={style.shopProductLink} to={shopProductNode.slug}>
                 <Image
-                  className={style.shopItemImage}
+                  className={style.shopProductImage}
                   image={
-                    shopImagesByName[shopItemNode.fileName]?.[0]?.childImageSharp?.gatsbyImageData
+                    shopProductImagesByName[shopProductNode.fileName]?.[0]?.childImageSharp
+                      ?.gatsbyImageData
                   }
-                  alt={shopItemNode.frontmatter.title}
+                  alt={shopProductNode.frontmatter.title}
                 />
-                <div>{shopItemNode.frontmatter.title}</div>
-                <div>${shopItemNode.frontmatter.price}</div>
+                <div>{shopProductNode.frontmatter.title}</div>
+                <div>${shopProductNode.frontmatter.price}</div>
               </Link>
             </div>
           );

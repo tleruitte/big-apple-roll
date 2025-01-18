@@ -1,50 +1,40 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { CartState } from "src/app/slices/cart/types";
+import getCartEntryKey from "src/app/slices/cart/helpers/getCartEntryKey";
+import { CartEntry, CartEntryKey, CartState } from "src/app/slices/cart/types";
 
 const initialState: CartState = {
-  cartItems: [],
+  cartEntriesByKey: {},
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    incrementCartItem: (state, action: PayloadAction<{ shopItemId: string; size: string }>) => {
-      const existingItemIndex = state.cartItems.findIndex((cartItem) => {
-        return (
-          cartItem.shopItemId === action.payload.shopItemId && cartItem.size === action.payload.size
-        );
-      });
-      if (existingItemIndex !== -1) {
-        state.cartItems[existingItemIndex].count += 1;
-      } else {
-        state.cartItems.push({
-          shopItemId: action.payload.shopItemId,
-          size: action.payload.size,
-          count: 1,
-        });
+    addCartEntry: (state, action: PayloadAction<Omit<CartEntry, "key">>) => {
+      const key = getCartEntryKey(action.payload);
+      state.cartEntriesByKey[key] = {
+        key,
+        ...action.payload,
+        count: (state.cartEntriesByKey[key]?.count ?? 0) + action.payload.count,
+      };
+    },
+    incrementCartEntry: (state, action: PayloadAction<CartEntryKey>) => {
+      const cartEntry = state.cartEntriesByKey[action.payload];
+      if (cartEntry) {
+        cartEntry.count += 1;
       }
     },
-    decrementCartItem: (state, action: PayloadAction<{ shopItemId: string; size: string }>) => {
-      const existingItemIndex = state.cartItems.findIndex((cartItem) => {
-        return (
-          cartItem.shopItemId === action.payload.shopItemId && cartItem.size === action.payload.size
-        );
-      });
-      if (existingItemIndex !== -1) {
-        state.cartItems[existingItemIndex].count -= 1;
-        if (state.cartItems[existingItemIndex].count === 0) {
-          state.cartItems = state.cartItems.filter((item) => {
-            return item !== state.cartItems[existingItemIndex];
-          });
-        }
+    decrementCartEntry: (state, action: PayloadAction<CartEntryKey>) => {
+      const cartEntry = state.cartEntriesByKey[action.payload];
+      if (cartEntry && cartEntry.count > 1) {
+        cartEntry.count -= 1;
+      } else if (cartEntry) {
+        delete state.cartEntriesByKey[action.payload];
       }
     },
-    removeCartItem: (state, action: PayloadAction<{ shopItemId: string; size: string }>) => {
-      state.cartItems = state.cartItems.filter((item) => {
-        return item !== action.payload;
-      });
+    removeCartEntry: (state, action: PayloadAction<CartEntryKey>) => {
+      delete state.cartEntriesByKey[action.payload];
     },
   },
 });

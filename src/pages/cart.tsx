@@ -4,23 +4,26 @@ import { graphql, useStaticQuery } from "gatsby";
 import * as style from "src/pages/cart.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
 import useAppDispatch from "src/app/hooks/useAppDispatch";
-import ShopNavigation from "src/components/shopNavigation";
-import useCartItems from "src/components/shop/useCartItems";
+import ShopNavigation from "src/components/shop/shopNavigation";
 import Image from "src/components/image";
 import TextButton from "src/components/buttons/textButton";
+import cartSlice from "src/app/slices/cart/cartSlice";
+import useCallbackId from "src/components/hooks/useCallbackId";
+import { CartEntryKey } from "src/app/slices/cart/types";
+import useShop from "src/components/shop/useShop";
 
 export default function Cart(): React.JSX.Element {
-  const { shopItems, shopImages } = useStaticQuery<Queries.CartQuery>(graphql`
+  const { shopProducts, shopProductsImages } = useStaticQuery<Queries.CartQuery>(graphql`
     query Cart {
-      shopItems: allMarkdownRemark(
+      shopProducts: allMarkdownRemark(
         sort: { frontmatter: { order_index: ASC } }
         filter: { fileRelativeDirectory: { eq: "shop" } }
       ) {
         nodes {
-          ...ShopItemFragment
+          ...ShopProductFragment
         }
       }
-      shopImages: allFile(
+      shopProductsImages: allFile(
         filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
         sort: { name: ASC }
       ) {
@@ -33,35 +36,46 @@ export default function Cart(): React.JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { cartItems } = useCartItems(shopItems, shopImages);
+  const { cartItems, cartItemCount } = useShop(shopProducts, shopProductsImages);
 
-  const handleAddItem = useCallback(() => {
-    // dispatch(cartSlice.actions.addItem("item"));
-  }, []);
+  // const handleAddItem = useCallback(() => {
+  //   // dispatch(cartSlice.actions.addItem("item"));
+  // }, []);
+
+  const handleRemoveCartItem = useCallbackId(
+    useCallback(
+      (id) => {
+        dispatch(cartSlice.actions.removeCartEntry(id as CartEntryKey));
+      },
+      [dispatch],
+    ),
+  );
 
   return (
     <>
-      <ShopNavigation goToShop />
+      <ShopNavigation cartItemCount={cartItemCount} goToShop />
       <h1>Cart</h1>
       <div className={style.cart}>
         <div className={style.cartItems}>
           {cartItems.map((cartItem) => (
-            <React.Fragment key={cartItem.shopItem.id}>
+            <React.Fragment key={cartItem.key}>
               <Image
                 className={style.cartItemImage}
-                image={cartItem.shopImages[0].childImageSharp?.gatsbyImageData}
-                alt={cartItem.shopItem.frontmatter?.title}
+                image={cartItem.shopProductImages[0].childImageSharp?.gatsbyImageData}
+                alt={cartItem.shopProduct.frontmatter?.title}
               />
               <div>
                 <div>
-                  <strong>{cartItem.shopItem.frontmatter?.title}</strong>
+                  <strong>{cartItem.shopProduct.frontmatter?.title}</strong>
                 </div>
-                <div>{cartItem.cartItemModel.size}</div>
-                <div>${cartItem.shopItem.frontmatter?.price}</div>
-                <div>- {cartItem.cartItemModel.count} +</div>
+                <div>{cartItem.cartEntry.size}</div>
+                <div>${cartItem.shopProduct.frontmatter?.price}</div>
+                <div>- {cartItem.cartEntry.count} +</div>
               </div>
               <div>
-                <TextButton>Remove</TextButton>
+                <TextButton id={cartItem.key} onClick={handleRemoveCartItem}>
+                  Remove
+                </TextButton>
               </div>
             </React.Fragment>
           ))}

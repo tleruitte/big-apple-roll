@@ -1,13 +1,13 @@
 import { graphql } from "gatsby";
 
-export enum ShopItemColor {
+export enum ShopProductColor {
   Green = "green",
   Orange = "orange",
   Blue = "blue",
 }
 
-export const shopItemFragment = graphql`
-  fragment ShopItemFragment on MarkdownRemark {
+export const shopProductFragment = graphql`
+  fragment ShopProductFragment on MarkdownRemark {
     id
     fileName
     fileRelativeDirectory

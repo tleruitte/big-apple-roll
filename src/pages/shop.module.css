@@ -1,13 +1,13 @@
-.shopItems {
+.shopProducts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-2);
 }
 
-.shopItemLink {
+.shopProductLink {
   text-decoration: none;
 }
 
-.shopItemImage {
+.shopProductImage {
   border-radius: var(--spacing-1);
 }
