@@ -90,10 +90,17 @@ const useShop = (
     }, 0);
   }, [cartItems]);
 
+  const cartTotal = useMemo(() => {
+    return cartItems.reduce((acc, cartItem) => {
+      return acc + cartItem.cartEntry.count * (cartItem.shopProduct.frontmatter?.price ?? 0);
+    }, 0);
+  }, [cartItems]);
+
   return {
     cartItems,
     cartItemsByKey,
     cartItemCount,
+    cartTotal,
     shopProductsByName,
     shopProductImagesByName,
   };

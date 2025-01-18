@@ -21,7 +21,7 @@
 		"prefix": "component",
 		"body":[
 			"import React from 'react';",
-			"import * as style from 'src/pages/${TM_FILENAME_BASE}.module.css';",
+			"import * as style from 'src/components/${TM_FILENAME_BASE}.module.css';",
 			"",
 			"type Props = {};",
 			"",

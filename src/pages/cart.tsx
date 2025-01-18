@@ -10,7 +10,8 @@ import TextButton from "src/components/buttons/textButton";
 import cartSlice from "src/app/slices/cart/cartSlice";
 import useCallbackId from "src/components/hooks/useCallbackId";
 import { CartEntryKey } from "src/app/slices/cart/types";
-import useShop from "src/components/shop/useShop";
+import useShop, { CartItem } from "src/components/shop/useShop";
+import ShopCounter from "src/components/shop/shopCounter";
 
 export default function Cart(): React.JSX.Element {
   const { shopProducts, shopProductsImages } = useStaticQuery<Queries.CartQuery>(graphql`
@@ -36,11 +37,21 @@ export default function Cart(): React.JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { cartItems, cartItemCount } = useShop(shopProducts, shopProductsImages);
+  const { cartItems, cartItemCount, cartTotal } = useShop(shopProducts, shopProductsImages);
 
-  // const handleAddItem = useCallback(() => {
-  //   // dispatch(cartSlice.actions.addItem("item"));
-  // }, []);
+  const handleIncrementCartItem = useCallback(
+    (cartItem: CartItem) => {
+      dispatch(cartSlice.actions.incrementCartEntry(cartItem.key));
+    },
+    [dispatch],
+  );
+
+  const handleDecrementCartItem = useCallback(
+    (cartItem: CartItem) => {
+      dispatch(cartSlice.actions.decrementCartEntry(cartItem.key));
+    },
+    [dispatch],
+  );
 
   const handleRemoveCartItem = useCallbackId(
     useCallback(
@@ -59,18 +70,26 @@ export default function Cart(): React.JSX.Element {
         <div className={style.cartItems}>
           {cartItems.map((cartItem) => (
             <React.Fragment key={cartItem.key}>
-              <Image
-                className={style.cartItemImage}
-                image={cartItem.shopProductImages[0].childImageSharp?.gatsbyImageData}
-                alt={cartItem.shopProduct.frontmatter?.title}
-              />
               <div>
+                <Image
+                  className={style.cartItemImage}
+                  image={cartItem.shopProductImages[0].childImageSharp?.gatsbyImageData}
+                  alt={cartItem.shopProduct.frontmatter?.title}
+                />
+              </div>
+              <div className={style.cartItemDetails}>
                 <div>
                   <strong>{cartItem.shopProduct.frontmatter?.title}</strong>
                 </div>
                 <div>{cartItem.cartEntry.size}</div>
                 <div>${cartItem.shopProduct.frontmatter?.price}</div>
-                <div>- {cartItem.cartEntry.count} +</div>
+                <div>
+                  <ShopCounter
+                    cartItem={cartItem}
+                    onIncrement={handleIncrementCartItem}
+                    onDecrement={handleDecrementCartItem}
+                  ></ShopCounter>
+                </div>
               </div>
               <div>
                 <TextButton id={cartItem.key} onClick={handleRemoveCartItem}>
@@ -79,6 +98,13 @@ export default function Cart(): React.JSX.Element {
               </div>
             </React.Fragment>
           ))}
+        </div>
+        <div>
+          <h2 className={style.summary}>Order summary</h2>
+          <div className={style.total}>
+            <span>Total</span>
+            <span>${cartTotal}</span>
+          </div>
         </div>
       </div>
     </>

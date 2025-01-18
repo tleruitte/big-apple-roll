@@ -1,0 +1,31 @@
+.counter {
+  display: flex;
+
+  & > * {
+    padding: 0 var(--spacing-1);
+    color: var(--color-text-inverted);
+  }
+
+  & > button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  & .counterDecrement {
+    background: var(--color-accent-2);
+  }
+
+  & .count {
+    background: var(--color-accent-1);
+  }
+
+  & .counterIncrement {
+    background: var(--color-accent-3);
+  }
+}

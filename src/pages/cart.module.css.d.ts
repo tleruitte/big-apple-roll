@@ -2,3 +2,6 @@
 export const cart: string;
 export const cartItems: string;
 export const cartItemImage: string;
+export const cartItemDetails: string;
+export const summary: string;
+export const total: string;
