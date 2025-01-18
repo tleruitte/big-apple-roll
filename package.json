@@ -43,6 +43,7 @@
     "typescript-eslint": "^8.18.2"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.8.1",
     "@reduxjs/toolkit": "^2.5.0",
     "clsx": "^2.1.1",
     "gatsby": "^5.14.1",

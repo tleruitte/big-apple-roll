@@ -3272,6 +3272,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@paypal/paypal-js@npm:^8.1.2":
+  version: 8.1.3
+  resolution: "@paypal/paypal-js@npm:8.1.3"
+  dependencies:
+    promise-polyfill: "npm:^8.3.0"
+  checksum: 10c0/3f4a9827f770dbad3636a8d260a628ea08ba0510edf0de08b2b2eadd300eb32f2082a1453a27bec870efdb1ea31292016f54fb637cff9a4a8e607bbe8d007818
+  languageName: node
+  linkType: hard
+
+"@paypal/react-paypal-js@npm:^8.8.1":
+  version: 8.8.1
+  resolution: "@paypal/react-paypal-js@npm:8.8.1"
+  dependencies:
+    "@paypal/paypal-js": "npm:^8.1.2"
+    "@paypal/sdk-constants": "npm:^1.0.122"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+    react-dom: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10c0/ff8dde61ef5eeb4cb3d79717eebe60f32825ebb55a8d0283e664968d13406cbf1f090c92f124d2d3830ace86be89b67fdb5fadff9a66de37a3921a3c875ac248
+  languageName: node
+  linkType: hard
+
+"@paypal/sdk-constants@npm:^1.0.122":
+  version: 1.0.151
+  resolution: "@paypal/sdk-constants@npm:1.0.151"
+  dependencies:
+    hi-base32: "npm:^0.5.0"
+  checksum: 10c0/7f534bb0b784e4815805b55a047b373dc33628ee11f65c76d7ca81908f3bb59ae61337a81c4199c8a183ac0b3e17754ac49af55d34286001d584be075e7ef36c
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -10141,6 +10172,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hi-base32@npm:^0.5.0":
+  version: 0.5.1
+  resolution: "hi-base32@npm:0.5.1"
+  checksum: 10c0/45adb99249b04108fd689cb344f4b625b49d0518327117c34c403dbaf4723aaefb2a1bde6d7a0288ff0f835970d0f844a3ae103534dc237c99b8552a0e689177
+  languageName: node
+  linkType: hard
+
 "hosted-git-info@npm:^2.1.4":
   version: 2.8.9
   resolution: "hosted-git-info@npm:2.8.9"
@@ -11881,6 +11919,7 @@ __metadata:
     "@babel/core": "npm:^7.26.0"
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/js": "npm:^9.17.0"
+    "@paypal/react-paypal-js": "npm:^8.8.1"
     "@reduxjs/toolkit": "npm:^2.5.0"
     "@types/babel__core": "npm:^7.20.5"
     "@types/eslint": "npm:^9.6.1"
@@ -14169,6 +14208,13 @@ __metadata:
   version: 2.0.3
   resolution: "progress@npm:2.0.3"
   checksum: 10c0/1697e07cb1068055dbe9fe858d242368ff5d2073639e652b75a7eb1f2a1a8d4afd404d719de23c7b48481a6aa0040686310e2dac2f53d776daa2176d3f96369c
+  languageName: node
+  linkType: hard
+
+"promise-polyfill@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "promise-polyfill@npm:8.3.0"
+  checksum: 10c0/97141f07a31a6be135ec9ed53700a3423a771cabec0ba5e08fcb2bf8cfda855479ff70e444fceb938f560be42b450cd032c14f4a940ed2ad1e5b4dcb78368dce
   languageName: node
   linkType: hard
 

@@ -1,5 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  ReactPayPalScriptOptions,
+} from "@paypal/react-paypal-js";
+import { PayPalButtonCreateOrder, PayPalButtonOnApprove } from "@paypal/paypal-js";
 
 import * as style from "src/pages/cart.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
@@ -12,6 +18,15 @@ import useCallbackId from "src/components/hooks/useCallbackId";
 import { CartEntryKey } from "src/app/slices/cart/types";
 import useShop, { CartItem } from "src/components/shop/useShop";
 import ShopCounter from "src/components/shop/shopCounter";
+
+// Doc: https://developer.paypal.com/sdk/js/configuration/
+const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
+  clientId: "ASkF4WrNyc3lZOXQmFSsXsFl64ggGyH5iUMoR3VVBe8TgEKA8se1RXCdZ01Ys4HqYebewTpXZIoGwhAw",
+  currency: "USD",
+  intent: "capture",
+  components: "buttons,applepay",
+  disableFunding: "paylater",
+};
 
 export default function Cart(): React.JSX.Element {
   const { shopProducts, shopProductsImages } = useStaticQuery<Queries.CartQuery>(graphql`
@@ -62,6 +77,29 @@ export default function Cart(): React.JSX.Element {
     ),
   );
 
+  const handleCreateOrder = useMemo((): PayPalButtonCreateOrder => {
+    return async (data, actions) => {
+      return actions.order.create({
+        intent: "CAPTURE",
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              value: "98",
+            },
+          },
+        ],
+      });
+    };
+  }, []);
+
+  const handleApproveOrder = useMemo((): PayPalButtonOnApprove => {
+    return async (data, actions) => {
+      await actions.order?.capture();
+      alert("Transaction completed");
+    };
+  }, []);
+
   return (
     <>
       <ShopNavigation cartItemCount={cartItemCount} goToShop />
@@ -104,6 +142,11 @@ export default function Cart(): React.JSX.Element {
           <div className={style.total}>
             <span>Total</span>
             <span>${cartTotal}</span>
+          </div>
+          <div className={style.paypal}>
+            <PayPalScriptProvider options={PAYPAL_OPTIONS}>
+              <PayPalButtons createOrder={handleCreateOrder} onApprove={handleApproveOrder} />
+            </PayPalScriptProvider>
           </div>
         </div>
       </div>
