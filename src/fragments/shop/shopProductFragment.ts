@@ -1,6 +1,6 @@
 import { graphql } from "gatsby";
 
-export enum ShopProductColor {
+export enum ShopProductButtonColor {
   Green = "green",
   Orange = "orange",
   Blue = "blue",
@@ -15,7 +15,7 @@ export const shopProductFragment = graphql`
     slug
     frontmatter {
       title
-      color # Either "green", "orange", or "blue"
+      button_color # Either "green", "orange", or "blue"
       order_index # Number to order items by
       price # Number (no currency symbol)
     }

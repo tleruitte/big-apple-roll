@@ -1,6 +1,6 @@
 ---
 title: Green unisex t-shirt
-color: green
+button_color: green
 order_index: 1
 price: 29.99
 ---

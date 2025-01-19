@@ -7,7 +7,7 @@ import Button, { ButtonColor } from "src/components/buttons/button";
 import Image from "src/components/image";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop from "src/components/shop/useShop";
-import { ShopProductColor } from "src/fragments/shop/shopProductFragment";
+import { ShopProductButtonColor } from "src/fragments/shop/shopProductFragment";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
 import * as style from "src/templates/shopProductTemplate.module.css";
@@ -61,17 +61,17 @@ export default function ShopProductTemplate(
 
   const buttonColor = useMemo((): ButtonColor | undefined => {
     if (
-      shopProduct?.frontmatter?.color &&
-      isEnumValue(shopProduct.frontmatter.color, ShopProductColor)
+      shopProduct?.frontmatter?.button_color &&
+      isEnumValue(shopProduct.frontmatter.button_color, ShopProductButtonColor)
     ) {
-      return switchOn(shopProduct.frontmatter.color, {
-        [ShopProductColor.Orange]: "accent1",
-        [ShopProductColor.Green]: "accent2",
-        [ShopProductColor.Blue]: "accent3",
+      return switchOn(shopProduct.frontmatter.button_color, {
+        [ShopProductButtonColor.Orange]: "accent1",
+        [ShopProductButtonColor.Green]: "accent2",
+        [ShopProductButtonColor.Blue]: "accent3",
       });
     }
     return undefined;
-  }, [shopProduct?.frontmatter?.color]);
+  }, [shopProduct?.frontmatter?.button_color]);
 
   const handleAddToCart = useCallback(() => {
     const shopProductName = shopProduct?.fileName;

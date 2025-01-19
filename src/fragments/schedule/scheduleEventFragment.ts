@@ -1,5 +1,12 @@
 import { graphql } from "gatsby";
 
+export enum ScheduleEventDifficulty {
+  Easy = "easy",
+  Casual = "casual",
+  Moderate = "moderate",
+  Advanced = "advanced",
+}
+
 export const scheduleEventFragment = graphql`
   fragment ScheduleEventFragment on MarkdownRemark {
     id

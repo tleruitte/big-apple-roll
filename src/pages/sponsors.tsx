@@ -7,12 +7,7 @@ import * as style from "src/pages/sponsors.module.css";
 import isEnumValue from "src/helpers/isEnumValue";
 import HeadLayout from "src/components/layouts/headLayout";
 import switchOn from "src/helpers/switchOn";
-
-enum SponsorType {
-  Presenting = "presenting",
-  Supporting = "supporting",
-  General = "general",
-}
+import { SponsorType } from "src/fragments/sponsors/sponsorFragment";
 
 export default function Sponsors(): React.JSX.Element {
   const data = useStaticQuery<Queries.SponsorsQuery>(graphql`

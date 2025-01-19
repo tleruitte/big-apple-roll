@@ -3,6 +3,7 @@ import { graphql, PageProps } from "gatsby";
 import React from "react";
 
 import Pagination from "src/components/pagination";
+import { ScheduleEventDifficulty } from "src/fragments/schedule/scheduleEventFragment";
 import { formatDate, formatDateTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
 import isEnumValue from "src/helpers/isEnumValue";
@@ -33,13 +34,6 @@ export const query = graphql`
   }
 `;
 
-enum Difficulty {
-  Easy = "easy",
-  Casual = "casual",
-  Moderate = "moderate",
-  Advanced = "advanced",
-}
-
 export default function ScheduleEventTemplate(
   props: PageProps<Queries.ScheduleEventTemplateQuery, ScheduleEventTemplateContext>,
 ): React.JSX.Element {
@@ -58,24 +52,24 @@ export default function ScheduleEventTemplate(
       <h1>{scheduleEvent.frontmatter.title}</h1>
       <h2>{formatDateTime(scheduleEvent.frontmatter.date)}</h2>
       {scheduleEvent.frontmatter.difficulty &&
-      isEnumValue(scheduleEvent.frontmatter.difficulty, Difficulty) ? (
+      isEnumValue(scheduleEvent.frontmatter.difficulty, ScheduleEventDifficulty) ? (
         <div
           className={clsx(
             style.difficulty,
             switchOn(scheduleEvent.frontmatter.difficulty, {
-              [Difficulty.Easy]: style.isEasy,
-              [Difficulty.Casual]: style.isCasual,
-              [Difficulty.Moderate]: style.isModerate,
-              [Difficulty.Advanced]: style.isAdvanced,
+              [ScheduleEventDifficulty.Easy]: style.isEasy,
+              [ScheduleEventDifficulty.Casual]: style.isCasual,
+              [ScheduleEventDifficulty.Moderate]: style.isModerate,
+              [ScheduleEventDifficulty.Advanced]: style.isAdvanced,
             }),
           )}
         >
           <span className={style.difficultyLabel}>
             {switchOn(scheduleEvent.frontmatter.difficulty, {
-              [Difficulty.Easy]: "Easy street skate",
-              [Difficulty.Casual]: "Casual street skate",
-              [Difficulty.Moderate]: "Moderate street skate",
-              [Difficulty.Advanced]: "Advanced street skate",
+              [ScheduleEventDifficulty.Easy]: "Easy street skate",
+              [ScheduleEventDifficulty.Casual]: "Casual street skate",
+              [ScheduleEventDifficulty.Moderate]: "Moderate street skate",
+              [ScheduleEventDifficulty.Advanced]: "Advanced street skate",
             })}
           </span>
         </div>
