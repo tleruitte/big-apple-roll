@@ -1,5 +1,5 @@
-import React from "react";
 import { GatsbyBrowser } from "gatsby";
+import React from "react";
 import { Provider } from "react-redux";
 
 import PageLayout from "./src/components/layouts/pageLayout";

@@ -1,23 +1,23 @@
-import React, { useCallback, useMemo } from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { PayPalButtonCreateOrder, PayPalButtonOnApprove } from "@paypal/paypal-js";
 import {
   PayPalScriptProvider,
   PayPalButtons,
   ReactPayPalScriptOptions,
 } from "@paypal/react-paypal-js";
-import { PayPalButtonCreateOrder, PayPalButtonOnApprove } from "@paypal/paypal-js";
+import { graphql, useStaticQuery } from "gatsby";
+import React, { useCallback, useMemo } from "react";
 
-import * as style from "src/pages/cart.module.css";
-import HeadLayout from "src/components/layouts/headLayout";
 import useAppDispatch from "src/app/hooks/useAppDispatch";
-import ShopNavigation from "src/components/shop/shopNavigation";
-import Image from "src/components/image";
-import TextButton from "src/components/buttons/textButton";
 import cartSlice from "src/app/slices/cart/cartSlice";
-import useCallbackId from "src/components/hooks/useCallbackId";
 import { CartEntryKey } from "src/app/slices/cart/types";
-import useShop, { CartItem } from "src/components/shop/useShop";
+import TextButton from "src/components/buttons/textButton";
+import useCallbackId from "src/components/hooks/useCallbackId";
+import Image from "src/components/image";
+import HeadLayout from "src/components/layouts/headLayout";
 import ShopCounter from "src/components/shop/shopCounter";
+import ShopNavigation from "src/components/shop/shopNavigation";
+import useShop, { CartItem } from "src/components/shop/useShop";
+import * as style from "src/pages/cart.module.css";
 
 // Doc: https://developer.paypal.com/sdk/js/configuration/
 const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {

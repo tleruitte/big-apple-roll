@@ -1,17 +1,17 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import globals from "globals";
-import js from "@eslint/js";
-import typescript from "typescript-eslint";
-import react from "eslint-plugin-react";
-import eslintConfigPrettier from "eslint-config-prettier";
-import eslintPluginImportX from "eslint-plugin-import-x";
 import { includeIgnoreFile } from "@eslint/compat";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
+import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
+import eslintConfigPrettier from "eslint-config-prettier";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
+import eslintPluginImportX from "eslint-plugin-import-x";
+import react from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import globals from "globals";
+import typescript from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,6 +68,9 @@ export default typescript.config(
         "warn",
         {
           "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+          },
         },
       ],
     },

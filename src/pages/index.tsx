@@ -1,9 +1,9 @@
-import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
+import React from "react";
 
-import * as style from "src/pages/index.module.css";
 import Button from "src/components/buttons/button";
 import HeadLayout from "src/components/layouts/headLayout";
+import * as style from "src/pages/index.module.css";
 
 export default function Index() {
   return (

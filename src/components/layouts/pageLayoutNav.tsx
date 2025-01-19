@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 
+import Instagram from "src/components/images/Instagram.svg";
 import * as style from "src/components/layouts/pageLayoutNav.module.css";
 import Link from "src/components/link";
-import Instagram from "src/components/images/Instagram.svg";
 
 type Props = {
   mobile?: boolean;

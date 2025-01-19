@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
+import clsx from "clsx";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import clsx from "clsx";
+import React, { useMemo } from "react";
 
-import * as style from "src/pages/sponsors.module.css";
-import isEnumValue from "src/helpers/isEnumValue";
 import HeadLayout from "src/components/layouts/headLayout";
-import switchOn from "src/helpers/switchOn";
 import { SponsorType } from "src/fragments/sponsors/sponsorFragment";
+import isEnumValue from "src/helpers/isEnumValue";
+import switchOn from "src/helpers/switchOn";
+import * as style from "src/pages/sponsors.module.css";
 
 export default function Sponsors(): React.JSX.Element {
   const data = useStaticQuery<Queries.SponsorsQuery>(graphql`

@@ -1,10 +1,10 @@
-import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import React from "react";
 
-import * as style from "src/pages/schedule.module.css";
-import HeadLayout from "src/components/layouts/headLayout";
 import Button from "src/components/buttons/button";
+import HeadLayout from "src/components/layouts/headLayout";
 import { formatDate } from "src/helpers/date";
+import * as style from "src/pages/schedule.module.css";
 
 export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`

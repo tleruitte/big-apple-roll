@@ -1,11 +1,11 @@
-import React from "react";
 import { graphql, HeadProps, Link, PageProps } from "gatsby";
+import React from "react";
 
-import * as style from "src/templates/scheduleDayTemplate.module.css";
 import HeadLayout from "src/components/layouts/headLayout";
-import { formatDate, formatTime } from "src/helpers/date";
 import Pagination from "src/components/pagination";
+import { formatDate, formatTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
+import * as style from "src/templates/scheduleDayTemplate.module.css";
 
 export type ScheduleDayTemplateContext = {
   scheduleDayId: string;

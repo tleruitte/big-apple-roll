@@ -1,6 +1,6 @@
+import postcssGlobalData from "@csstools/postcss-global-data";
 import type { GatsbyConfig } from "gatsby";
 import postcssCustomMedia from "postcss-custom-media";
-import postcssGlobalData from "@csstools/postcss-global-data";
 
 const config: GatsbyConfig = {
   pathPrefix: "/big-apple-roll",

@@ -1,6 +1,6 @@
-import React from "react";
-import { Link as GatsbyLink } from "gatsby";
 import clsx from "clsx";
+import { Link as GatsbyLink } from "gatsby";
+import React from "react";
 
 import * as style from "src/components/link.module.css";
 
