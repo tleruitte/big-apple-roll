@@ -12,6 +12,7 @@ This repo contains the code for the Big Apple Roll website: https://tleruitte.gi
   - [Install](#install)
   - [Run dev server](#run-dev-server)
   - [Deploy](#deploy)
+  - [Roadmap](#roadmap)
   - [Lint](#lint)
   - [Update dependencies](#update-dependencies)
 
@@ -104,9 +105,17 @@ yarn install
 yarn dev
 ```
 
+- Open [http://localhost:8000](http://localhost:8000)
+- Open [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) to explore GraphQL
+- Hot reloading is enabled in dev
+
 ### Deploy
 
 Just push new commits to `main` and the website will be automatically deployed to GitHub Pages with Github actions.
+
+### Roadmap
+
+The roadmap/open issues is managed in [Height](https://bar.height.app/). (Ask Thibault for access.)
 
 ### Lint
 
