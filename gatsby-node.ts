@@ -2,6 +2,7 @@ import path from "node:path";
 
 import { GatsbyNode } from "gatsby";
 import { createFilePath } from "gatsby-source-filesystem";
+import FilterWarningsPlugin from "webpack-filter-warnings-plugin";
 
 import { ScheduleDayTemplateContext } from "src/templates/scheduleDayTemplate";
 import { ScheduleEventTemplateContext } from "src/templates/scheduleEventTemplate";
@@ -158,4 +159,14 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, getNode, action
       }
     }
   }
+};
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
+      }),
+    ],
+  });
 };
