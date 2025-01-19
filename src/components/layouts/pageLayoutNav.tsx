@@ -3,6 +3,7 @@ import React from "react";
 
 import * as style from "src/components/layouts/pageLayoutNav.module.css";
 import Link from "src/components/link";
+import Instagram from "src/components/images/Instagram.svg";
 
 type Props = {
   mobile?: boolean;
@@ -30,6 +31,14 @@ export default function PageLayoutNav(props: Props): React.JSX.Element | null {
       <Link className={style.navItem} to="/shop/" onClick={onClick}>
         Shop
       </Link>
+      <a
+        className={style.navItemInstagram}
+        href="https://www.instagram.com/bigappleroll/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src={Instagram} width="20" height="20" />
+      </a>
     </nav>
   );
 }

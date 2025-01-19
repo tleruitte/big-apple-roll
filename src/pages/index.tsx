@@ -10,7 +10,7 @@ export default function Index() {
     <>
       <div className={style.logo}>
         <StaticImage
-          src="../images/logo.png"
+          src="../components/images/logo.png"
           alt="Logo"
           placeholder="none"
           layout="constrained"
