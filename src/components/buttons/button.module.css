@@ -7,6 +7,32 @@
   text-transform: uppercase;
   user-select: none;
 
+  & .buttonBanner {
+    background: var(--color-accent-2);
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+
+    & .buttonBannerText {
+      font-size: var(--font-size-2_5);
+      font-weight: var(--font-weight-500);
+    }
+  }
+
+  & .buttonLabel {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-50);
+    text-align: center;
+    overflow: hidden;
+
+    & .buttonLabelText {
+      font-size: var(--font-size-2);
+      font-weight: var(--font-weight-500);
+      letter-spacing: var(--letter-spacing-minus02);
+    }
+  }
+
   &:hover,
   &:active {
     color: var(--color-text-inverted);
@@ -48,34 +74,28 @@
     }
   }
 
-  & .buttonBanner {
-    background: var(--color-accent-2);
-    text-align: center;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-
-    & .buttonBannerText {
-      font-size: var(--font-size-2_5);
-      font-weight: var(--font-weight-500);
-    }
-  }
-
-  & .buttonLabel {
-    flex: 1;
-    padding: var(--spacing-50);
-    text-align: center;
-
-    & .buttonLabelText {
-      font-size: var(--font-size-2);
-      font-weight: var(--font-weight-500);
-      letter-spacing: var(--letter-spacing-minus02);
-    }
-
-    .is-large & {
+  &.is-large {
+    & .buttonLabel {
       padding: var(--spacing-2);
 
       & .buttonLabelText {
         font-size: var(--font-size-5);
+      }
+    }
+  }
+}
+
+@media (--phone-breakpoint) {
+  .button .buttonBanner .buttonBannerText {
+    font-size: var(--font-size-1_5);
+  }
+
+  .button.is-large {
+    & .buttonLabel {
+      padding: var(--spacing-1);
+
+      & .buttonLabelText {
+        font-size: var(--font-size-3);
       }
     }
   }

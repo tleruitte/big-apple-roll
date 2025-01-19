@@ -67,7 +67,7 @@ export default function ScheduleDayTemplate(
 
           return (
             <div key={node.id} className={style.event}>
-              <div className={style.eventTime}>
+              <div>
                 <span className={style.eventTimeText}>{formatTime(date)}</span>
               </div>
               <div className={style.eventSeparator}></div>

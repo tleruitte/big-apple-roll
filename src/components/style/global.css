@@ -34,6 +34,20 @@ h3 {
   color: var(--color-accent-3);
 }
 
+@media (--phone-breakpoint) {
+  h1 {
+    font-size: var(--font-size-2);
+  }
+
+  h2 {
+    font-size: var(--font-size-1_5);
+  }
+
+  h3 {
+    font-size: var(--font-size-1_25);
+  }
+}
+
 a {
   color: var(--color-text);
 

@@ -8,6 +8,7 @@ import store from "src/app/store";
 
 import "./src/components/style/variables/color.css";
 import "./src/components/style/variables/font.css";
+import "./src/components/style/variables/media.css";
 import "./src/components/style/variables/spacing.css";
 import "./src/components/style/global.css";
 

@@ -1,8 +1,11 @@
 import clsx from "clsx";
-import { graphql, Link, useStaticQuery } from "gatsby";
-import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import React, { useCallback, useState } from "react";
 
+import Icon, { IconName } from "src/components/icon";
 import * as style from "src/components/layouts/pageLayout.module.css";
+import PageLayoutNav from "src/components/layouts/pageLayoutNav";
+import Link from "src/components/link";
 
 type Props = {
   children: React.ReactNode;
@@ -21,30 +24,47 @@ export default function PageLayout(props: Props): React.JSX.Element {
     }
   `);
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleClickMenu = useCallback(() => {
+    setShowMenu(true);
+  }, []);
+
+  const handleCloseMenu = useCallback(() => {
+    setShowMenu(false);
+  }, []);
+
   return (
     <>
       <header className={style.header}>
         <div className={clsx(style.headerContent, style.content)}>
-          <Link to="/" className={style.headerLogo} draggable={false}>
+          <Link to="/" className={style.headerLogo}>
             {data.site?.siteMetadata?.title ?? ""}
           </Link>
-          <nav className={style.headerNav}>
-            <Link to="/schedule/" className={style.headerNavItem} draggable={false}>
-              Schedule
+          <div className={style.desktopNav}>
+            <PageLayoutNav />
+          </div>
+          <div className={style.mobileMenu}>
+            <Link onClick={handleClickMenu}>
+              <Icon name={IconName.Menu} />
             </Link>
-            <Link to="/hotel/" className={style.headerNavItem} draggable={false}>
-              Hotel
-            </Link>
-            <Link to="/sponsors/" className={style.headerNavItem} draggable={false}>
-              Sponsors
-            </Link>
-            <Link to="/shop/" className={style.headerNavItem} draggable={false}>
-              Shop
-            </Link>
-          </nav>
+          </div>
         </div>
       </header>
       <main className={clsx(style.main, style.content)}>{children}</main>
+      {showMenu ? (
+        <div className={style.mobileNav}>
+          <div className={style.mobileNavClose}>
+            <Link onClick={handleCloseMenu}>
+              <Icon name={IconName.Close} />
+            </Link>
+          </div>
+          <Link className={style.headerLogo} to="/" onClick={handleCloseMenu}>
+            {data.site?.siteMetadata?.title ?? ""}
+          </Link>
+          <PageLayoutNav mobile onClick={handleCloseMenu} />
+        </div>
+      ) : null}
     </>
   );
 }

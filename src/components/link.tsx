@@ -1,5 +1,8 @@
 import React from "react";
 import { Link as GatsbyLink } from "gatsby";
+import clsx from "clsx";
+
+import * as style from "src/components/link.module.css";
 
 type Props = {
   className?: string;
@@ -14,14 +17,20 @@ export default function Link(props: Props): React.JSX.Element | null {
 
   if (!to) {
     return (
-      <span className={className} data-id={id} onClick={onClick}>
+      <span className={clsx(style.link, className)} data-id={id} onClick={onClick}>
         {children}
       </span>
     );
   }
 
   return (
-    <GatsbyLink to={to} className={className} data-id={id} draggable={false} onClick={onClick}>
+    <GatsbyLink
+      to={to}
+      className={clsx(style.link, className)}
+      data-id={id}
+      draggable={false}
+      onClick={onClick}
+    >
       {children}
     </GatsbyLink>
   );

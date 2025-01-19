@@ -13,7 +13,7 @@ export default function Index() {
           src="../images/logo.png"
           alt="Logo"
           placeholder="none"
-          layout="fixed"
+          layout="constrained"
           width={500}
         />
       </div>

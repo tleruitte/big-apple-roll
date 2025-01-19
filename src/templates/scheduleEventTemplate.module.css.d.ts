@@ -9,7 +9,7 @@ export const details: string;
 export const detailsList: string;
 export const detailsListTerm: string;
 export const detailsListDescription: string;
-export const detailsMap: string;
 export const detailsMapFrame: string;
 export const description: string;
+export const routeMapFrame: string;
 export const pagination: string;

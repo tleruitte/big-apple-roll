@@ -116,7 +116,7 @@ export default function ScheduleEventTemplate(
           ) : null}
         </dl>
         {scheduleEvent.frontmatter.start_map ? (
-          <div className={style.detailsMap}>
+          <div>
             <iframe
               className={style.detailsMapFrame}
               src={scheduleEvent.frontmatter.start_map}
@@ -133,7 +133,12 @@ export default function ScheduleEventTemplate(
       {scheduleEvent.frontmatter.route_map ? (
         <>
           <h3>Route map</h3>
-          <iframe src={scheduleEvent.frontmatter.route_map} width="640" height="480"></iframe>
+          <iframe
+            className={style.routeMapFrame}
+            src={scheduleEvent.frontmatter.route_map}
+            width="640"
+            height="480"
+          ></iframe>
         </>
       ) : null}
       <div className={style.pagination}>

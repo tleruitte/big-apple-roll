@@ -1787,6 +1787,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@csstools/cascade-layer-name-parser@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@csstools/cascade-layer-name-parser@npm:2.0.4"
+  peerDependencies:
+    "@csstools/css-parser-algorithms": ^3.0.4
+    "@csstools/css-tokenizer": ^3.0.3
+  checksum: 10c0/774f2bcc96a576183853191bdfd31df15e22c51901ee01678ee47f1d1afcb4ab0e6d9a78e08f7383ac089c7e0b390013633f45ff1f1d577c9aefd252589bcced
+  languageName: node
+  linkType: hard
+
 "@csstools/css-parser-algorithms@npm:^3.0.4":
   version: 3.0.4
   resolution: "@csstools/css-parser-algorithms@npm:3.0.4"
@@ -1810,6 +1820,15 @@ __metadata:
     "@csstools/css-parser-algorithms": ^3.0.4
     "@csstools/css-tokenizer": ^3.0.3
   checksum: 10c0/5d008a70f5d4fd96224066a433f5cdefa76cfd78a74416a20d6d5b2bb1bc8282b140e8373015d807d4dadb91daf3deb73eb13f853ec4e0479d0cb92e80c6f20d
+  languageName: node
+  linkType: hard
+
+"@csstools/postcss-global-data@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@csstools/postcss-global-data@npm:3.0.0"
+  peerDependencies:
+    postcss: ^8.4
+  checksum: 10c0/9c40b07c3c01c4736fca7835297685c5f865a93973d02214bcd9ed1300884fb2dcbb491afccf1e9a971e628340886be83f853b7a86ad51a104031440aad9dbcf
   languageName: node
   linkType: hard
 
@@ -6378,6 +6397,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig@npm:^8.3.5":
+  version: 8.3.6
+  resolution: "cosmiconfig@npm:8.3.6"
+  dependencies:
+    import-fresh: "npm:^3.3.0"
+    js-yaml: "npm:^4.1.0"
+    parse-json: "npm:^5.2.0"
+    path-type: "npm:^4.0.0"
+  peerDependencies:
+    typescript: ">=4.9.5"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/0382a9ed13208f8bfc22ca2f62b364855207dffdb73dc26e150ade78c3093f1cf56172df2dd460c8caf2afa91c0ed4ec8a88c62f8f9cd1cf423d26506aa8797a
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^9.0.0":
   version: 9.0.0
   resolution: "cosmiconfig@npm:9.0.0"
@@ -9146,6 +9182,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-postcss@npm:^6.14.0":
+  version: 6.14.0
+  resolution: "gatsby-plugin-postcss@npm:6.14.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.20.13"
+    postcss-loader: "npm:^7.3.4"
+  peerDependencies:
+    gatsby: ^5.0.0-next
+    postcss: ^8.0.5
+  checksum: 10c0/4618c52830d2296ba9b52c95e0155836c07c90e2b6eca216bf5f0a460201d53e6c79e8ee6613194ecc180511ff9cc1ee357d021cbe7269ba7bb1ad8d95b816ab
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-robots-txt@npm:^1.8.0":
   version: 1.8.0
   resolution: "gatsby-plugin-robots-txt@npm:1.8.0"
@@ -11328,6 +11377,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jiti@npm:^1.20.0":
+  version: 1.21.7
+  resolution: "jiti@npm:1.21.7"
+  bin:
+    jiti: bin/jiti.js
+  checksum: 10c0/77b61989c758ff32407cdae8ddc77f85e18e1a13fc4977110dbd2e05fc761842f5f71bce684d9a01316e1c4263971315a111385759951080bbfe17cbb5de8f7a
+  languageName: node
+  linkType: hard
+
 "joi@npm:^17.11.0, joi@npm:^17.9.2":
   version: 17.13.3
   resolution: "joi@npm:17.13.3"
@@ -11917,6 +11975,7 @@ __metadata:
   resolution: "main@workspace:."
   dependencies:
     "@babel/core": "npm:^7.26.0"
+    "@csstools/postcss-global-data": "npm:^3.0.0"
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/js": "npm:^9.17.0"
     "@paypal/react-paypal-js": "npm:^8.8.1"
@@ -11945,6 +12004,7 @@ __metadata:
     gatsby-omni-font-loader: "npm:^2.0.2"
     gatsby-plugin-dts-css-modules: "npm:^3.0.0"
     gatsby-plugin-image: "npm:^3.14.0"
+    gatsby-plugin-postcss: "npm:^6.14.0"
     gatsby-plugin-robots-txt: "npm:^1.8.0"
     gatsby-plugin-root-import: "npm:^2.0.9"
     gatsby-plugin-sharp: "npm:^5.14.0"
@@ -11954,6 +12014,8 @@ __metadata:
     globals: "npm:^15.14.0"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.5.0"
+    postcss: "npm:^8.5.1"
+    postcss-custom-media: "npm:^11.0.5"
     prettier: "npm:3.4.2"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
@@ -12750,7 +12812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.7":
+"nanoid@npm:^3.3.7, nanoid@npm:^3.3.8":
   version: 3.3.8
   resolution: "nanoid@npm:3.3.8"
   bin:
@@ -13725,6 +13787,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-custom-media@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "postcss-custom-media@npm:11.0.5"
+  dependencies:
+    "@csstools/cascade-layer-name-parser": "npm:^2.0.4"
+    "@csstools/css-parser-algorithms": "npm:^3.0.4"
+    "@csstools/css-tokenizer": "npm:^3.0.3"
+    "@csstools/media-query-list-parser": "npm:^4.0.2"
+  peerDependencies:
+    postcss: ^8.4
+  checksum: 10c0/5ba1ca0383818e83d5f6f398a2b0c12cfda066b5d552adfc0e030a2c5f8690c2cc6224f9a1832a9c780dae3fd8d00d78c4a5c88eb36b731da1752f0c3917d488
+  languageName: node
+  linkType: hard
+
 "postcss-discard-comments@npm:^5.1.2":
   version: 5.1.2
   resolution: "postcss-discard-comments@npm:5.1.2"
@@ -13781,6 +13857,20 @@ __metadata:
     postcss: ^7.0.0 || ^8.0.1
     webpack: ^5.0.0
   checksum: 10c0/710c9913a24d2963bbca5a90c44fdf06a4c06b2771089d3079765f1ef7e5f0a653a9854afea7b5fd05c954530fe3c8a25c8d570c5403f6f6914617be1fed0502
+  languageName: node
+  linkType: hard
+
+"postcss-loader@npm:^7.3.4":
+  version: 7.3.4
+  resolution: "postcss-loader@npm:7.3.4"
+  dependencies:
+    cosmiconfig: "npm:^8.3.5"
+    jiti: "npm:^1.20.0"
+    semver: "npm:^7.5.4"
+  peerDependencies:
+    postcss: ^7.0.0 || ^8.0.1
+    webpack: ^5.0.0
+  checksum: 10c0/1bf7614aeea9ad1f8ee6be3a5451576c059391688ea67f825aedc2674056369597faeae4e4a81fe10843884c9904a71403d9a54197e1f560e8fbb9e61f2a2680
   languageName: node
   linkType: hard
 
@@ -14121,6 +14211,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/f1b3f17aaf36d136f59ec373459f18129908235e65dbdc3aee5eef8eba0756106f52de5ec4682e29a2eab53eb25170e7e871b3e4b52a8f1de3d344a514306be3
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.1":
+  version: 8.5.1
+  resolution: "postcss@npm:8.5.1"
+  dependencies:
+    nanoid: "npm:^3.3.8"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/c4d90c59c98e8a0c102b77d3f4cac190f883b42d63dc60e2f3ed840f16197c0c8e25a4327d2e9a847b45a985612317dc0534178feeebd0a1cf3eb0eecf75cae4
   languageName: node
   linkType: hard
 

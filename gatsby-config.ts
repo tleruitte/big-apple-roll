@@ -1,4 +1,6 @@
 import type { GatsbyConfig } from "gatsby";
+import postcssCustomMedia from "postcss-custom-media";
+import postcssGlobalData from "@csstools/postcss-global-data";
 
 const config: GatsbyConfig = {
   pathPrefix: "/big-apple-roll",
@@ -22,11 +24,24 @@ const config: GatsbyConfig = {
             name: "Oswald",
             file: "https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap",
           },
+          {
+            name: "Material Symbols Outlined",
+            file: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined",
+          },
+        ],
+      },
+    },
+    "gatsby-plugin-image",
+    {
+      resolve: "gatsby-plugin-postcss",
+      options: {
+        postCssPlugins: [
+          postcssGlobalData({ files: ["./src/components/style/variables/media.css"] }),
+          postcssCustomMedia(),
         ],
       },
     },
     "gatsby-plugin-dts-css-modules",
-    "gatsby-plugin-image",
     "gatsby-plugin-root-import",
     "gatsby-plugin-sharp",
     {
