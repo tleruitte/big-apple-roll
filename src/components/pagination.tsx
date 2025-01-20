@@ -20,7 +20,7 @@ export default function Pagination(props: Props): React.JSX.Element {
         <div className={style.paginationPrevious}>
           <TextButton internalHref={previousSlug}>
             <span className={style.paginationText}>
-              <Icon name={IconName.ArrowLeft} /> {previousTitle}
+              <Icon name={IconName.ArrowLeft} size="small" /> {previousTitle}
             </span>
           </TextButton>
         </div>
@@ -29,7 +29,7 @@ export default function Pagination(props: Props): React.JSX.Element {
         <div className={style.paginationNext}>
           <TextButton internalHref={nextSlug}>
             <span className={style.paginationText}>
-              {nextTitle} <Icon name={IconName.ArrowRight} />
+              {nextTitle} <Icon name={IconName.ArrowRight} size="small" />
             </span>
           </TextButton>
         </div>

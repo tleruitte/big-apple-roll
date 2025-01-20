@@ -10,4 +10,8 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+
+  &.is-small {
+    font-size: 16px;
+  }
 }

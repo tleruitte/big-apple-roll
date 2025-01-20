@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 import * as style from "src/components/icon.module.css";
@@ -15,17 +16,20 @@ export enum IconName {
 
 type Props = {
   name: IconName;
+  size?: "regular" | "small";
 };
 
 export default function Icon(props: Props): React.JSX.Element | null {
-  const { name } = props;
+  const { name, size } = props;
 
   switch (name) {
     case IconName.ArrowLeft:
     case IconName.ArrowRight:
     case IconName.Close:
     case IconName.Menu: {
-      return <span className={style.icon}>{name}</span>;
+      return (
+        <span className={clsx(style.icon, { [style.isSmall]: size === "small" })}>{name}</span>
+      );
     }
     case IconName.Instagram: {
       return <img src={Instagram} width="20" height="20" />;
