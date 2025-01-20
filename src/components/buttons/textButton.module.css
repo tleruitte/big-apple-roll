@@ -3,6 +3,10 @@
   cursor: pointer;
   user-select: none;
 
+  &.is-current {
+    color: var(--color-accent-1);
+  }
+
   &:hover {
     color: var(--color-accent-3);
   }

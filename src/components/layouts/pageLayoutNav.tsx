@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { PageProps } from "gatsby";
 import React from "react";
 
 import IconButton from "src/components/buttons/iconButton";
@@ -7,12 +8,13 @@ import { IconName } from "src/components/icon";
 import * as style from "src/components/layouts/pageLayoutNav.module.css";
 
 type Props = {
+  location: PageProps["location"];
   mobile?: boolean;
   onClick?: React.MouseEventHandler;
 };
 
 export default function PageLayoutNav(props: Props): React.JSX.Element | null {
-  const { mobile, onClick } = props;
+  const { location, mobile, onClick } = props;
 
   return (
     <nav
@@ -20,16 +22,16 @@ export default function PageLayoutNav(props: Props): React.JSX.Element | null {
         [style.isMobile]: mobile,
       })}
     >
-      <TextButton internalHref="/schedule/" onClick={onClick}>
+      <TextButton internalHref="/schedule/" location={location} onClick={onClick}>
         Schedule
       </TextButton>
-      <TextButton internalHref="/hotel/" onClick={onClick}>
+      <TextButton internalHref="/hotel/" location={location} onClick={onClick}>
         Hotel
       </TextButton>
-      <TextButton internalHref="/sponsors/" onClick={onClick}>
+      <TextButton internalHref="/sponsors/" location={location} onClick={onClick}>
         Sponsors
       </TextButton>
-      <TextButton internalHref="/shop/" onClick={onClick}>
+      <TextButton internalHref="/shop/" location={location} onClick={onClick}>
         Shop
       </TextButton>
       <IconButton

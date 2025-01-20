@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 import * as style from "src/components/buttons/textButton.module.css";
@@ -10,10 +11,16 @@ type Props = {
 export default function TextButton(props: Props): React.JSX.Element {
   const { children } = props;
 
-  const { id, handleClick } = useButton(props);
+  const { id, isCurrent, handleClick } = useButton(props);
 
   return (
-    <div className={style.textButton} id={id} onClick={handleClick}>
+    <div
+      className={clsx(style.textButton, {
+        [style.isCurrent]: isCurrent,
+      })}
+      id={id}
+      onClick={handleClick}
+    >
       <div className={style.textButtonText}>{children}</div>
     </div>
   );

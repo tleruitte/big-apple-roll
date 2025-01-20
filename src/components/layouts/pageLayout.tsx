@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, PageProps, useStaticQuery } from "gatsby";
 import React, { useCallback, useState } from "react";
 
 import Button from "src/components/buttons/button";
@@ -12,8 +12,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function PageLayout(props: Props): React.JSX.Element {
-  const { children } = props;
+export default function PageLayout(props: Omit<PageProps, "children"> & Props): React.JSX.Element {
+  const { location, children } = props;
 
   const data = useStaticQuery<Queries.LayoutQuery>(graphql`
     query Layout {
@@ -43,7 +43,7 @@ export default function PageLayout(props: Props): React.JSX.Element {
             <span className={style.headerLogo}>{data.site?.siteMetadata?.title ?? ""}</span>
           </Button>
           <div className={style.desktopNav}>
-            <PageLayoutNav />
+            <PageLayoutNav location={location} />
           </div>
           <div className={style.mobileMenu}>
             <IconButton iconName={IconName.Menu} onClick={handleClickMenu}></IconButton>
@@ -59,7 +59,7 @@ export default function PageLayout(props: Props): React.JSX.Element {
           <Button internalHref="/" onClick={handleCloseMenu}>
             <span className={style.headerLogo}>{data.site?.siteMetadata?.title ?? ""}</span>
           </Button>
-          <PageLayoutNav mobile onClick={handleCloseMenu} />
+          <PageLayoutNav location={location} mobile onClick={handleCloseMenu} />
         </div>
       ) : null}
     </>

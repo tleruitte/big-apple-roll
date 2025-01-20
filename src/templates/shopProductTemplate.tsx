@@ -112,7 +112,7 @@ export default function ShopProductTemplate(
         <div className={style.shopProductDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopProduct.html ?? "" }}></div>
           <div>
-            <SurfaceButton internalHref="/cart/" color={buttonColor} onClick={handleAddToCart}>
+            <SurfaceButton internalHref="/shop/cart/" color={buttonColor} onClick={handleAddToCart}>
               Add to cart
             </SurfaceButton>
           </div>

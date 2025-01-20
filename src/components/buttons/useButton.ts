@@ -1,15 +1,16 @@
-import { navigate } from "gatsby";
-import { useCallback } from "react";
+import { navigate, PageProps } from "gatsby";
+import { useCallback, useMemo } from "react";
 
 export type ButtonProps = {
   id?: string;
   internalHref?: string | null;
+  location?: PageProps["location"];
   externalHref?: string | null;
   onClick?: React.MouseEventHandler;
 };
 
 const useButton = (props: ButtonProps) => {
-  const { id, internalHref, externalHref, onClick } = props;
+  const { id, internalHref, location, externalHref, onClick } = props;
 
   const handleClick = useCallback(
     (event: React.MouseEvent) => {
@@ -26,8 +27,13 @@ const useButton = (props: ButtonProps) => {
     [internalHref, externalHref, onClick],
   );
 
+  const isCurrent = useMemo(() => {
+    return internalHref && location?.pathname.startsWith(internalHref);
+  }, [internalHref, location?.pathname]);
+
   return {
     id,
+    isCurrent,
     handleClick,
   };
 };

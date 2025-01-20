@@ -15,7 +15,7 @@ export default function ShopNavigation(props: Props): React.JSX.Element | null {
     <Pagination
       previousSlug={goToShop ? "/shop/" : undefined}
       previousTitle={goToShop ? "Shop" : undefined}
-      nextSlug={goToCart ? "/cart/" : undefined}
+      nextSlug={goToCart ? "/shop/cart/" : undefined}
       nextTitle={goToCart ? `Cart${cartItemCount ? ` (${cartItemCount})` : ""}` : undefined}
     />
   );

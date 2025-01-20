@@ -17,7 +17,7 @@ import HeadLayout from "src/components/layouts/headLayout";
 import ShopCounter from "src/components/shop/shopCounter";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop, { CartItem } from "src/components/shop/useShop";
-import * as style from "src/pages/cart.module.css";
+import * as style from "src/pages/shop/cart.module.css";
 
 // Doc: https://developer.paypal.com/sdk/js/configuration/
 const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
