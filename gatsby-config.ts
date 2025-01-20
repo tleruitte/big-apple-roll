@@ -1,6 +1,4 @@
-import postcssGlobalData from "@csstools/postcss-global-data";
 import type { GatsbyConfig } from "gatsby";
-import postcssCustomMedia from "postcss-custom-media";
 
 const config: GatsbyConfig = {
   pathPrefix: "/big-apple-roll",
@@ -32,15 +30,7 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-image",
-    {
-      resolve: "gatsby-plugin-postcss",
-      options: {
-        postCssPlugins: [
-          postcssGlobalData({ files: ["./src/components/style/variables/media.css"] }),
-          postcssCustomMedia(),
-        ],
-      },
-    },
+    "gatsby-plugin-postcss",
     "gatsby-plugin-dts-css-modules", // Must be after gatsby-plugin-postcss, component must be imported for types to be generated
     "gatsby-plugin-root-import",
     "gatsby-plugin-sharp",

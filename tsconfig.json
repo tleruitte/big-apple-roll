@@ -1,10 +1,5 @@
 {
-  "include": [
-    "src/**/*",
-    "./gatsby-browser.tsx",
-    "./gatsby-config.ts",
-    "./gatsby-node.ts"
-  ],
+  "include": ["src/**/*", "./gatsby-browser.tsx", "./gatsby-config.ts", "./gatsby-node.ts"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
