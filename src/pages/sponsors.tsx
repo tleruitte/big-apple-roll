@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 
+import Image from "src/components/image";
 import HeadLayout from "src/components/layouts/headLayout";
 import { SponsorType } from "src/fragments/sponsors/sponsorFragment";
 import isEnumValue from "src/helpers/isEnumValue";
@@ -132,12 +132,10 @@ export default function Sponsors(): React.JSX.Element {
                   >
                     {sponsorLogo.type === "image" &&
                     sponsorLogo.node.childImageSharp?.gatsbyImageData ? (
-                      <GatsbyImage
+                      <Image
                         className={style.sponsorLogo}
                         image={sponsorLogo.node.childImageSharp.gatsbyImageData}
                         alt={title}
-                        objectFit="contain"
-                        sizes=""
                       />
                     ) : null}
                     {sponsorLogo.type === "svg" ? (
