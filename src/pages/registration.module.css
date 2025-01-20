@@ -1,0 +1,30 @@
+.form {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) 0;
+}
+
+.label {
+  display: contents;
+}
+
+.label-label {
+  &.is-required::after {
+    content: " *";
+    color: var(--color-accent-1);
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--spacing-2) 0;
+}
+
+.footerRight {
+  display: flex;
+  gap: var(--spacing-2);
+}

@@ -50,3 +50,7 @@ export const formatDateTime = (date: string): string => {
     hour: "numeric",
   });
 };
+
+export const currentDateInput = () => {
+  return DateTime.now().toFormat("yyyy-MM-dd");
+};

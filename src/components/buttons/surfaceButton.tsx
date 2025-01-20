@@ -9,7 +9,7 @@ export type SurfaceButtonColor = "accent1" | "accent2" | "accent3";
 
 type Props = {
   color?: SurfaceButtonColor;
-  size?: "large";
+  size?: "small" | "large";
   banner?: string;
   children: React.ReactNode;
 } & ButtonProps;
@@ -17,7 +17,7 @@ type Props = {
 export default function SurfaceButton(props: Props): React.JSX.Element {
   const { color = "accent1", size, banner, children } = props;
 
-  const { id, handleClick } = useButton(props);
+  const { id, disabled, handleClick } = useButton(props);
 
   return (
     <div
@@ -30,9 +30,13 @@ export default function SurfaceButton(props: Props): React.JSX.Element {
         }),
         size
           ? switchOn(size, {
+              small: style.isSmall,
               large: style.isLarge,
             })
           : null,
+        {
+          [style.isDisabled]: disabled,
+        },
       )}
       data-id={id}
       onClick={handleClick}

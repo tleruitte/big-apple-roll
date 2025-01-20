@@ -19,8 +19,8 @@ export default function Index() {
       </div>
       <h2 className={style.date}>August 1-4, 2024</h2>
       <div className={style.menu}>
-        <SurfaceButton internalHref="/schedule/">Schedule</SurfaceButton>
         <SurfaceButton internalHref="/hotel/">Book a room</SurfaceButton>
+        <SurfaceButton internalHref="/registration/">Register</SurfaceButton>
       </div>
     </>
   );

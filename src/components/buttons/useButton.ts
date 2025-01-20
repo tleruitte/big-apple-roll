@@ -6,14 +6,19 @@ export type ButtonProps = {
   internalHref?: string | null;
   location?: PageProps["location"];
   externalHref?: string | null;
+  disabled?: boolean;
   onClick?: React.MouseEventHandler;
 };
 
 const useButton = (props: ButtonProps) => {
-  const { id, internalHref, location, externalHref, onClick } = props;
+  const { id, internalHref, location, externalHref, disabled, onClick } = props;
 
   const handleClick = useCallback(
     (event: React.MouseEvent) => {
+      if (disabled) {
+        return;
+      }
+
       if (internalHref !== undefined && internalHref !== null) {
         navigate(internalHref);
       }
@@ -24,7 +29,7 @@ const useButton = (props: ButtonProps) => {
 
       onClick?.(event);
     },
-    [internalHref, externalHref, onClick],
+    [disabled, internalHref, externalHref, onClick],
   );
 
   const isCurrent = useMemo(() => {
@@ -33,6 +38,7 @@ const useButton = (props: ButtonProps) => {
 
   return {
     id,
+    disabled,
     isCurrent,
     handleClick,
   };
