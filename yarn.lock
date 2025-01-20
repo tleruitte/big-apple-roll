@@ -12016,6 +12016,7 @@ __metadata:
     luxon: "npm:^3.5.0"
     postcss: "npm:^8.5.1"
     postcss-custom-media: "npm:^11.0.5"
+    postcss-hover-media-feature: "npm:^1.0.2"
     prettier: "npm:3.4.2"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
@@ -13844,6 +13845,17 @@ __metadata:
   peerDependencies:
     postcss: ^8.1.4
   checksum: 10c0/b413f73cc3c005f33479df95e1357467c28183e62ba8b25e06b8590b2a69e60d624f07824c0ff85fb1dfdd5bb7dfa321dad0885d42ec3c8f000669960b30894f
+  languageName: node
+  linkType: hard
+
+"postcss-hover-media-feature@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "postcss-hover-media-feature@npm:1.0.2"
+  dependencies:
+    postcss-selector-parser: "npm:^6.0.4"
+  peerDependencies:
+    postcss: ^8.0.0
+  checksum: 10c0/3a412e6362e59122c9d81f99b778df0a461c34a9c871bed4630c31956ed2cd53cd2e7e48ee4a3242ba8d1a267dad38270ac45dda4d5b338c4697b456ff579ae4
   languageName: node
   linkType: hard
 

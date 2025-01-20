@@ -6,6 +6,7 @@ const config = {
       files: ["./src/components/style/variables/media.css"],
     }),
     require("postcss-custom-media")(),
+    require("postcss-hover-media-feature"),
   ],
 };
 
