@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
-import Button from "src/components/buttons/button";
+import SurfaceButton from "src/components/buttons/surfaceButton";
 import HeadLayout from "src/components/layouts/headLayout";
 import { formatDate } from "src/helpers/date";
 import * as style from "src/pages/schedule.module.css";
@@ -30,14 +30,14 @@ export default function Schedule(): React.JSX.Element {
 
         return (
           <div key={node.id}>
-            <Button
+            <SurfaceButton
               color={pre_bar ? "accent3" : undefined}
               size="large"
-              to={node.slug}
+              internalHref={node.slug}
               banner={pre_bar ? "Pre bar" : formatDate(date, { format: "short" })}
             >
               {title}
-            </Button>
+            </SurfaceButton>
           </div>
         );
       })}

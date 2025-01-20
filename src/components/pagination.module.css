@@ -5,10 +5,12 @@
 
   & .paginationPrevious {
     grid-column: 1 / 2;
+    justify-self: start;
   }
 
   & .paginationNext {
     grid-column: 2 / 3;
+    justify-self: end;
     text-align: right;
   }
 }

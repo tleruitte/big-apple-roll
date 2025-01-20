@@ -1,102 +1,13 @@
 .button {
-  display: flex;
-  align-items: stretch;
-  color: var(--color-text-inverted);
-  font-family: var(--font-family-oswald);
-  text-decoration: none;
-  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
   user-select: none;
 
-  & .buttonBanner {
-    background: var(--color-accent-2);
-    text-align: center;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-
-    & .buttonBannerText {
-      font-size: var(--font-size-2_5);
-      font-weight: var(--font-weight-500);
-    }
+  &:hover {
+    color: var(--color-accent-3);
   }
 
-  & .buttonLabel {
-    flex: 1;
-    min-width: 0;
-    padding: var(--spacing-50);
-    text-align: center;
-    overflow: hidden;
-
-    & .buttonLabelText {
-      font-size: var(--font-size-2);
-      font-weight: var(--font-weight-500);
-      letter-spacing: var(--letter-spacing-minus02);
-    }
-  }
-
-  &:hover,
   &:active {
-    color: var(--color-text-inverted);
-  }
-
-  &.is-accent1 {
-    background: var(--color-accent-1);
-
-    &:hover {
-      background: var(--color-accent-3);
-    }
-
-    &:active {
-      background: var(--color-accent-2);
-    }
-  }
-
-  &.is-accent2 {
-    background: var(--color-accent-2);
-
-    &:hover {
-      background: var(--color-accent-1);
-    }
-
-    &:active {
-      background: var(--color-accent-3);
-    }
-  }
-
-  &.is-accent3 {
-    background: var(--color-accent-3);
-
-    &:hover {
-      background: var(--color-accent-2);
-    }
-
-    &:active {
-      background: var(--color-accent-1);
-    }
-  }
-
-  &.is-large {
-    & .buttonLabel {
-      padding: var(--spacing-2);
-
-      & .buttonLabelText {
-        font-size: var(--font-size-5);
-      }
-    }
-  }
-}
-
-@media (--phone-breakpoint) {
-  .button .buttonBanner .buttonBannerText {
-    font-size: var(--font-size-1_5);
-  }
-
-  .button.is-large {
-    & .buttonLabel {
-      padding: var(--spacing-1);
-
-      & .buttonLabelText {
-        font-size: var(--font-size-3);
-      }
-    }
+    color: var(--color-accent-2);
   }
 }

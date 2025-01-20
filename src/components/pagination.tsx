@@ -17,12 +17,12 @@ export default function Pagination(props: Props): React.JSX.Element {
     <div className={style.pagination}>
       {previousSlug && previousTitle ? (
         <div className={style.paginationPrevious}>
-          <TextButton to={previousSlug}>← {previousTitle}</TextButton>
+          <TextButton internalHref={previousSlug}>← {previousTitle}</TextButton>
         </div>
       ) : null}
       {nextSlug && nextTitle ? (
         <div className={style.paginationNext}>
-          <TextButton to={nextSlug}>{nextTitle} →</TextButton>
+          <TextButton internalHref={nextSlug}>{nextTitle} →</TextButton>
         </div>
       ) : null}
     </div>

@@ -64,6 +64,16 @@ a {
   }
 }
 
+button {
+  margin: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+}
+
 iframe {
   border: none;
 }

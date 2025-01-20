@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from "react";
 
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import cartSlice from "src/app/slices/cart/cartSlice";
-import Button, { ButtonColor } from "src/components/buttons/button";
+import SurfaceButton, { SurfaceButtonColor } from "src/components/buttons/surfaceButton";
 import Image from "src/components/image";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop from "src/components/shop/useShop";
@@ -59,7 +59,7 @@ export default function ShopProductTemplate(
 
   const { cartItemCount } = useShop(shopProducts, shopProductsImages);
 
-  const buttonColor = useMemo((): ButtonColor | undefined => {
+  const buttonColor = useMemo((): SurfaceButtonColor | undefined => {
     if (
       shopProduct?.frontmatter?.button_color &&
       isEnumValue(shopProduct.frontmatter.button_color, ShopProductButtonColor)
@@ -112,9 +112,9 @@ export default function ShopProductTemplate(
         <div className={style.shopProductDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopProduct.html ?? "" }}></div>
           <div>
-            <Button to="/cart/" color={buttonColor} onClick={handleAddToCart}>
+            <SurfaceButton internalHref="/cart/" color={buttonColor} onClick={handleAddToCart}>
               Add to cart
-            </Button>
+            </SurfaceButton>
           </div>
           <div>
             <p>T-shirts must be picked-up during registration on Friday or Saturday.</p>

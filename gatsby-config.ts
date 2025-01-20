@@ -41,7 +41,7 @@ const config: GatsbyConfig = {
         ],
       },
     },
-    "gatsby-plugin-dts-css-modules",
+    "gatsby-plugin-dts-css-modules", // Must be after gatsby-plugin-postcss, component must be imported for types to be generated
     "gatsby-plugin-root-import",
     "gatsby-plugin-sharp",
     {

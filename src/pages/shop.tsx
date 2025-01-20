@@ -1,9 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
+import Button from "src/components/buttons/button";
 import Image from "src/components/image";
 import HeadLayout from "src/components/layouts/headLayout";
-import Link from "src/components/link";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop from "src/components/shop/useShop";
 import * as style from "src/pages/shop.module.css";
@@ -44,7 +44,7 @@ export default function Shop(): React.JSX.Element {
 
           return (
             <div key={shopProductNode.id}>
-              <Link className={style.shopProductLink} to={shopProductNode.slug}>
+              <Button internalHref={shopProductNode.slug}>
                 <Image
                   className={style.shopProductImage}
                   image={
@@ -55,7 +55,7 @@ export default function Shop(): React.JSX.Element {
                 />
                 <div>{shopProductNode.frontmatter.title}</div>
                 <div>${shopProductNode.frontmatter.price}</div>
-              </Link>
+              </Button>
             </div>
           );
         })}

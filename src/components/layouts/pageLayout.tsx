@@ -2,10 +2,11 @@ import clsx from "clsx";
 import { graphql, useStaticQuery } from "gatsby";
 import React, { useCallback, useState } from "react";
 
-import Icon, { IconName } from "src/components/icon";
+import Button from "src/components/buttons/button";
+import IconButton from "src/components/buttons/iconButton";
+import { IconName } from "src/components/icon";
 import * as style from "src/components/layouts/pageLayout.module.css";
 import PageLayoutNav from "src/components/layouts/pageLayoutNav";
-import Link from "src/components/link";
 
 type Props = {
   children: React.ReactNode;
@@ -38,16 +39,14 @@ export default function PageLayout(props: Props): React.JSX.Element {
     <>
       <header className={style.header}>
         <div className={clsx(style.headerContent, style.content)}>
-          <Link to="/" className={style.headerLogo}>
-            {data.site?.siteMetadata?.title ?? ""}
-          </Link>
+          <Button internalHref="/">
+            <span className={style.headerLogo}>{data.site?.siteMetadata?.title ?? ""}</span>
+          </Button>
           <div className={style.desktopNav}>
             <PageLayoutNav />
           </div>
           <div className={style.mobileMenu}>
-            <Link onClick={handleClickMenu}>
-              <Icon name={IconName.Menu} />
-            </Link>
+            <IconButton iconName={IconName.Menu} onClick={handleClickMenu}></IconButton>
           </div>
         </div>
       </header>
@@ -55,13 +54,11 @@ export default function PageLayout(props: Props): React.JSX.Element {
       {showMenu ? (
         <div className={style.mobileNav}>
           <div className={style.mobileNavClose}>
-            <Link onClick={handleCloseMenu}>
-              <Icon name={IconName.Close} />
-            </Link>
+            <IconButton iconName={IconName.Close} onClick={handleCloseMenu} />
           </div>
-          <Link className={style.headerLogo} to="/" onClick={handleCloseMenu}>
-            {data.site?.siteMetadata?.title ?? ""}
-          </Link>
+          <Button internalHref="/" onClick={handleCloseMenu}>
+            <span className={style.headerLogo}>{data.site?.siteMetadata?.title ?? ""}</span>
+          </Button>
           <PageLayoutNav mobile onClick={handleCloseMenu} />
         </div>
       ) : null}

@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import React from "react";
 
-import Instagram from "src/components/images/Instagram.svg";
+import IconButton from "src/components/buttons/iconButton";
+import TextButton from "src/components/buttons/textButton";
+import { IconName } from "src/components/icon";
 import * as style from "src/components/layouts/pageLayoutNav.module.css";
-import Link from "src/components/link";
 
 type Props = {
   mobile?: boolean;
@@ -19,26 +20,22 @@ export default function PageLayoutNav(props: Props): React.JSX.Element | null {
         [style.isMobile]: mobile,
       })}
     >
-      <Link className={style.navItem} to="/schedule/" onClick={onClick}>
+      <TextButton internalHref="/schedule/" onClick={onClick}>
         Schedule
-      </Link>
-      <Link className={style.navItem} to="/hotel/" onClick={onClick}>
+      </TextButton>
+      <TextButton internalHref="/hotel/" onClick={onClick}>
         Hotel
-      </Link>
-      <Link className={style.navItem} to="/sponsors/" onClick={onClick}>
+      </TextButton>
+      <TextButton internalHref="/sponsors/" onClick={onClick}>
         Sponsors
-      </Link>
-      <Link className={style.navItem} to="/shop/" onClick={onClick}>
+      </TextButton>
+      <TextButton internalHref="/shop/" onClick={onClick}>
         Shop
-      </Link>
-      <a
-        className={style.navItemInstagram}
-        href="https://www.instagram.com/bigappleroll/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img src={Instagram} width="20" height="20" />
-      </a>
+      </TextButton>
+      <IconButton
+        iconName={IconName.Instagram}
+        externalHref="https://www.instagram.com/bigappleroll/"
+      />
     </nav>
   );
 }

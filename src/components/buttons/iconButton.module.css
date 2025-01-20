@@ -1,0 +1,28 @@
+.iconButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* Increase clickable area */
+  margin: -10px;
+  padding: 10px;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    background: var(--color-accent-3);
+    opacity: 0.4;
+  }
+
+  &:active::before {
+    background: var(--color-accent-2);
+    opacity: 0.4;
+  }
+}

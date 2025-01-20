@@ -1,21 +1,20 @@
 import React from "react";
 
 import * as style from "src/components/buttons/textButton.module.css";
-import Link from "src/components/link";
+import useButton, { ButtonProps } from "src/components/buttons/useButton";
 
 type Props = {
-  id?: string;
-  to?: string;
-  onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
-};
+} & ButtonProps;
 
 export default function TextButton(props: Props): React.JSX.Element {
-  const { id, to, onClick, children } = props;
+  const { children } = props;
+
+  const { id, handleClick } = useButton(props);
 
   return (
-    <Link className={style.textButton} id={id} to={to} onClick={onClick}>
-      {children}
-    </Link>
+    <div className={style.textButton} id={id} onClick={handleClick}>
+      <div className={style.textButtonText}>{children}</div>
+    </div>
   );
 }

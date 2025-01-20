@@ -4,10 +4,6 @@
   gap: var(--spacing-2);
 }
 
-.shopProductLink {
-  text-decoration: none;
-}
-
 .shopProductImage {
   border-radius: var(--spacing-1);
 }
