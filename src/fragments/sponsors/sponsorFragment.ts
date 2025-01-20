@@ -16,5 +16,8 @@ export const sponsorFragment = graphql`
       type # Either "presenting", "supporting", or "general"
       url # string
     }
+    linkedFiles {
+      ...ImageFragment
+    }
   }
 `;

@@ -14,12 +14,11 @@ import * as style from "src/templates/shopProductTemplate.module.css";
 
 export type ShopProductTemplateContext = {
   shopProductId: string;
-  shopProductImagesNameRegex: string;
 };
 
 export const query = graphql`
-  query ShopProductTemplate($shopProductId: String!, $shopProductImagesNameRegex: String!) {
-    shopProducts: allMarkdownRemark(
+  query ShopProductTemplate($shopProductId: String!) {
+    allShopProducts: allMarkdownRemark(
       sort: { frontmatter: { order_index: ASC } }
       filter: { fileRelativeDirectory: { eq: "shop" } }
     ) {
@@ -27,24 +26,8 @@ export const query = graphql`
         ...ShopProductFragment
       }
     }
-    shopProductsImages: allFile(
-      filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
-      sort: { name: ASC }
-    ) {
-      nodes {
-        ...ImageFragment
-      }
-    }
     shopProduct: markdownRemark(id: { eq: $shopProductId }) {
       ...ShopProductFragment
-    }
-    shopProductImages: allFile(
-      filter: { name: { regex: $shopProductImagesNameRegex } }
-      sort: { name: ASC }
-    ) {
-      nodes {
-        ...ImageFragment
-      }
     }
   }
 `;
@@ -53,11 +36,11 @@ export default function ShopProductTemplate(
   props: PageProps<Queries.ShopProductTemplateQuery, ShopProductTemplateContext>,
 ): React.JSX.Element {
   const { data } = props;
-  const { shopProducts, shopProductsImages, shopProduct, shopProductImages } = data;
+  const { allShopProducts, shopProduct } = data;
 
   const dispatch = useAppDispatch();
 
-  const { cartItemCount } = useShop(shopProducts, shopProductsImages);
+  const { cartItemCount } = useShop(allShopProducts);
 
   const buttonColor = useMemo((): SurfaceButtonColor | undefined => {
     if (
@@ -98,12 +81,12 @@ export default function ShopProductTemplate(
       <h1>{shopProduct.frontmatter?.title}</h1>
       <div className={style.shopProduct}>
         <div className={style.shopProductImages}>
-          {shopProductImages.nodes.map((shopProductImage) => {
+          {shopProduct.linkedFiles.map((shopProductLinkedFile) => {
             return (
               <Image
-                key={shopProductImage.id}
+                key={shopProductLinkedFile.id}
                 className={style.shopProductImage}
-                image={shopProductImage.childImageSharp?.gatsbyImageData}
+                image={shopProductLinkedFile.childImageSharp?.gatsbyImageData}
                 alt={shopProduct.frontmatter?.title}
               />
             );

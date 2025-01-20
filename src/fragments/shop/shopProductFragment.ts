@@ -11,13 +11,16 @@ export const shopProductFragment = graphql`
     id
     fileName
     fileRelativeDirectory
-    html
     slug
     frontmatter {
       title
       button_color # Either "green", "orange", or "blue"
       order_index # Number to order items by
       price # Number (no currency symbol)
+    }
+    html
+    linkedFiles {
+      ...ImageFragment
     }
   }
 `;

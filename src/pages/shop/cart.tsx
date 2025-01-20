@@ -29,9 +29,9 @@ const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
 };
 
 export default function Cart(): React.JSX.Element {
-  const { shopProducts, shopProductsImages } = useStaticQuery<Queries.CartQuery>(graphql`
+  const { allShopProducts } = useStaticQuery<Queries.CartQuery>(graphql`
     query Cart {
-      shopProducts: allMarkdownRemark(
+      allShopProducts: allMarkdownRemark(
         sort: { frontmatter: { order_index: ASC } }
         filter: { fileRelativeDirectory: { eq: "shop" } }
       ) {
@@ -39,20 +39,12 @@ export default function Cart(): React.JSX.Element {
           ...ShopProductFragment
         }
       }
-      shopProductsImages: allFile(
-        filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
-        sort: { name: ASC }
-      ) {
-        nodes {
-          ...ImageFragment
-        }
-      }
     }
   `);
 
   const dispatch = useAppDispatch();
 
-  const { cartItems, cartItemCount, cartTotal } = useShop(shopProducts, shopProductsImages);
+  const { cartItems, cartItemCount, cartTotal } = useShop(allShopProducts);
 
   const handleIncrementCartItem = useCallback(
     (cartItem: CartItem) => {
@@ -111,7 +103,7 @@ export default function Cart(): React.JSX.Element {
               <div>
                 <Image
                   className={style.cartItemImage}
-                  image={cartItem.shopProductImages[0].childImageSharp?.gatsbyImageData}
+                  image={cartItem.shopProduct.linkedFiles[0]?.childImageSharp?.gatsbyImageData}
                   alt={cartItem.shopProduct.frontmatter?.title}
                 />
               </div>

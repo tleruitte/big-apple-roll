@@ -10,7 +10,7 @@ import switchOn from "src/helpers/switchOn";
 import * as style from "src/pages/sponsors.module.css";
 
 export default function Sponsors(): React.JSX.Element {
-  const data = useStaticQuery<Queries.SponsorsQuery>(graphql`
+  const { groupedSponsors } = useStaticQuery<Queries.SponsorsQuery>(graphql`
     query Sponsors {
       groupedSponsors: allMarkdownRemark(
         filter: { fileRelativeDirectory: { eq: "sponsors" } }
@@ -22,26 +22,11 @@ export default function Sponsors(): React.JSX.Element {
           }
         }
       }
-      sponsorImageLogos: allFile(
-        filter: { relativeDirectory: { eq: "sponsors" }, extension: { nin: ["md", "svg"] } }
-      ) {
-        nodes {
-          ...ImageFragment
-        }
-      }
-      sponsorSVGLogos: allFile(
-        filter: { relativeDirectory: { eq: "sponsors" }, extension: { eq: "svg" } }
-      ) {
-        nodes {
-          name
-          publicURL
-        }
-      }
     }
   `);
 
   const sponsorsByType = useMemo(() => {
-    return data.groupedSponsors.group.reduce<
+    return groupedSponsors.group.reduce<
       Record<SponsorType, Queries.SponsorsQuery["groupedSponsors"]["group"][number]["nodes"]>
     >(
       (acc, group) => {
@@ -60,31 +45,7 @@ export default function Sponsors(): React.JSX.Element {
         [SponsorType.General]: [],
       },
     );
-  }, [data.groupedSponsors.group]);
-
-  const sponsorLogosByName = useMemo(() => {
-    const sponsorLogosByName: Record<
-      string,
-      | {
-          type: "image";
-          node: Queries.SponsorsQuery["sponsorImageLogos"]["nodes"][0];
-        }
-      | {
-          type: "svg";
-          node: Queries.SponsorsQuery["sponsorSVGLogos"]["nodes"][0];
-        }
-    > = {};
-
-    data.sponsorImageLogos.nodes.forEach((node) => {
-      sponsorLogosByName[node.name] = { type: "image", node };
-    });
-
-    data.sponsorSVGLogos.nodes.forEach((node) => {
-      sponsorLogosByName[node.name] = { type: "svg", node };
-    });
-
-    return sponsorLogosByName;
-  }, [data.sponsorImageLogos.nodes, data.sponsorSVGLogos.nodes]);
+  }, [groupedSponsors.group]);
 
   return (
     <div>
@@ -115,9 +76,7 @@ export default function Sponsors(): React.JSX.Element {
             >
               {sponsors.map((sponsor) => {
                 const { title, url } = sponsor.frontmatter ?? {};
-                const sponsorLogo = sponsor.fileName
-                  ? sponsorLogosByName[sponsor.fileName]
-                  : undefined;
+                const sponsorLogo = sponsor.linkedFiles?.[0];
                 if (!title || !url || !sponsorLogo) {
                   return null;
                 }
@@ -130,21 +89,19 @@ export default function Sponsors(): React.JSX.Element {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {sponsorLogo.type === "image" &&
-                    sponsorLogo.node.childImageSharp?.gatsbyImageData ? (
+                    {sponsorLogo.childImageSharp?.gatsbyImageData ? (
                       <Image
                         className={style.sponsorLogo}
-                        image={sponsorLogo.node.childImageSharp.gatsbyImageData}
+                        image={sponsorLogo.childImageSharp.gatsbyImageData}
                         alt={title}
                       />
-                    ) : null}
-                    {sponsorLogo.type === "svg" ? (
+                    ) : (
                       <img
                         className={style.sponsorLogo}
-                        src={sponsorLogo.node.publicURL ?? undefined}
+                        src={sponsorLogo.publicURL ?? undefined}
                         alt={title}
                       />
-                    ) : null}
+                    )}
                   </a>
                 );
               })}

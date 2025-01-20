@@ -9,9 +9,9 @@ import useShop from "src/components/shop/useShop";
 import * as style from "src/pages/shop.module.css";
 
 export default function Shop(): React.JSX.Element {
-  const { shopProducts, shopProductsImages } = useStaticQuery<Queries.ShopQuery>(graphql`
+  const { allShopProducts } = useStaticQuery<Queries.ShopQuery>(graphql`
     query Shop {
-      shopProducts: allMarkdownRemark(
+      allShopProducts: allMarkdownRemark(
         sort: { frontmatter: { order_index: ASC } }
         filter: { fileRelativeDirectory: { eq: "shop" } }
       ) {
@@ -19,25 +19,17 @@ export default function Shop(): React.JSX.Element {
           ...ShopProductFragment
         }
       }
-      shopProductsImages: allFile(
-        filter: { relativeDirectory: { eq: "shop" }, extension: { ne: "md" } }
-        sort: { name: ASC }
-      ) {
-        nodes {
-          ...ImageFragment
-        }
-      }
     }
   `);
 
-  const { cartItemCount, shopProductImagesByName } = useShop(shopProducts, shopProductsImages);
+  const { cartItemCount } = useShop(allShopProducts);
 
   return (
     <>
       <ShopNavigation cartItemCount={cartItemCount} goToCart />
       <h1>T-shirts</h1>
       <div className={style.shopProducts}>
-        {shopProducts.nodes.map((shopProductNode) => {
+        {allShopProducts.nodes.map((shopProductNode) => {
           if (!shopProductNode.fileName || !shopProductNode.frontmatter) {
             return null;
           }
@@ -47,10 +39,7 @@ export default function Shop(): React.JSX.Element {
               <Button internalHref={shopProductNode.slug}>
                 <Image
                   className={style.shopProductImage}
-                  image={
-                    shopProductImagesByName[shopProductNode.fileName]?.[0]?.childImageSharp
-                      ?.gatsbyImageData
-                  }
+                  image={shopProductNode.linkedFiles?.[0]?.childImageSharp?.gatsbyImageData}
                   alt={shopProductNode.frontmatter.title}
                 />
                 <div>{shopProductNode.frontmatter.title}</div>

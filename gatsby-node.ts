@@ -2,6 +2,7 @@ import path from "node:path";
 
 import { GatsbyNode } from "gatsby";
 import { createFilePath } from "gatsby-source-filesystem";
+import { sortBy } from "lodash";
 import FilterWarningsPlugin from "webpack-filter-warnings-plugin";
 
 import { ScheduleDayTemplateContext } from "src/templates/scheduleDayTemplate";
@@ -53,7 +54,6 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
           node {
             id
             slug
-            fileName
           }
         }
       }
@@ -107,7 +107,6 @@ export const createPages: GatsbyNode["createPages"] = async (args) => {
     }
     const context: ShopProductTemplateContext = {
       shopProductId: node.id,
-      shopProductImagesNameRegex: `/^${node.fileName}.+/`,
     };
     createPage({
       component: path.resolve(`./src/templates/shopProductTemplate.tsx`),
@@ -122,14 +121,20 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
 
   createTypes(`
     type MarkdownRemark implements Node {
-      fileName: String @proxy(from: "fields.fileName")
-      fileRelativeDirectory: String @proxy(from: "fields.fileRelativeDirectory")
-      slug: String @proxy(from: "fields.slug")
+      fileName: String! @proxy(from: "fields.fileName")
+      fileRelativeDirectory: String! @proxy(from: "fields.fileRelativeDirectory")
+      linkedFiles: [File!]! @link(from: "fields.linkedFiles___NODE")
+      slug: String! @proxy(from: "fields.slug")
     }
   `);
 };
 
-export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, getNode, actions }) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+  node,
+  getNode,
+  getNodesByType,
+  actions,
+}) => {
   const { createNodeField } = actions;
 
   // Add file information on MarkdownRemark nodes
@@ -146,16 +151,40 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, getNode, action
     if (node.parent) {
       const parentNode = getNode(node.parent);
       if (parentNode) {
+        const fileName = parentNode.name;
         createNodeField({
           node,
           name: "fileName",
-          value: parentNode.name,
+          value: fileName,
         });
+
+        const fileRelativeDirectory = parentNode.relativeDirectory;
         createNodeField({
           node,
           name: "fileRelativeDirectory",
-          value: parentNode.relativeDirectory,
+          value: fileRelativeDirectory,
         });
+
+        if (typeof fileName === "string") {
+          const allFileNodes = getNodesByType(`File`);
+          const linkedFileNodes = sortBy(
+            allFileNodes.filter((fileNode) => {
+              return (
+                fileNode.relativeDirectory === fileRelativeDirectory &&
+                typeof fileNode.name === "string" &&
+                fileNode.name.startsWith?.(fileName) &&
+                fileNode.extension !== parentNode.extension
+              );
+            }),
+            (fileNode) => fileNode.name,
+          );
+
+          createNodeField({
+            node,
+            name: "linkedFiles___NODE",
+            value: linkedFileNodes.map((fileNode) => fileNode.id),
+          });
+        }
       }
     }
   }
