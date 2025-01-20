@@ -6,6 +6,8 @@ import assertNever from "src/helpers/assertNever";
 
 // All icons: https://fonts.google.com/icons?query=Material+Symbols
 export enum IconName {
+  ArrowLeft = "arrow_left_alt",
+  ArrowRight = "arrow_right_alt",
   Close = "close",
   Instagram = "instagram",
   Menu = "menu",
@@ -19,6 +21,8 @@ export default function Icon(props: Props): React.JSX.Element | null {
   const { name } = props;
 
   switch (name) {
+    case IconName.ArrowLeft:
+    case IconName.ArrowRight:
     case IconName.Close:
     case IconName.Menu: {
       return <span className={style.icon}>{name}</span>;

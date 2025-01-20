@@ -2,3 +2,4 @@
 export const pagination: string;
 export const paginationPrevious: string;
 export const paginationNext: string;
+export const paginationText: string;
