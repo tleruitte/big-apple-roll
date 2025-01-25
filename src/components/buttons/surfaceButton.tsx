@@ -20,7 +20,7 @@ export default function SurfaceButton(props: Props): React.JSX.Element {
   const { id, disabled, handleClick } = useButton(props);
 
   return (
-    <div
+    <button
       className={clsx(
         style.button,
         switchOn(color, {
@@ -49,6 +49,6 @@ export default function SurfaceButton(props: Props): React.JSX.Element {
       <div className={style.buttonLabel}>
         <span className={style.buttonLabelText}>{children}</span>
       </div>
-    </div>
+    </button>
   );
 }

@@ -29,16 +29,15 @@ export default function Schedule(): React.JSX.Element {
         }
 
         return (
-          <div key={node.id}>
-            <SurfaceButton
-              color={pre_bar ? "accent3" : undefined}
-              size="large"
-              internalHref={node.slug}
-              banner={pre_bar ? "Pre bar" : formatDate(date, { format: "short" })}
-            >
-              {title}
-            </SurfaceButton>
-          </div>
+          <SurfaceButton
+            key={node.id}
+            color={pre_bar ? "accent3" : undefined}
+            size="large"
+            internalHref={node.slug}
+            banner={pre_bar ? "Pre bar" : formatDate(date, { format: "short" })}
+          >
+            {title}
+          </SurfaceButton>
         );
       })}
     </div>

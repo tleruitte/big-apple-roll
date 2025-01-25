@@ -64,21 +64,24 @@ a {
   }
 }
 
-input {
-  border: 1px solid var(--color-border);
-  padding: var(--spacing-50);
+input,
+button {
+  margin: 0;
+  border: none;
+  padding: 0;
+  background: none;
   color: var(--color-text);
   font-family: var(--font-family-open-sans);
   font-size: 100%;
   line-height: 1.6;
 }
 
+input {
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-50);
+}
+
 button {
-  margin: 0;
-  border: none;
-  outline: none;
-  padding: 0;
-  background: none;
   cursor: pointer;
   user-select: none;
 }
