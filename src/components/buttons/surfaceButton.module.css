@@ -64,7 +64,7 @@
 .buttonLabel {
   flex: 1;
   min-width: 0;
-  padding: var(--spacing-50);
+  padding: var(--spacing-50) var(--spacing-1);
   text-align: center;
   overflow: hidden;
 }

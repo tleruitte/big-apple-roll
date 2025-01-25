@@ -24,6 +24,7 @@ export default function LinkButton(props: Props): React.JSX.Element | null {
         [style.isNoDecoration]: noDecoration,
       })}
       href={href}
+      draggable={false}
       data-id={id}
       onClick={handleClick}
     >

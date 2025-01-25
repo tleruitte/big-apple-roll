@@ -39,8 +39,8 @@ export default function Registration(): React.JSX.Element {
         ...MetadataFragment
       }
       releaseOfParticipation: markdownRemark(
-        fileName: { eq: "registration" }
-        fileRelativeDirectory: { eq: "release-of-participation" }
+        fileRelativeDirectory: { eq: "registration" }
+        fileName: { eq: "release-of-participation" }
       ) {
         html
       }
