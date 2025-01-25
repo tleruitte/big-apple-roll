@@ -28,3 +28,15 @@
   display: flex;
   gap: var(--spacing-2);
 }
+
+@media (--tablet-breakpoint) {
+  .form {
+    grid-template-columns: 100%;
+  }
+
+  .label {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: var(--spacing-50);
+  }
+}

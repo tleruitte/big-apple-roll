@@ -58,6 +58,8 @@ export default function Registration(): React.JSX.Element {
   const [emergencyPhone, setEmergencyPhone] = useState("");
   const [emergencyRelation, setEmergencyRelation] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const isValid = useMemo(() => {
     switch (page) {
       case Page.Submitted: {
@@ -117,6 +119,8 @@ export default function Registration(): React.JSX.Element {
   const handleNext = useCallback(async () => {
     const nextPage = findPage(page, 1);
     if (nextPage === Page.Submitted) {
+      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       const response = await fetch("https://www.formbackend.com/f/362d34dbb098fccb", {
         method: "POST",
         headers: {
@@ -142,6 +146,7 @@ export default function Registration(): React.JSX.Element {
         throw new Error("Something went wrong");
       }
 
+      setLoading(false);
       reset();
     }
 
@@ -176,7 +181,7 @@ export default function Registration(): React.JSX.Element {
                 <form className={style.form}>
                   <label className={style.label}>
                     <span className={clsx(style.labelLabel, style.isRequired)}>Full name:</span>
-                    <TextInput type="text" value={name} onChange={setName} />
+                    <TextInput type="text" value={name} autoFocus onChange={setName} />
                   </label>
 
                   <label className={style.label}>
@@ -200,7 +205,7 @@ export default function Registration(): React.JSX.Element {
                 <form className={style.form}>
                   <label className={style.label}>
                     <span className={clsx(style.labelLabel, style.isRequired)}>Signature:</span>
-                    <TextInput type="text" value={signature} onChange={setSignature} />
+                    <TextInput type="text" value={signature} autoFocus onChange={setSignature} />
                   </label>
                   <label className={style.label}>
                     <span className={clsx(style.labelLabel, style.isRequired)}>Date:</span>
@@ -219,7 +224,12 @@ export default function Registration(): React.JSX.Element {
                     <span className={clsx(style.labelLabel, style.isRequired)}>
                       Emergency contact full name:
                     </span>
-                    <TextInput type="text" value={emergencyName} onChange={setEmergencyName} />
+                    <TextInput
+                      type="text"
+                      value={emergencyName}
+                      autoFocus
+                      onChange={setEmergencyName}
+                    />
                   </label>
                   <label className={style.label}>
                     <span className={clsx(style.labelLabel, style.isRequired)}>
@@ -264,24 +274,29 @@ export default function Registration(): React.JSX.Element {
           }
         }
       })()}
-      {page !== Page.Submitted ? (
-        <div className={style.footer}>
-          <TextButton onClick={handleClear}>Clear</TextButton>
+      <div className={style.footer}>
+        <TextButton onClick={handleClear}>Clear</TextButton>
+        {page !== Page.Submitted ? (
           <div className={style.footerRight}>
             <SurfaceButton
               color="accent3"
               size="small"
-              disabled={page === Page.PersonalInfo}
+              disabled={page === Page.PersonalInfo || loading}
               onClick={handleBack}
             >
               Back
             </SurfaceButton>
-            <SurfaceButton color="accent2" size="small" disabled={!isValid} onClick={handleNext}>
+            <SurfaceButton
+              color="accent2"
+              size="small"
+              disabled={!isValid || loading}
+              onClick={handleNext}
+            >
               {page === Page.EmergencyContact ? "Submit" : "Next"}
             </SurfaceButton>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </>
   );
 }
