@@ -18,7 +18,7 @@ export default function TextButton(props: Props): React.JSX.Element {
       className={clsx(style.textButton, {
         [style.isCurrent]: isCurrent,
       })}
-      id={id}
+      data-id={id}
       onClick={handleClick}
     >
       <div className={style.textButtonText}>{children}</div>

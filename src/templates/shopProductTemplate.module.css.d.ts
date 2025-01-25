@@ -3,3 +3,7 @@ export const shopProduct: string;
 export const shopProductImages: string;
 export const shopProductImage: string;
 export const shopProductDetails: string;
+export const sizeLabel: string;
+export const sizes: string;
+export const size: string;
+export const isSelected: string;

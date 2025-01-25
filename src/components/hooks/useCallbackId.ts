@@ -10,7 +10,7 @@ import { useCallback } from "react";
  * ```
  */
 const useCallbackId = <
-  Event extends React.UIEvent,
+  Event extends React.UIEvent | React.FormEvent,
   CallbackId extends (id: string, event: Event) => void,
 >(
   callback: CallbackId,
@@ -23,7 +23,9 @@ const useCallbackId = <
           return "";
         }
 
-        return target.dataset.id ?? "";
+        const idContainer = target.closest("[data-id]");
+        const id = idContainer instanceof HTMLElement ? (idContainer?.dataset.id ?? "") : "";
+        return id;
       })();
 
       return callback(id, event);

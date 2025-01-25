@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { graphql, PageProps, useStaticQuery } from "gatsby";
 import React, { useCallback, useState } from "react";
 
-import Button from "src/components/buttons/button";
 import IconButton from "src/components/buttons/iconButton";
+import LinkButton from "src/components/buttons/linkButton";
 import { IconName } from "src/components/icon";
 import * as style from "src/components/layouts/pageLayout.module.css";
 import PageLayoutNav from "src/components/layouts/pageLayoutNav";
@@ -37,9 +37,9 @@ export default function PageLayout(props: Omit<PageProps, "children"> & Props): 
     <>
       <header className={style.header}>
         <div className={clsx(style.headerContent, style.content)}>
-          <Button internalHref="/">
+          <LinkButton internalHref="/" noDecoration>
             <span className={style.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
-          </Button>
+          </LinkButton>
           <div className={style.desktopNav}>
             <PageLayoutNav location={location} />
           </div>
@@ -54,9 +54,9 @@ export default function PageLayout(props: Omit<PageProps, "children"> & Props): 
           <div className={style.mobileNavClose}>
             <IconButton iconName={IconName.Close} onClick={handleCloseMenu} />
           </div>
-          <Button internalHref="/" onClick={handleCloseMenu}>
+          <LinkButton internalHref="/" noDecoration onClick={handleCloseMenu}>
             <span className={style.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
-          </Button>
+          </LinkButton>
           <PageLayoutNav location={location} mobile onClick={handleCloseMenu} />
         </div>
       ) : null}

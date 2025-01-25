@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
-import Button from "src/components/buttons/button";
+import LinkButton from "src/components/buttons/linkButton";
 import Image from "src/components/image";
 import HeadLayout from "src/components/layouts/headLayout";
 import ShopNavigation from "src/components/shop/shopNavigation";
@@ -36,7 +36,7 @@ export default function Shop(): React.JSX.Element {
 
           return (
             <div key={shopProductNode.id}>
-              <Button internalHref={shopProductNode.slug}>
+              <LinkButton internalHref={shopProductNode.slug} noDecoration>
                 <Image
                   className={style.shopProductImage}
                   image={shopProductNode.linkedFiles?.[0]?.childImageSharp?.gatsbyImageData}
@@ -44,7 +44,7 @@ export default function Shop(): React.JSX.Element {
                 />
                 <div>{shopProductNode.frontmatter.title}</div>
                 <div>${shopProductNode.frontmatter.price}</div>
-              </Button>
+              </LinkButton>
             </div>
           );
         })}

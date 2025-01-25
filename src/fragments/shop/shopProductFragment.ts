@@ -17,6 +17,7 @@ export const shopProductFragment = graphql`
       button_color # Either "green", "orange", or "blue"
       order_index # Number to order items by
       price # Number (no currency symbol)
+      sizes # Array of strings
     }
     html
     linkedFiles {

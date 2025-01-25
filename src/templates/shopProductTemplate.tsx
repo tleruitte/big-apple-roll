@@ -1,9 +1,12 @@
+import clsx from "clsx";
 import { graphql, PageProps } from "gatsby";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import cartSlice from "src/app/slices/cart/cartSlice";
+import LinkButton from "src/components/buttons/linkButton";
 import SurfaceButton, { SurfaceButtonColor } from "src/components/buttons/surfaceButton";
+import useCallbackId from "src/components/hooks/useCallbackId";
 import Image from "src/components/image";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop from "src/components/shop/useShop";
@@ -42,6 +45,8 @@ export default function ShopProductTemplate(
 
   const { cartItemCount } = useShop(allShopProducts);
 
+  const [size, setSize] = useState<string | null>(null);
+
   const buttonColor = useMemo((): SurfaceButtonColor | undefined => {
     if (
       shopProduct?.frontmatter?.button_color &&
@@ -56,20 +61,22 @@ export default function ShopProductTemplate(
     return undefined;
   }, [shopProduct?.frontmatter?.button_color]);
 
+  const handleSelectSize = useCallbackId(setSize);
+
   const handleAddToCart = useCallback(() => {
     const shopProductName = shopProduct?.fileName;
-    if (!shopProductName) {
+    if (!shopProductName || !size) {
       return;
     }
 
     dispatch(
       cartSlice.actions.addCartEntry({
         name: shopProductName,
-        size: "small",
+        size,
         count: 1,
       }),
     );
-  }, [dispatch, shopProduct?.fileName]);
+  }, [dispatch, shopProduct?.fileName, size]);
 
   if (!shopProduct) {
     return <></>;
@@ -95,12 +102,41 @@ export default function ShopProductTemplate(
         <div className={style.shopProductDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopProduct.html ?? "" }}></div>
           <div>
-            <SurfaceButton internalHref="/shop/cart/" color={buttonColor} onClick={handleAddToCart}>
+            <div className={style.sizeLabel}>Size:</div>
+            <div className={style.sizes}>
+              {shopProduct.frontmatter?.sizes?.map((shopProductSize) => {
+                return (
+                  <button
+                    key={shopProductSize}
+                    className={clsx(style.size, {
+                      [style.isSelected]: size === shopProductSize,
+                    })}
+                    data-id={shopProductSize}
+                    onClick={handleSelectSize}
+                  >
+                    {shopProductSize}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <div>
+            <SurfaceButton
+              internalHref="/shop/cart/"
+              color={buttonColor}
+              disabled={!size}
+              onClick={handleAddToCart}
+            >
               Add to cart
             </SurfaceButton>
           </div>
           <div>
-            <p>T-shirts must be picked-up during registration on Friday or Saturday.</p>
+            T-shirts must be picked-up during registration on{" "}
+            <LinkButton to="/schedule/friday/registration-and-expo/">Friday</LinkButton> or{" "}
+            <LinkButton internalHref="/schedule/saturday/registration-and-expo/">
+              Saturday
+            </LinkButton>
+            .
           </div>
         </div>
       </div>

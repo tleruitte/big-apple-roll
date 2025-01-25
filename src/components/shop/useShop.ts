@@ -31,7 +31,11 @@ const useShop = (allShopProducts: Queries.ShopQuery["allShopProducts"]) => {
     return compact(
       cartEntries.map((cartEntry): CartItem | null => {
         const shopProduct = shopProductsByName[cartEntry.name];
-        if (!shopProduct) {
+        if (
+          !shopProduct ||
+          (shopProduct.frontmatter?.sizes &&
+            !shopProduct.frontmatter.sizes.includes(cartEntry.size))
+        ) {
           return null;
         }
 

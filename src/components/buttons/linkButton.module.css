@@ -1,0 +1,6 @@
+.linkButton {
+  &.is-no-decoration {
+    text-decoration: none;
+    user-select: none;
+  }
+}
