@@ -114,14 +114,51 @@ export default function Registration(): React.JSX.Element {
     setPage(findPage(page, -1));
   }, [page]);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(async () => {
     const nextPage = findPage(page, 1);
-    setPage(nextPage);
-
     if (nextPage === Page.Submitted) {
+      const response = await fetch("https://www.formbackend.com/f/362d34dbb098fccb", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          signature,
+          date,
+          emergencyName,
+          emergencyEmail,
+          emergencyPhone,
+          emergencyRelation,
+        }),
+      });
+
+      if (response.status === 422) {
+        throw new Error("Validation error");
+      } else if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
       reset();
     }
-  }, [page, reset]);
+
+    setPage(nextPage);
+  }, [
+    date,
+    email,
+    emergencyEmail,
+    emergencyName,
+    emergencyPhone,
+    emergencyRelation,
+    name,
+    page,
+    phone,
+    reset,
+    signature,
+  ]);
 
   return (
     <>
