@@ -3,7 +3,6 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   pathPrefix: "/big-apple-roll",
   siteMetadata: {
-    title: "Big Apple Roll",
     siteUrl: "https://tleruitte.github.io/",
   },
   graphqlTypegen: true,

@@ -8,19 +8,17 @@ type Props = {
 export default function HeadLayout(props: Props): React.JSX.Element {
   const { pageTitle } = props;
 
-  const data = useStaticQuery<Queries.LayoutHeadQuery>(graphql`
+  const { metadata } = useStaticQuery<Queries.LayoutHeadQuery>(graphql`
     query LayoutHead {
-      site {
-        siteMetadata {
-          title
-        }
+      metadata: markdownRemark(fileName: { eq: "metadata" }, fileRelativeDirectory: { eq: "" }) {
+        ...MetadataFragment
       }
     }
   `);
 
   return (
     <>
-      <title>{`${pageTitle ? `${pageTitle} - ` : ""}${data.site?.siteMetadata?.title ?? ""}`}</title>
+      <title>{`${pageTitle ? `${pageTitle} - ` : ""}${metadata?.frontmatter?.title ?? ""}`}</title>
     </>
   );
 }

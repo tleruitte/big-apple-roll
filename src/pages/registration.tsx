@@ -33,11 +33,14 @@ const findPage = (currentPage: Page, offset: number): Page => {
 };
 
 export default function Registration(): React.JSX.Element {
-  const { registration } = useStaticQuery<Queries.RegistrationQuery>(graphql`
+  const { metadata, releaseOfParticipation } = useStaticQuery<Queries.RegistrationQuery>(graphql`
     query Registration {
-      registration: markdownRemark(
+      metadata: markdownRemark(fileName: { eq: "metadata" }, fileRelativeDirectory: { eq: "" }) {
+        ...MetadataFragment
+      }
+      releaseOfParticipation: markdownRemark(
         fileName: { eq: "registration" }
-        fileRelativeDirectory: { eq: "registration" }
+        fileRelativeDirectory: { eq: "release-of-participation" }
       ) {
         html
       }
@@ -169,8 +172,9 @@ export default function Registration(): React.JSX.Element {
     <>
       <h1>Registration</h1>
       <p>
-        Welcome to Big Apple Roll 2024! All skaters are required to complete this registration form
-        and sign the Release of Participation before attending any Big Apple Roll skates.
+        Welcome to Big Apple Roll {metadata?.frontmatter?.year}! All skaters are required to
+        complete this registration form and sign the Release of Participation before attending any
+        Big Apple Roll skates.
       </p>
       {(() => {
         switch (page) {
@@ -201,7 +205,7 @@ export default function Registration(): React.JSX.Element {
             return (
               <>
                 <h2>Release for Participation</h2>
-                <div dangerouslySetInnerHTML={{ __html: registration?.html ?? "" }}></div>
+                <div dangerouslySetInnerHTML={{ __html: releaseOfParticipation?.html ?? "" }}></div>
                 <form className={style.form}>
                   <label className={style.label}>
                     <span className={clsx(style.labelLabel, style.isRequired)}>Signature:</span>
