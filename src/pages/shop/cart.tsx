@@ -147,5 +147,5 @@ export default function Cart(): React.JSX.Element {
 }
 
 export function Head() {
-  return <HeadLayout pageTitle="" />;
+  return <HeadLayout pageTitle="Cart" />;
 }

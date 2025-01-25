@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 
+import HeadLayout from "src/components/layouts/headLayout";
 import Pagination from "src/components/pagination";
 import { ScheduleEventDifficulty } from "src/fragments/schedule/scheduleEventFragment";
 import { formatDate, formatDateTime } from "src/helpers/date";
@@ -151,4 +152,12 @@ export default function ScheduleEventTemplate(
       </div>
     </>
   );
+}
+
+export function Head(
+  props: PageProps<Queries.ScheduleEventTemplateQuery, ScheduleEventTemplateContext>,
+): JSX.Element {
+  const { data } = props;
+  const { scheduleEvent } = data;
+  return <HeadLayout pageTitle={scheduleEvent?.frontmatter?.title} />;
 }

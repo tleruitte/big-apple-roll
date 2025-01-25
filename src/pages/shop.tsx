@@ -54,5 +54,5 @@ export default function Shop(): React.JSX.Element {
 }
 
 export function Head() {
-  return <HeadLayout pageTitle="" />;
+  return <HeadLayout pageTitle="Shop" />;
 }

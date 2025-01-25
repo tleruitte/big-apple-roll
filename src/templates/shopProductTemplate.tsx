@@ -8,6 +8,7 @@ import LinkButton from "src/components/buttons/linkButton";
 import SurfaceButton, { SurfaceButtonColor } from "src/components/buttons/surfaceButton";
 import useCallbackId from "src/components/hooks/useCallbackId";
 import Image from "src/components/image";
+import HeadLayout from "src/components/layouts/headLayout";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop from "src/components/shop/useShop";
 import { ShopProductButtonColor } from "src/fragments/shop/shopProductFragment";
@@ -142,4 +143,12 @@ export default function ShopProductTemplate(
       </div>
     </>
   );
+}
+
+export function Head(
+  props: PageProps<Queries.ShopProductTemplateQuery, ShopProductTemplateContext>,
+): React.JSX.Element {
+  const { data } = props;
+  const { shopProduct } = data;
+  return <HeadLayout pageTitle={shopProduct?.frontmatter?.title} />;
 }

@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
 type Props = {
-  pageTitle?: string;
+  pageTitle?: string | null;
 };
 
 export default function HeadLayout(props: Props): React.JSX.Element {
