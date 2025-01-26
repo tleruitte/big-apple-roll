@@ -46,7 +46,12 @@ const config: GatsbyConfig = {
         path: `./content/2024/`,
       },
     },
-    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: ["gatsby-remark-images"],
+      },
+    },
     "gatsby-transformer-sharp",
   ],
 };
