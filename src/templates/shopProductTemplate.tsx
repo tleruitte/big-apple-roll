@@ -4,7 +4,6 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import useAppDispatch from "src/app/hooks/useAppDispatch";
 import cartSlice from "src/app/slices/cart/cartSlice";
-import LinkButton from "src/components/buttons/linkButton";
 import SurfaceButton, { SurfaceButtonColor } from "src/components/buttons/surfaceButton";
 import useCallbackId from "src/components/hooks/useCallbackId";
 import Image from "src/components/image";
@@ -47,6 +46,11 @@ export default function ShopProductTemplate(
   const { cartItemCount } = useShop(allShopProducts);
 
   const [size, setSize] = useState<string | null>(null);
+  const [count, setCount] = useState(1);
+
+  const needsSize = useMemo(() => {
+    return !!shopProduct?.frontmatter?.sizes?.length;
+  }, [shopProduct?.frontmatter?.sizes?.length]);
 
   const buttonColor = useMemo((): SurfaceButtonColor | undefined => {
     if (
@@ -64,20 +68,28 @@ export default function ShopProductTemplate(
 
   const handleSelectSize = useCallbackId(setSize);
 
+  const handleSelectCount = useCallback((event: React.ChangeEvent) => {
+    const { target } = event;
+    if (!(target instanceof HTMLSelectElement)) {
+      return;
+    }
+    setCount(parseInt(target.value, 10));
+  }, []);
+
   const handleAddToCart = useCallback(() => {
     const shopProductName = shopProduct?.fileName;
-    if (!shopProductName || !size) {
+    if (!shopProductName || (needsSize && !size)) {
       return;
     }
 
     dispatch(
       cartSlice.actions.addCartEntry({
         name: shopProductName,
-        size,
-        count: 1,
+        size: needsSize ? size : null,
+        count,
       }),
     );
-  }, [dispatch, shopProduct?.fileName, size]);
+  }, [count, dispatch, needsSize, shopProduct?.fileName, size]);
 
   if (!shopProduct) {
     return <></>;
@@ -102,42 +114,60 @@ export default function ShopProductTemplate(
         </div>
         <div className={style.shopProductDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopProduct.html ?? "" }}></div>
-          <div>
-            <div className={style.sizeLabel}>Size:</div>
-            <div className={style.sizes}>
-              {shopProduct.frontmatter?.sizes?.map((shopProductSize) => {
-                return (
-                  <button
-                    key={shopProductSize}
-                    className={clsx(style.size, {
-                      [style.isSelected]: size === shopProductSize,
-                    })}
-                    data-id={shopProductSize}
-                    onClick={handleSelectSize}
-                  >
-                    {shopProductSize}
-                  </button>
-                );
-              })}
+          {needsSize ? (
+            <div>
+              <div className={style.sizeLabel}>Size:</div>
+              <div className={style.sizes}>
+                {shopProduct.frontmatter?.sizes?.map((shopProductSize) => {
+                  return (
+                    <button
+                      key={shopProductSize}
+                      className={clsx(style.size, {
+                        [style.isSelected]: size === shopProductSize,
+                      })}
+                      data-id={shopProductSize}
+                      onClick={handleSelectSize}
+                    >
+                      {shopProductSize}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          ) : null}
+          {shopProduct.frontmatter?.discounts?.length ? (
+            <div className={style.discounts}>
+              <select className={style.discountsSelect} onChange={handleSelectCount}>
+                <option key={1} value={1}>
+                  1 {shopProduct.frontmatter.title?.toLocaleLowerCase()} - $
+                  {shopProduct.frontmatter.price}
+                </option>
+                {shopProduct.frontmatter.discounts.map((discount) => {
+                  if (!discount) {
+                    return null;
+                  }
+
+                  return (
+                    <option key={discount.count} value={discount.count ?? 0}>
+                      {discount.count} {shopProduct.frontmatter?.title_plural?.toLocaleLowerCase()}{" "}
+                      - ${discount.price}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          ) : (
+            <div>${shopProduct.frontmatter?.price}</div>
+          )}
           <div>
             <SurfaceButton
               internalHref="/shop/cart/"
               color={buttonColor}
-              disabled={!size}
+              disabled={needsSize && !size}
               onClick={handleAddToCart}
             >
               Add to cart
             </SurfaceButton>
-          </div>
-          <div>
-            T-shirts must be picked-up during registration on{" "}
-            <LinkButton to="/schedule/friday/registration-and-expo/">Friday</LinkButton> or{" "}
-            <LinkButton internalHref="/schedule/saturday/registration-and-expo/">
-              Saturday
-            </LinkButton>
-            .
           </div>
         </div>
       </div>

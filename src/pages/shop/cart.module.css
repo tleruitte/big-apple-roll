@@ -17,7 +17,13 @@
 
 .cartItemDetails {
   display: grid;
+  align-content: start;
   gap: var(--spacing-25);
+}
+
+.discount {
+  margin-right: var(--spacing-50);
+  color: var(--color-text-secondary);
 }
 
 .summary {

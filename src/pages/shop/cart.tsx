@@ -98,36 +98,46 @@ export default function Cart(): React.JSX.Element {
       <h1>Cart</h1>
       <div className={style.cart}>
         <div className={style.cartItems}>
-          {cartItems.map((cartItem) => (
-            <React.Fragment key={cartItem.key}>
-              <div>
-                <Image
-                  className={style.cartItemImage}
-                  image={cartItem.shopProduct.linkedFiles[0]?.childImageSharp?.gatsbyImageData}
-                  alt={cartItem.shopProduct.frontmatter?.title}
-                />
-              </div>
-              <div className={style.cartItemDetails}>
+          {cartItems.map((cartItem) => {
+            const hasDiscount =
+              cartItem.undiscountedPrice && cartItem.undiscountedPrice !== cartItem.price;
+            return (
+              <React.Fragment key={cartItem.key}>
                 <div>
-                  <strong>{cartItem.shopProduct.frontmatter?.title}</strong>
+                  <Image
+                    className={style.cartItemImage}
+                    image={cartItem.shopProduct.linkedFiles[0]?.childImageSharp?.gatsbyImageData}
+                    alt={cartItem.shopProduct.frontmatter?.title}
+                  />
                 </div>
-                <div>{cartItem.cartEntry.size}</div>
-                <div>${cartItem.shopProduct.frontmatter?.price}</div>
+                <div className={style.cartItemDetails}>
+                  <div>
+                    <strong>{cartItem.shopProduct.frontmatter?.title}</strong> - $
+                    {cartItem.shopProduct.frontmatter?.price}
+                  </div>
+                  {cartItem.cartEntry.size ? <div>{cartItem.cartEntry.size}</div> : null}
+                  <div>
+                    {hasDiscount ? (
+                      <s className={style.discount}>${cartItem.undiscountedPrice}</s>
+                    ) : null}{" "}
+                    <span>${cartItem.price}</span>
+                  </div>
+                  <div>
+                    <ShopCounter
+                      cartItem={cartItem}
+                      onIncrement={handleIncrementCartItem}
+                      onDecrement={handleDecrementCartItem}
+                    ></ShopCounter>
+                  </div>
+                </div>
                 <div>
-                  <ShopCounter
-                    cartItem={cartItem}
-                    onIncrement={handleIncrementCartItem}
-                    onDecrement={handleDecrementCartItem}
-                  ></ShopCounter>
+                  <TextButton id={cartItem.key} onClick={handleRemoveCartItem}>
+                    Remove
+                  </TextButton>
                 </div>
-              </div>
-              <div>
-                <TextButton id={cartItem.key} onClick={handleRemoveCartItem}>
-                  Remove
-                </TextButton>
-              </div>
-            </React.Fragment>
-          ))}
+              </React.Fragment>
+            );
+          })}
         </div>
         <div>
           <h2 className={style.summary}>Order summary</h2>

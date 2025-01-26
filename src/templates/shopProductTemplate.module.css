@@ -42,6 +42,14 @@
   }
 }
 
+.discounts {
+  display: flex;
+}
+
+.discountsSelect {
+  flex: 1;
+}
+
 @media (--tablet-breakpoint) {
   .shopProduct {
     grid-template-columns: 100%;

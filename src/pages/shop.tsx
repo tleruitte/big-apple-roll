@@ -27,7 +27,7 @@ export default function Shop(): React.JSX.Element {
   return (
     <>
       <ShopNavigation cartItemCount={cartItemCount} goToCart />
-      <h1>T-shirts</h1>
+      <h1>Shop</h1>
       <div className={style.shopProducts}>
         {allShopProducts.nodes.map((shopProductNode) => {
           if (!shopProductNode.fileName || !shopProductNode.frontmatter) {

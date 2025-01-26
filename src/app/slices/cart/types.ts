@@ -3,7 +3,7 @@ export type CartEntryKey = `${string}-${string}`;
 export type CartEntry = {
   key: CartEntryKey;
   name: string;
-  size: string;
+  size: string | null;
   count: number;
 };
 

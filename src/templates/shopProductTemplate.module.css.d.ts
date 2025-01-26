@@ -7,3 +7,5 @@ export const sizeLabel: string;
 export const sizes: string;
 export const size: string;
 export const isSelected: string;
+export const discounts: string;
+export const discountsSelect: string;

@@ -14,9 +14,14 @@ export const shopProductFragment = graphql`
     slug
     frontmatter {
       title
+      title_plural
       button_color # Either "green", "orange", or "blue"
       order_index # Number to order items by
       price # Number (no currency symbol)
+      discounts {
+        count # Number
+        price # Number (no currency symbol)
+      }
       sizes # Array of strings
     }
     html

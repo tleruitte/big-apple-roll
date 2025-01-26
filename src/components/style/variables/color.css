@@ -1,9 +1,14 @@
 :root {
-  /* Primary */
+  /* Text */
   --color-text: #1e3566;
+  --color-text-secondary: #1e35665a;
   --color-text-inverted: white;
+
+  /* Border */
   --color-border: rgb(0 0 0 / 5%);
   --color-border-strong: rgb(0 0 0 / 20%);
+
+  /* Background */
   --color-background: white;
 
   /* Color */
