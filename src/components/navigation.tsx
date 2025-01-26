@@ -2,7 +2,7 @@ import React from "react";
 
 import TextButton from "src/components/buttons/textButton";
 import Icon, { IconName } from "src/components/icon";
-import * as style from "src/components/navigation.module.css";
+import * as classNames from "src/components/navigation.module.css";
 
 type Props = {
   previousSlug?: string;
@@ -15,20 +15,20 @@ export default function Navigation(props: Props): React.JSX.Element {
   const { previousSlug, previousTitle, nextSlug, nextTitle } = props;
 
   return (
-    <div className={style.navigation}>
+    <div className={classNames.navigation}>
       {previousSlug && previousTitle ? (
-        <div className={style.previous}>
+        <div className={classNames.previous}>
           <TextButton internalHref={previousSlug}>
-            <span className={style.label}>
+            <span className={classNames.label}>
               <Icon name={IconName.ArrowLeft} size="small" /> {previousTitle}
             </span>
           </TextButton>
         </div>
       ) : null}
       {nextSlug && nextTitle ? (
-        <div className={style.next}>
+        <div className={classNames.next}>
           <TextButton internalHref={nextSlug}>
-            <span className={style.label}>
+            <span className={classNames.label}>
               {nextTitle} <Icon name={IconName.ArrowRight} size="small" />
             </span>
           </TextButton>

@@ -7,7 +7,7 @@ import HeadLayout from "src/components/layouts/headLayout";
 import { SponsorType } from "src/fragments/sponsors/sponsorFragment";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
-import * as style from "src/pages/sponsors.module.css";
+import * as classNames from "src/pages/sponsors.module.css";
 
 export default function Sponsors(): React.JSX.Element {
   const { groupedSponsors } = useStaticQuery<Queries.SponsorsQuery>(graphql`
@@ -54,7 +54,7 @@ export default function Sponsors(): React.JSX.Element {
           <React.Fragment key={type}>
             <h1>{type} sponsors</h1>
             {type === SponsorType.Presenting ? (
-              <p className={style.description}>
+              <p className={classNames.description}>
                 A huge “Thank You” to all of our generous sponsors. BAR Sponsors donate money,
                 services, skate equipment, accessories and free or discounted entrance fees to
                 skating instruction & events. We use many of these items as prizes in our raffle,
@@ -64,11 +64,11 @@ export default function Sponsors(): React.JSX.Element {
             ) : null}
             <div
               className={clsx(
-                style.sponsors,
+                classNames.sponsors,
                 isEnumValue(type, SponsorType)
                   ? switchOn(type, {
-                      [SponsorType.Presenting]: style.isPresenting,
-                      [SponsorType.Supporting]: style.isSupporting,
+                      [SponsorType.Presenting]: classNames.isPresenting,
+                      [SponsorType.Supporting]: classNames.isSupporting,
                       [SponsorType.General]: null,
                     })
                   : null,
@@ -84,20 +84,20 @@ export default function Sponsors(): React.JSX.Element {
                 return (
                   <a
                     key={sponsor.id}
-                    className={style.sponsor}
+                    className={classNames.sponsor}
                     href={url}
                     target="_blank"
                     rel="noreferrer"
                   >
                     {sponsorLogo.childImageSharp?.gatsbyImageData ? (
                       <Image
-                        className={style.sponsorLogo}
+                        className={classNames.sponsorLogo}
                         image={sponsorLogo.childImageSharp.gatsbyImageData}
                         alt={title}
                       />
                     ) : (
                       <img
-                        className={style.sponsorLogo}
+                        className={classNames.sponsorLogo}
                         src={sponsorLogo.publicURL ?? undefined}
                         alt={title}
                       />

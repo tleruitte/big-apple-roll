@@ -21,8 +21,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: var(--spacing-75);
-    padding-bottom: var(--spacing-75);
+    padding-top: var(--spacing-0_75);
+    padding-bottom: var(--spacing-0_75);
   }
 }
 
@@ -30,7 +30,7 @@
   font-family: var(--font-family-oswald);
   font-size: var(--font-size-2);
   font-weight: var(--font-weight-500);
-  letter-spacing: var(--letter-spacing-minus02);
+  letter-spacing: var(--letter-spacing--0_02);
   text-transform: uppercase;
   text-decoration: none;
 }

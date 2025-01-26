@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-import * as style from "src/components/icon.module.css";
+import * as classNames from "src/components/icon.module.css";
 import Instagram from "src/components/images/Instagram.svg";
 import assertNever from "src/helpers/assertNever";
 
@@ -28,7 +28,9 @@ export default function Icon(props: Props): React.JSX.Element | null {
     case IconName.Close:
     case IconName.Menu: {
       return (
-        <span className={clsx(style.icon, { [style.isSmall]: size === "small" })}>{name}</span>
+        <span className={clsx(classNames.icon, { [classNames.isSmall]: size === "small" })}>
+          {name}
+        </span>
       );
     }
     case IconName.Instagram: {

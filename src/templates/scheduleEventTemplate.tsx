@@ -9,7 +9,7 @@ import { formatDate, formatDateTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
-import * as style from "src/templates/scheduleEventTemplate.module.css";
+import * as classNames from "src/templates/scheduleEventTemplate.module.css";
 
 export type ScheduleEventTemplateContext = {
   scheduleEventId: string;
@@ -56,16 +56,16 @@ export default function ScheduleEventTemplate(
       isEnumValue(scheduleEvent.frontmatter.difficulty, ScheduleEventDifficulty) ? (
         <div
           className={clsx(
-            style.difficulty,
+            classNames.difficulty,
             switchOn(scheduleEvent.frontmatter.difficulty, {
-              [ScheduleEventDifficulty.Easy]: style.isEasy,
-              [ScheduleEventDifficulty.Casual]: style.isCasual,
-              [ScheduleEventDifficulty.Moderate]: style.isModerate,
-              [ScheduleEventDifficulty.Advanced]: style.isAdvanced,
+              [ScheduleEventDifficulty.Easy]: classNames.isEasy,
+              [ScheduleEventDifficulty.Casual]: classNames.isCasual,
+              [ScheduleEventDifficulty.Moderate]: classNames.isModerate,
+              [ScheduleEventDifficulty.Advanced]: classNames.isAdvanced,
             }),
           )}
         >
-          <span className={style.difficultyLabel}>
+          <span className={classNames.difficultyLabel}>
             {switchOn(scheduleEvent.frontmatter.difficulty, {
               [ScheduleEventDifficulty.Easy]: "Easy street skate",
               [ScheduleEventDifficulty.Casual]: "Casual street skate",
@@ -75,42 +75,50 @@ export default function ScheduleEventTemplate(
           </span>
         </div>
       ) : null}
-      <div className={style.details}>
-        <dl className={style.detailsList}>
+      <div className={classNames.details}>
+        <dl className={classNames.detailsList}>
           {scheduleEvent.frontmatter.location ? (
             <>
-              <dt className={style.detailsListTerm}>Location:</dt>
-              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.location}</dd>
+              <dt className={classNames.detailsListTerm}>Location:</dt>
+              <dd className={classNames.detailsListDescription}>
+                {scheduleEvent.frontmatter.location}
+              </dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.start ? (
             <>
-              <dt className={style.detailsListTerm}>Start:</dt>
-              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.start}</dd>
+              <dt className={classNames.detailsListTerm}>Start:</dt>
+              <dd className={classNames.detailsListDescription}>
+                {scheduleEvent.frontmatter.start}
+              </dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.end ? (
             <>
-              <dt className={style.detailsListTerm}>End:</dt>
-              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.end}</dd>
+              <dt className={classNames.detailsListTerm}>End:</dt>
+              <dd className={classNames.detailsListDescription}>{scheduleEvent.frontmatter.end}</dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.leader ? (
             <>
-              <dt className={style.detailsListTerm}>Leader:</dt>
-              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.leader}</dd>
+              <dt className={classNames.detailsListTerm}>Leader:</dt>
+              <dd className={classNames.detailsListDescription}>
+                {scheduleEvent.frontmatter.leader}
+              </dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.distance ? (
             <>
-              <dt className={style.detailsListTerm}>Distance:</dt>
-              <dd className={style.detailsListDescription}>{scheduleEvent.frontmatter.distance}</dd>
+              <dt className={classNames.detailsListTerm}>Distance:</dt>
+              <dd className={classNames.detailsListDescription}>
+                {scheduleEvent.frontmatter.distance}
+              </dd>
             </>
           ) : null}
           {scheduleEvent.frontmatter.highlights ? (
             <>
-              <dt className={style.detailsListTerm}>Highlights:</dt>
-              <dd className={style.detailsListDescription}>
+              <dt className={classNames.detailsListTerm}>Highlights:</dt>
+              <dd className={classNames.detailsListDescription}>
                 {scheduleEvent.frontmatter.highlights}
               </dd>
             </>
@@ -119,7 +127,7 @@ export default function ScheduleEventTemplate(
         {scheduleEvent.frontmatter.start_map ? (
           <div>
             <iframe
-              className={style.detailsMapFrame}
+              className={classNames.detailsMapFrame}
               src={scheduleEvent.frontmatter.start_map}
             ></iframe>
           </div>
@@ -127,7 +135,7 @@ export default function ScheduleEventTemplate(
       </div>
       {scheduleEvent.html ? (
         <div
-          className={style.description}
+          className={classNames.description}
           dangerouslySetInnerHTML={{ __html: scheduleEvent.html }}
         ></div>
       ) : null}
@@ -135,14 +143,14 @@ export default function ScheduleEventTemplate(
         <>
           <h3>Route map</h3>
           <iframe
-            className={style.routeMapFrame}
+            className={classNames.routeMapFrame}
             src={scheduleEvent.frontmatter.route_map}
             width="640"
             height="480"
           ></iframe>
         </>
       ) : null}
-      <div className={style.pagination}>
+      <div className={classNames.pagination}>
         <Navigation
           previousSlug={previousScheduleEvent?.slug ?? undefined}
           previousTitle={previousScheduleEvent?.frontmatter?.title ?? undefined}

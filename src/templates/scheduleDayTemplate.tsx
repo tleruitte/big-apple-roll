@@ -5,7 +5,7 @@ import HeadLayout from "src/components/layouts/headLayout";
 import Navigation from "src/components/navigation";
 import { formatDate, formatTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
-import * as style from "src/templates/scheduleDayTemplate.module.css";
+import * as classNames from "src/templates/scheduleDayTemplate.module.css";
 
 export type ScheduleDayTemplateContext = {
   scheduleDayId: string;
@@ -58,7 +58,7 @@ export default function ScheduleDayTemplate(
         previousTitle="Schedule"
       ></Navigation>
       <h1>{formatDate(scheduleDay.frontmatter.date)}</h1>
-      <div className={style.events}>
+      <div className={classNames.events}>
         {scheduleEvents.nodes.map((node) => {
           const { title, date } = node.frontmatter ?? {};
           if (!title || !date || !node.slug) {
@@ -66,13 +66,13 @@ export default function ScheduleDayTemplate(
           }
 
           return (
-            <div key={node.id} className={style.event}>
+            <div key={node.id} className={classNames.event}>
               <div>
-                <span className={style.eventTimeText}>{formatTime(date)}</span>
+                <span className={classNames.eventTimeText}>{formatTime(date)}</span>
               </div>
-              <div className={style.eventSeparator}></div>
-              <div className={style.eventName}>
-                <span className={style.eventNameText}>
+              <div className={classNames.eventSeparator}></div>
+              <div className={classNames.eventName}>
+                <span className={classNames.eventNameText}>
                   <Link to={node.slug} draggable={false}>
                     {title}
                   </Link>
@@ -82,7 +82,7 @@ export default function ScheduleDayTemplate(
           );
         })}
       </div>
-      <div className={style.pagination}>
+      <div className={classNames.pagination}>
         <Navigation
           previousSlug={previousScheduleDay?.slug ?? undefined}
           previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}

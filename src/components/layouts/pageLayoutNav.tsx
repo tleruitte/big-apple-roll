@@ -5,7 +5,7 @@ import React from "react";
 import IconButton from "src/components/buttons/iconButton";
 import TextButton from "src/components/buttons/textButton";
 import { IconName } from "src/components/icon";
-import * as style from "src/components/layouts/pageLayoutNav.module.css";
+import * as classNames from "src/components/layouts/pageLayoutNav.module.css";
 
 type Props = {
   location: PageProps["location"];
@@ -18,8 +18,8 @@ export default function PageLayoutNav(props: Props): React.JSX.Element | null {
 
   return (
     <nav
-      className={clsx(style.nav, {
-        [style.isMobile]: mobile,
+      className={clsx(classNames.nav, {
+        [classNames.isMobile]: mobile,
       })}
     >
       <TextButton internalHref="/schedule/" location={location} onClick={onClick}>

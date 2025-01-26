@@ -12,17 +12,17 @@
 }
 
 .cartItemImage {
-  border-radius: var(--spacing-50);
+  border-radius: var(--spacing-0_5);
 }
 
 .cartItemDetails {
   display: grid;
   align-content: start;
-  gap: var(--spacing-25);
+  gap: var(--spacing-0_25);
 }
 
 .discount {
-  margin-right: var(--spacing-50);
+  margin-right: var(--spacing-0_5);
   color: var(--color-text-secondary);
 }
 

@@ -37,6 +37,6 @@
   .label {
     display: grid;
     grid-template-columns: 100%;
-    gap: var(--spacing-50);
+    gap: var(--spacing-0_5);
   }
 }

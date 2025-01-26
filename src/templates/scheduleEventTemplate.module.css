@@ -37,7 +37,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-content: start;
-  gap: var(--spacing-25) var(--spacing-75);
+  gap: var(--spacing-0_25) var(--spacing-0_75);
   margin: 0;
 }
 
@@ -72,7 +72,7 @@
 
 @media (--tablet-breakpoint) {
   .difficulty {
-    padding: var(--spacing-50) var(--spacing-1);
+    padding: var(--spacing-0_5) var(--spacing-1);
   }
 
   .details {

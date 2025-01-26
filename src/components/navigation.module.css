@@ -1,7 +1,7 @@
 .navigation {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing-75);
+  gap: var(--spacing-0_75);
 }
 
 .previous {
@@ -17,6 +17,6 @@
 
 .label {
   display: flex;
-  gap: var(--spacing-25);
+  gap: var(--spacing-0_25);
   align-items: center;
 }

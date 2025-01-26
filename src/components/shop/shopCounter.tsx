@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 
-import * as style from "src/components/shop/shopCounter.module.css";
+import * as classNames from "src/components/shop/shopCounter.module.css";
 import { CartItem } from "src/components/shop/useShop";
 
 type Props = {
@@ -21,16 +21,16 @@ export default function ShopCounter(props: Props): React.JSX.Element | null {
   }, [cartItem, onDecrement]);
 
   return (
-    <div className={style.counter}>
+    <div className={classNames.counter}>
       <button
-        className={style.counterDecrement}
+        className={classNames.counterDecrement}
         disabled={cartItem.cartEntry.count <= 1}
         onClick={handleDecrement}
       >
         -
       </button>
-      <div className={style.count}>{cartItem.cartEntry.count}</div>
-      <button className={style.counterIncrement} onClick={handleIncrement}>
+      <div className={classNames.count}>{cartItem.cartEntry.count}</div>
+      <button className={classNames.counterIncrement} onClick={handleIncrement}>
         +
       </button>
     </div>

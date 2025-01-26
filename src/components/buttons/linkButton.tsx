@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-import * as style from "src/components/buttons/linkButton.module.css";
+import * as classNames from "src/components/buttons/linkButton.module.css";
 import useButton, { ButtonProps } from "src/components/buttons/useButton";
 
 type Props = {
@@ -20,8 +20,8 @@ export default function LinkButton(props: Props): React.JSX.Element | null {
 
   return (
     <a
-      className={clsx(style.linkButton, {
-        [style.isNoDecoration]: noDecoration,
+      className={clsx(classNames.linkButton, {
+        [classNames.isNoDecoration]: noDecoration,
       })}
       href={href}
       draggable={false}

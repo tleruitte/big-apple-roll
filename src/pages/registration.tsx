@@ -8,7 +8,7 @@ import TextInput from "src/components/form/textInput";
 import HeadLayout from "src/components/layouts/headLayout";
 import assertNever from "src/helpers/assertNever";
 import { currentDateInput } from "src/helpers/date";
-import * as style from "src/pages/registration.module.css";
+import * as classNames from "src/pages/registration.module.css";
 
 enum Page {
   PersonalInfo = "personalInfo",
@@ -182,19 +182,25 @@ export default function Registration(): React.JSX.Element {
             return (
               <>
                 <h2>Personal Information</h2>
-                <form className={style.form}>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>Full name:</span>
+                <form className={classNames.form}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
+                      Full name:
+                    </span>
                     <TextInput type="text" value={name} autoFocus onChange={setName} />
                   </label>
 
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>Email:</span>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
+                      Email:
+                    </span>
                     <TextInput type="email" value={email} onChange={setEmail} />
                   </label>
 
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>Phone number:</span>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
+                      Phone number:
+                    </span>
                     <TextInput type="tel" value={phone} onChange={setPhone} />
                   </label>
                 </form>
@@ -206,13 +212,17 @@ export default function Registration(): React.JSX.Element {
               <>
                 <h2>Release for Participation</h2>
                 <div dangerouslySetInnerHTML={{ __html: releaseOfParticipation?.html ?? "" }}></div>
-                <form className={style.form}>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>Signature:</span>
+                <form className={classNames.form}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
+                      Signature:
+                    </span>
                     <TextInput type="text" value={signature} autoFocus onChange={setSignature} />
                   </label>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>Date:</span>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
+                      Date:
+                    </span>
                     <TextInput type="date" value={date} onChange={setDate} />
                   </label>
                 </form>
@@ -223,9 +233,9 @@ export default function Registration(): React.JSX.Element {
             return (
               <>
                 <h2>Emergency Contact</h2>
-                <form className={style.form}>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>
+                <form className={classNames.form}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
                       Emergency contact full name:
                     </span>
                     <TextInput
@@ -235,20 +245,20 @@ export default function Registration(): React.JSX.Element {
                       onChange={setEmergencyName}
                     />
                   </label>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
                       Emergency contact email:
                     </span>
                     <TextInput type="email" value={emergencyEmail} onChange={setEmergencyEmail} />
                   </label>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
                       Emergency contact phone number:
                     </span>
                     <TextInput type="tel" value={emergencyPhone} onChange={setEmergencyPhone} />
                   </label>
-                  <label className={style.label}>
-                    <span className={clsx(style.labelLabel, style.isRequired)}>
+                  <label className={classNames.label}>
+                    <span className={clsx(classNames.labelLabel, classNames.isRequired)}>
                       Relationship to self:
                     </span>
                     <TextInput
@@ -278,10 +288,10 @@ export default function Registration(): React.JSX.Element {
           }
         }
       })()}
-      <div className={style.footer}>
+      <div className={classNames.footer}>
         <TextButton onClick={handleClear}>Clear</TextButton>
         {page !== Page.Submitted ? (
-          <div className={style.footerRight}>
+          <div className={classNames.footerRight}>
             <SurfaceButton
               color="accent3"
               size="small"

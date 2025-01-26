@@ -1,7 +1,7 @@
 .events {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--spacing-75) var(--spacing-1_5);
+  gap: var(--spacing-0_75) var(--spacing-1_5);
 }
 
 .event {
@@ -12,7 +12,7 @@
   font-family: var(--font-family-oswald);
   font-size: var(--font-size-1_5);
   font-weight: var(--font-weight-500);
-  letter-spacing: var(--letter-spacing-minus02);
+  letter-spacing: var(--letter-spacing--0_02);
 }
 
 .eventSeparator {
@@ -47,7 +47,7 @@
 
 @media (--tablet-breakpoint) {
   .events {
-    gap: var(--spacing-75);
+    gap: var(--spacing-0_75);
   }
 
   .eventTimeText {
@@ -55,7 +55,7 @@
   }
 
   .eventName {
-    margin-bottom: var(--spacing-75);
+    margin-bottom: var(--spacing-0_75);
   }
 
   .eventNameText {
@@ -65,7 +65,7 @@
 
 @media (--phone-breakpoint) {
   .events {
-    gap: var(--spacing-25);
+    gap: var(--spacing-0_25);
   }
 
   .eventTimeText {
@@ -74,7 +74,7 @@
   }
 
   .eventName {
-    margin-bottom: var(--spacing-75);
+    margin-bottom: var(--spacing-0_75);
   }
 
   .eventNameText {

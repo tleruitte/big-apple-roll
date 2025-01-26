@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 import IconButton from "src/components/buttons/iconButton";
 import LinkButton from "src/components/buttons/linkButton";
 import { IconName } from "src/components/icon";
-import * as style from "src/components/layouts/pageLayout.module.css";
+import * as classNames from "src/components/layouts/pageLayout.module.css";
 import PageLayoutNav from "src/components/layouts/pageLayoutNav";
 
 type Props = {
@@ -35,27 +35,27 @@ export default function PageLayout(props: Omit<PageProps, "children"> & Props): 
 
   return (
     <>
-      <header className={style.header}>
-        <div className={clsx(style.headerContent, style.content)}>
+      <header className={classNames.header}>
+        <div className={clsx(classNames.headerContent, classNames.content)}>
           <LinkButton internalHref="/" noDecoration>
-            <span className={style.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
+            <span className={classNames.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
           </LinkButton>
-          <div className={style.desktopNav}>
+          <div className={classNames.desktopNav}>
             <PageLayoutNav location={location} />
           </div>
-          <div className={style.mobileMenu}>
+          <div className={classNames.mobileMenu}>
             <IconButton iconName={IconName.Menu} onClick={handleClickMenu}></IconButton>
           </div>
         </div>
       </header>
-      <main className={clsx(style.main, style.content)}>{children}</main>
+      <main className={clsx(classNames.main, classNames.content)}>{children}</main>
       {showMenu ? (
-        <div className={style.mobileNav}>
-          <div className={style.mobileNavClose}>
+        <div className={classNames.mobileNav}>
+          <div className={classNames.mobileNavClose}>
             <IconButton iconName={IconName.Close} onClick={handleCloseMenu} />
           </div>
           <LinkButton internalHref="/" noDecoration onClick={handleCloseMenu}>
-            <span className={style.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
+            <span className={classNames.headerLogo}>{metadata?.frontmatter?.title ?? ""}</span>
           </LinkButton>
           <PageLayoutNav location={location} mobile onClick={handleCloseMenu} />
         </div>

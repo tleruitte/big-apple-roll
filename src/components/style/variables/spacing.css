@@ -1,9 +1,9 @@
 /* spacing */
 :root {
   /* 1em = 16px */
-  --spacing-25: 0.25em;
-  --spacing-50: 0.5em;
-  --spacing-75: 0.75em;
+  --spacing-0_25: 0.25em;
+  --spacing-0_5: 0.5em;
+  --spacing-0_75: 0.75em;
   --spacing-1: 1em;
   --spacing-1_5: 1.5em;
   --spacing-2: 2em;

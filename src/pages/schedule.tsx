@@ -4,7 +4,7 @@ import React from "react";
 import SurfaceButton from "src/components/buttons/surfaceButton";
 import HeadLayout from "src/components/layouts/headLayout";
 import { formatDate } from "src/helpers/date";
-import * as style from "src/pages/schedule.module.css";
+import * as classNames from "src/pages/schedule.module.css";
 
 export default function Schedule(): React.JSX.Element {
   const data = useStaticQuery<Queries.ScheduleQuery>(graphql`
@@ -21,7 +21,7 @@ export default function Schedule(): React.JSX.Element {
   `);
 
   return (
-    <div className={style.schedule}>
+    <div className={classNames.schedule}>
       {data.scheduleDays.nodes.map((node) => {
         const { title, date, pre_bar } = node.frontmatter ?? {};
         if (!title || !date || !node.slug) {

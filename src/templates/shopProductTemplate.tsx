@@ -13,7 +13,7 @@ import useShop from "src/components/shop/useShop";
 import { ShopProductButtonColor } from "src/fragments/shop/shopProductFragment";
 import isEnumValue from "src/helpers/isEnumValue";
 import switchOn from "src/helpers/switchOn";
-import * as style from "src/templates/shopProductTemplate.module.css";
+import * as classNames from "src/templates/shopProductTemplate.module.css";
 
 export type ShopProductTemplateContext = {
   shopProductId: string;
@@ -99,31 +99,31 @@ export default function ShopProductTemplate(
     <>
       <ShopNavigation cartItemCount={cartItemCount} goToShop goToCart />
       <h1>{shopProduct.frontmatter?.title}</h1>
-      <div className={style.shopProduct}>
-        <div className={style.shopProductImages}>
+      <div className={classNames.shopProduct}>
+        <div className={classNames.shopProductImages}>
           {shopProduct.linkedFiles.map((shopProductLinkedFile) => {
             return (
               <Image
                 key={shopProductLinkedFile.id}
-                className={style.shopProductImage}
+                className={classNames.shopProductImage}
                 image={shopProductLinkedFile.childImageSharp?.gatsbyImageData}
                 alt={shopProduct.frontmatter?.title}
               />
             );
           })}
         </div>
-        <div className={style.shopProductDetails}>
+        <div className={classNames.shopProductDetails}>
           <div dangerouslySetInnerHTML={{ __html: shopProduct.html ?? "" }}></div>
           {needsSize ? (
             <div>
-              <div className={style.sizeLabel}>Size:</div>
-              <div className={style.sizes}>
+              <div className={classNames.sizeLabel}>Size:</div>
+              <div className={classNames.sizes}>
                 {shopProduct.frontmatter?.sizes?.map((shopProductSize) => {
                   return (
                     <button
                       key={shopProductSize}
-                      className={clsx(style.size, {
-                        [style.isSelected]: size === shopProductSize,
+                      className={clsx(classNames.size, {
+                        [classNames.isSelected]: size === shopProductSize,
                       })}
                       data-id={shopProductSize}
                       onClick={handleSelectSize}
@@ -136,8 +136,8 @@ export default function ShopProductTemplate(
             </div>
           ) : null}
           {shopProduct.frontmatter?.discounts?.length ? (
-            <div className={style.discounts}>
-              <select className={style.discountsSelect} onChange={handleSelectCount}>
+            <div className={classNames.discounts}>
+              <select className={classNames.discountsSelect} onChange={handleSelectCount}>
                 <option key={1} value={1}>
                   1 {shopProduct.frontmatter.title?.toLocaleLowerCase()} - $
                   {shopProduct.frontmatter.price}

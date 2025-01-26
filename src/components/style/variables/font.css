@@ -5,7 +5,7 @@
   --font-family-material-symbols-outlined: "Material Symbols Outlined";
 
   /* Font sizes */
-  --font-size-_8: 0.875em;
+  --font-size-0_8: 0.875em;
   --font-size-1_25: 1.25em;
   --font-size-1_5: 1.5em;
   --font-size-2: 2em;
@@ -21,6 +21,6 @@
   --font-weight-600: 600;
 
   /* - */
-  --letter-spacing-16: 0.16em;
-  --letter-spacing-minus02: -0.02em;
+  --letter-spacing-0_16: 0.16em;
+  --letter-spacing--0_02: -0.02em;
 }

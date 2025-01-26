@@ -17,7 +17,7 @@ import HeadLayout from "src/components/layouts/headLayout";
 import ShopCounter from "src/components/shop/shopCounter";
 import ShopNavigation from "src/components/shop/shopNavigation";
 import useShop, { CartItem } from "src/components/shop/useShop";
-import * as style from "src/pages/shop/cart.module.css";
+import * as classNames from "src/pages/shop/cart.module.css";
 
 // Doc: https://developer.paypal.com/sdk/js/configuration/
 const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
@@ -96,8 +96,8 @@ export default function Cart(): React.JSX.Element {
     <>
       <ShopNavigation cartItemCount={cartItemCount} goToShop />
       <h1>Cart</h1>
-      <div className={style.cart}>
-        <div className={style.cartItems}>
+      <div className={classNames.cart}>
+        <div className={classNames.cartItems}>
           {cartItems.map((cartItem) => {
             const hasDiscount =
               cartItem.undiscountedPrice && cartItem.undiscountedPrice !== cartItem.price;
@@ -105,12 +105,12 @@ export default function Cart(): React.JSX.Element {
               <React.Fragment key={cartItem.key}>
                 <div>
                   <Image
-                    className={style.cartItemImage}
+                    className={classNames.cartItemImage}
                     image={cartItem.shopProduct.linkedFiles[0]?.childImageSharp?.gatsbyImageData}
                     alt={cartItem.shopProduct.frontmatter?.title}
                   />
                 </div>
-                <div className={style.cartItemDetails}>
+                <div className={classNames.cartItemDetails}>
                   <div>
                     <strong>{cartItem.shopProduct.frontmatter?.title}</strong> - $
                     {cartItem.shopProduct.frontmatter?.price}
@@ -118,7 +118,7 @@ export default function Cart(): React.JSX.Element {
                   {cartItem.cartEntry.size ? <div>{cartItem.cartEntry.size}</div> : null}
                   <div>
                     {hasDiscount ? (
-                      <s className={style.discount}>${cartItem.undiscountedPrice}</s>
+                      <s className={classNames.discount}>${cartItem.undiscountedPrice}</s>
                     ) : null}{" "}
                     <span>${cartItem.price}</span>
                   </div>
@@ -140,12 +140,12 @@ export default function Cart(): React.JSX.Element {
           })}
         </div>
         <div>
-          <h2 className={style.summary}>Order summary</h2>
-          <div className={style.total}>
+          <h2 className={classNames.summary}>Order summary</h2>
+          <div className={classNames.total}>
             <span>Total</span>
             <span>${cartTotal}</span>
           </div>
-          <div className={style.paypal}>
+          <div className={classNames.paypal}>
             <PayPalScriptProvider options={PAYPAL_OPTIONS}>
               <PayPalButtons createOrder={handleCreateOrder} onApprove={handleApproveOrder} />
             </PayPalScriptProvider>
