@@ -2,7 +2,7 @@ import React from "react";
 
 import TextButton from "src/components/buttons/textButton";
 import Icon, { IconName } from "src/components/icon";
-import * as style from "src/components/pagination.module.css";
+import * as style from "src/components/navigation.module.css";
 
 type Props = {
   previousSlug?: string;
@@ -11,24 +11,24 @@ type Props = {
   nextTitle?: string;
 };
 
-export default function Pagination(props: Props): React.JSX.Element {
+export default function Navigation(props: Props): React.JSX.Element {
   const { previousSlug, previousTitle, nextSlug, nextTitle } = props;
 
   return (
-    <div className={style.pagination}>
+    <div className={style.navigation}>
       {previousSlug && previousTitle ? (
-        <div className={style.paginationPrevious}>
+        <div className={style.previous}>
           <TextButton internalHref={previousSlug}>
-            <span className={style.paginationText}>
+            <span className={style.label}>
               <Icon name={IconName.ArrowLeft} size="small" /> {previousTitle}
             </span>
           </TextButton>
         </div>
       ) : null}
       {nextSlug && nextTitle ? (
-        <div className={style.paginationNext}>
+        <div className={style.next}>
           <TextButton internalHref={nextSlug}>
-            <span className={style.paginationText}>
+            <span className={style.label}>
               {nextTitle} <Icon name={IconName.ArrowRight} size="small" />
             </span>
           </TextButton>

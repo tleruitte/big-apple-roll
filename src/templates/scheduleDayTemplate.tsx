@@ -2,7 +2,7 @@ import { graphql, HeadProps, Link, PageProps } from "gatsby";
 import React from "react";
 
 import HeadLayout from "src/components/layouts/headLayout";
-import Pagination from "src/components/pagination";
+import Navigation from "src/components/navigation";
 import { formatDate, formatTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
 import * as style from "src/templates/scheduleDayTemplate.module.css";
@@ -53,10 +53,10 @@ export default function ScheduleDayTemplate(
 
   return (
     <>
-      <Pagination
+      <Navigation
         previousSlug={getParentSlug(scheduleDay?.slug)}
         previousTitle="Schedule"
-      ></Pagination>
+      ></Navigation>
       <h1>{formatDate(scheduleDay.frontmatter.date)}</h1>
       <div className={style.events}>
         {scheduleEvents.nodes.map((node) => {
@@ -83,12 +83,12 @@ export default function ScheduleDayTemplate(
         })}
       </div>
       <div className={style.pagination}>
-        <Pagination
+        <Navigation
           previousSlug={previousScheduleDay?.slug ?? undefined}
           previousTitle={previousScheduleDay?.frontmatter?.title ?? undefined}
           nextSlug={nextScheduleDay?.slug ?? undefined}
           nextTitle={nextScheduleDay?.frontmatter?.title ?? undefined}
-        ></Pagination>
+        ></Navigation>
       </div>
     </>
   );

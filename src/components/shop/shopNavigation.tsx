@@ -1,6 +1,6 @@
 import React from "react";
 
-import Pagination from "src/components/pagination";
+import Navigation from "src/components/navigation";
 
 type Props = {
   cartItemCount: number;
@@ -12,7 +12,7 @@ export default function ShopNavigation(props: Props): React.JSX.Element | null {
   const { cartItemCount, goToShop, goToCart } = props;
 
   return (
-    <Pagination
+    <Navigation
       previousSlug={goToShop ? "/shop/" : undefined}
       previousTitle={goToShop ? "Shop" : undefined}
       nextSlug={goToCart ? "/shop/cart/" : undefined}

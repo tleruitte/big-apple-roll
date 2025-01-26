@@ -3,7 +3,7 @@ import { graphql, PageProps } from "gatsby";
 import React from "react";
 
 import HeadLayout from "src/components/layouts/headLayout";
-import Pagination from "src/components/pagination";
+import Navigation from "src/components/navigation";
 import { ScheduleEventDifficulty } from "src/fragments/schedule/scheduleEventFragment";
 import { formatDate, formatDateTime } from "src/helpers/date";
 import getParentSlug from "src/helpers/getParentSlug";
@@ -46,10 +46,10 @@ export default function ScheduleEventTemplate(
 
   return (
     <>
-      <Pagination
+      <Navigation
         previousSlug={getParentSlug(scheduleEvent?.slug)}
         previousTitle={formatDate(scheduleEvent.frontmatter.date, { format: "weekday" })}
-      ></Pagination>
+      ></Navigation>
       <h1>{scheduleEvent.frontmatter.title}</h1>
       <h2>{formatDateTime(scheduleEvent.frontmatter.date)}</h2>
       {scheduleEvent.frontmatter.difficulty &&
@@ -143,12 +143,12 @@ export default function ScheduleEventTemplate(
         </>
       ) : null}
       <div className={style.pagination}>
-        <Pagination
+        <Navigation
           previousSlug={previousScheduleEvent?.slug ?? undefined}
           previousTitle={previousScheduleEvent?.frontmatter?.title ?? undefined}
           nextSlug={nextScheduleEvent?.slug ?? undefined}
           nextTitle={nextScheduleEvent?.frontmatter?.title ?? undefined}
-        ></Pagination>
+        ></Navigation>
       </div>
     </>
   );
