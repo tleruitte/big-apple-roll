@@ -130,6 +130,8 @@ yarn lint
 yarn upgrade-interactive
 ```
 
+If Dependabot can't update a dependency, edit the `resolutions` field in `package.json` to force the version.
+
 ## External services
 
 - Registration form: [https://www.formbackend.com](https://www.formbackend.com)
