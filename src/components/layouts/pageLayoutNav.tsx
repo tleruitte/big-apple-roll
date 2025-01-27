@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { PageProps } from "gatsby";
+import { graphql, PageProps, useStaticQuery } from "gatsby";
 import React from "react";
 
 import IconButton from "src/components/buttons/iconButton";
@@ -16,6 +16,14 @@ type Props = {
 export default function PageLayoutNav(props: Props): React.JSX.Element | null {
   const { location, mobile, onClick } = props;
 
+  const { metadata } = useStaticQuery<Queries.PageLayoutNavQuery>(graphql`
+    query PageLayoutNav {
+      metadata: markdownRemark(fileName: { eq: "metadata" }, fileRelativeDirectory: { eq: "" }) {
+        ...MetadataFragment
+      }
+    }
+  `);
+
   return (
     <nav
       className={clsx(classNames.nav, {
@@ -30,6 +38,13 @@ export default function PageLayoutNav(props: Props): React.JSX.Element | null {
       </TextButton>
       <TextButton internalHref="/sponsors/" location={location} onClick={onClick}>
         Sponsors
+      </TextButton>
+      <TextButton
+        internalHref={`/gallery/${metadata?.frontmatter?.year}/`}
+        location={location}
+        onClick={onClick}
+      >
+        Gallery
       </TextButton>
       <TextButton internalHref="/shop/" location={location} onClick={onClick}>
         Shop
