@@ -11,6 +11,8 @@ Some examples of the previous year can be found in [archives](archives). Some ea
 
 The logo should be delivered in vectorial format (SVG, AI, EPS) and in raster format (PNG, JPG).
 
+Deadline: Mid-March
+
 ### Social media variants and color palette
 
 We'll need a few variants of the logo that could work well for social media:
@@ -26,6 +28,8 @@ Once the logo is finalized, we'll need a design for the t-shirt. We usually use 
 The t-shirt should use the logo, and mention "Big Apple Roll" and "2025"
 
 We could also use some design for some other merchandising like stickers, caps, etc.
+
+Deadline: End of March
 
 ## 3. Web design (optional)
 
