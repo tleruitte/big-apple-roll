@@ -20,6 +20,8 @@ We'll need a few variants of the logo that could work well for social media:
 - Avatar
 - Hero image (cover)
 
+You can see how we use them on our [Instagram](https://www.instagram.com/bigappleroll/).
+
 We'll also need a color palette that can be used for the website, social media, and other promotional materials.
 
 ## 2. T-shirts
