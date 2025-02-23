@@ -29,6 +29,8 @@ We'll also need a color palette that can be used for the website, social media, 
 Once the logo is finalized, we'll need a design for the t-shirt. We usually use [https://www.customink.com](https://www.customink.com) to print them.
 The t-shirt should use the logo, and mention "Big Apple Roll" and "2025"
 
+We also need a t-shirt for staff. It should use another color and mention "Staff".
+
 We could also use some design for some other merchandising like stickers, caps, etc.
 
 Deadline: End of March
