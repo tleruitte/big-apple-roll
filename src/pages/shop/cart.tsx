@@ -21,7 +21,7 @@ import * as classNames from "src/pages/shop/cart.module.css";
 
 // Doc: https://developer.paypal.com/sdk/js/configuration/
 const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
-  clientId: "AfkJKM8SaONJdLsKmncpyfI1FnQdPHnU7THetMJoBXUjPhcQ7UFBiPCMbsL680-Z9whkrMhrf8YWEIZA",
+  clientId: process.env.GATSBY_PAYPAL_CLIENT_ID ?? "",
   currency: "USD",
   intent: "capture",
   components: "buttons,applepay",

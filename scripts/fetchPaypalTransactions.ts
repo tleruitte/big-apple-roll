@@ -13,7 +13,7 @@ const run = async () => {
   // Get access token
   const client = new ClientCredentials({
     client: {
-      id: process.env.PAYPAL_CLIENT_ID ?? "",
+      id: process.env.GATSBY_PAYPAL_CLIENT_ID ?? "",
       secret: process.env.PAYPAL_CLIENT_SECRET ?? "",
     },
     auth: {

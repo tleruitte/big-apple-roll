@@ -1,3 +1,5 @@
+# https://github.com/actions/starter-workflows/blob/main/pages/gatsby.yml
+
 name: Deploy Gatsby site to Pages
 
 on:
@@ -58,6 +60,12 @@ jobs:
             ${{ runner.os }}-gatsby-build-
       - name: Install dependencies
         run: yarn install
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_GATSBY_PAYPAL_CLIENT_ID: ${{ secrets.GATSBY_PAYPAL_CLIENT_ID }}
+          envkey_PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
+          file_name: .env.production
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: "true"
