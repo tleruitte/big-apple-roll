@@ -21,7 +21,7 @@ import * as classNames from "src/pages/shop/cart.module.css";
 
 // Doc: https://developer.paypal.com/sdk/js/configuration/
 const PAYPAL_OPTIONS: ReactPayPalScriptOptions = {
-  clientId: "ASkF4WrNyc3lZOXQmFSsXsFl64ggGyH5iUMoR3VVBe8TgEKA8se1RXCdZ01Ys4HqYebewTpXZIoGwhAw",
+  clientId: "AfkJKM8SaONJdLsKmncpyfI1FnQdPHnU7THetMJoBXUjPhcQ7UFBiPCMbsL680-Z9whkrMhrf8YWEIZA",
   currency: "USD",
   intent: "capture",
   components: "buttons,applepay",
@@ -44,7 +44,8 @@ export default function Cart(): React.JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const { cartItems, cartItemCount, cartTotal } = useShop(allShopProducts);
+  const { cartItems, cartItemCount, cartTotalUndiscountedPrice, cartTotalDiscountedPrice } =
+    useShop(allShopProducts);
 
   const handleIncrementCartItem = useCallback(
     (cartItem: CartItem) => {
@@ -75,15 +76,36 @@ export default function Cart(): React.JSX.Element {
         intent: "CAPTURE",
         purchase_units: [
           {
+            items: cartItems.map((cartItem) => {
+              return {
+                name: `${cartItem.cartEntry.name} ${cartItem.cartEntry.size ?? ""}`,
+                quantity: cartItem.cartEntry.count.toString(),
+                unit_amount: {
+                  currency_code: "USD",
+                  value: cartItem.productPrice.toString(),
+                },
+                category: "DIGITAL_GOODS",
+              };
+            }),
             amount: {
               currency_code: "USD",
-              value: "98",
+              value: cartTotalDiscountedPrice.toString(),
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: cartTotalUndiscountedPrice.toString(),
+                },
+                discount: {
+                  currency_code: "USD",
+                  value: (cartTotalUndiscountedPrice - cartTotalDiscountedPrice).toString(),
+                },
+              },
             },
           },
         ],
       });
     };
-  }, []);
+  }, [cartItems, cartTotalDiscountedPrice, cartTotalUndiscountedPrice]);
 
   const handleApproveOrder = useMemo((): PayPalButtonOnApprove => {
     return async (data, actions) => {
@@ -100,7 +122,8 @@ export default function Cart(): React.JSX.Element {
         <div className={classNames.cartItems}>
           {cartItems.map((cartItem) => {
             const hasDiscount =
-              cartItem.undiscountedPrice && cartItem.undiscountedPrice !== cartItem.price;
+              cartItem.totalUndiscountedPrice &&
+              cartItem.totalUndiscountedPrice !== cartItem.totalDiscountedPrice;
             return (
               <React.Fragment key={cartItem.key}>
                 <div>
@@ -113,14 +136,14 @@ export default function Cart(): React.JSX.Element {
                 <div className={classNames.cartItemDetails}>
                   <div>
                     <strong>{cartItem.shopProduct.frontmatter?.title}</strong> - $
-                    {cartItem.shopProduct.frontmatter?.price}
+                    {cartItem.productPrice}
                   </div>
                   {cartItem.cartEntry.size ? <div>{cartItem.cartEntry.size}</div> : null}
                   <div>
                     {hasDiscount ? (
-                      <s className={classNames.discount}>${cartItem.undiscountedPrice}</s>
+                      <s className={classNames.discount}>${cartItem.totalUndiscountedPrice}</s>
                     ) : null}{" "}
-                    <span>${cartItem.price}</span>
+                    <span>${cartItem.totalDiscountedPrice}</span>
                   </div>
                   <div>
                     <ShopCounter
@@ -143,7 +166,7 @@ export default function Cart(): React.JSX.Element {
           <h2 className={classNames.summary}>Order summary</h2>
           <div className={classNames.total}>
             <span>Total</span>
-            <span>${cartTotal}</span>
+            <span>${cartTotalDiscountedPrice}</span>
           </div>
           <div className={classNames.paypal}>
             <PayPalScriptProvider options={PAYPAL_OPTIONS}>

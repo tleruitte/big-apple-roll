@@ -9,8 +9,9 @@ export type CartItem = {
   key: CartEntryKey;
   cartEntry: CartEntry;
   shopProduct: Queries.ShopQuery["allShopProducts"]["nodes"][number];
-  price: number;
-  undiscountedPrice: number;
+  productPrice: number;
+  totalUndiscountedPrice: number;
+  totalDiscountedPrice: number;
 };
 
 type NullableDiscount = NonNullable<
@@ -21,7 +22,7 @@ type Discount = {
   [P in keyof NonNullable<NullableDiscount>]: NonNullable<NonNullable<NullableDiscount>[P]>;
 };
 
-const getPrice = (
+const computePrice = (
   count: number,
   price: number,
   nullableDiscounts: ReadonlyArray<NullableDiscount> | null,
@@ -34,7 +35,7 @@ const getPrice = (
     const orderedDiscounts = sortBy(discounts, "count");
     const discount = orderedDiscounts.findLast((discount) => count >= discount.count);
     if (discount) {
-      return discount.price + getPrice(count - discount.count, price, discounts);
+      return discount.price + computePrice(count - discount.count, price, discounts);
     }
   }
 
@@ -78,15 +79,16 @@ const useShop = (allShopProducts: Queries.ShopQuery["allShopProducts"]) => {
           key: cartEntry.key,
           cartEntry,
           shopProduct,
-          price: toFixedNumber(
-            getPrice(
+          productPrice: toFixedNumber(shopProduct.frontmatter.price),
+          totalUndiscountedPrice: toFixedNumber(
+            computePrice(cartEntry.count, shopProduct.frontmatter.price, null),
+          ),
+          totalDiscountedPrice: toFixedNumber(
+            computePrice(
               cartEntry.count,
               shopProduct.frontmatter.price,
               shopProduct.frontmatter.discounts,
             ),
-          ),
-          undiscountedPrice: toFixedNumber(
-            getPrice(cartEntry.count, shopProduct.frontmatter?.price, null),
           ),
         };
       }),
@@ -99,16 +101,23 @@ const useShop = (allShopProducts: Queries.ShopQuery["allShopProducts"]) => {
     }, 0);
   }, [cartItems]);
 
-  const cartTotal = useMemo(() => {
+  const cartTotalUndiscountedPrice = useMemo(() => {
     return cartItems.reduce((acc, cartItem) => {
-      return toFixedNumber(acc + cartItem.price);
+      return toFixedNumber(acc + cartItem.totalUndiscountedPrice);
+    }, 0);
+  }, [cartItems]);
+
+  const cartTotalDiscountedPrice = useMemo(() => {
+    return cartItems.reduce((acc, cartItem) => {
+      return toFixedNumber(acc + cartItem.totalDiscountedPrice);
     }, 0);
   }, [cartItems]);
 
   return {
     cartItems,
     cartItemCount,
-    cartTotal,
+    cartTotalUndiscountedPrice,
+    cartTotalDiscountedPrice,
   };
 };
 
